@@ -6,21 +6,22 @@
 
 namespace Fjordimm3DEngine::ShaderPrograms
 {
-	class Flat : public ShaderProgram
+	class Smooth : public ShaderProgram
 	{
 		/* Constructors */
 
 	   public:
-		Flat(const Flat&) = delete;
-		Flat& operator=(const Flat&) = delete;
+		Smooth(const Smooth&) = delete;
+		Smooth& operator=(const Smooth&) = delete;
 		
-		Flat();
+		Smooth();
 
 		/* Fields */
 
 	   private:
 		ShaderTraits::In3DSpace traitIn3DSpace;
 		ShaderTraits::Has3DShape traitHas3DShape;
+		ShaderTraits::HasNormals traitHasNormals;
 
 		/* Methods */
 

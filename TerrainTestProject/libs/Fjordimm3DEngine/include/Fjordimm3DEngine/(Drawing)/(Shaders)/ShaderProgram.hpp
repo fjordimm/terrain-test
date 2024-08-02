@@ -54,7 +54,7 @@ namespace Fjordimm3DEngine
 		void enableAttribsForMesh();
 
 		template <class T, typename std::enable_if<std::is_base_of<ShaderTrait, T>::value>::type* = nullptr>
-		T* tryGetTrait()
+		T* tryGetTrait() const
 		{
 			std::unordered_map<std::size_t, ShaderTrait*>::const_iterator tryGet = this->traits.find(typeid(T).hash_code());
 			if (tryGet == this->traits.end())

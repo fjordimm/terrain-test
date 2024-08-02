@@ -22,12 +22,12 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Shader programs */
 
 		flatShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Flat>());
-		// smoothShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Smooth>());
+		smoothShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Smooth>());
 
 		/* Meshes */
 
 		cubeMesh = this->worldState.meshManager.add(this->flatShaderProgram, MeshSamples::Cube());
-		// sphereMesh = this->worldState.meshManager.add(this->smoothShaderProgram, MeshSamples::Sphere<10>());
+		sphereMesh = this->worldState.meshManager.add(this->smoothShaderProgram, MeshSamples::Sphere<10>());
 	}
 
 	void TerrainTestHead::onStart()
@@ -48,12 +48,12 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		/* Forms */
 
-		// {
-		// 	std::unique_ptr<PhysicForm> theOrigin = PhysicForm::New(this->worldState);
-		// 	theOrigin->setMeshAndLinkToShaderProgram(this->sphereMesh);
-		// 	theOrigin->tran.acqScale() = Vec(0.3f, 0.3f, 0.3f);
-		// 	this->worldState.forms.push_back(std::move(theOrigin));
-		// }
+		{
+			std::unique_ptr<PhysicForm> theOrigin = PhysicForm::New(this->worldState);
+			theOrigin->setMeshAndLinkToShaderProgram(this->sphereMesh);
+			theOrigin->tran.acqScale() = Vec(0.3f, 0.3f, 0.3f);
+			this->worldState.forms.push_back(std::move(theOrigin));
+		}
 
 		{
 			std::unique_ptr<PhysicForm> form1 = PhysicForm::New(this->worldState);

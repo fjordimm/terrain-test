@@ -3,6 +3,7 @@
 
 #include <cstring>
 #include "Fjordimm3DEngine/(Debug)/Debug.hpp"
+#include "Fjordimm3DEngine/(headerGroups)/allShaderTraits.hpp"
 
 namespace Fjordimm3DEngine
 {
@@ -14,11 +15,8 @@ namespace Fjordimm3DEngine
 
 	std::unique_ptr<MeshData> MeshSample::make(const ShaderProgram& shaderProgram) const
 	{
-		// TODO
-		MeshVertAttribs attribs = MeshVertAttribs::Positions3D;
-		// MeshVertAttribs attribs = shaderProgram.attribFlagsForMeshSamples();
-		bool doPositions3D = (attribs & MeshVertAttribs::Positions3D) != MeshVertAttribs::None;
-		bool doNormals3D = (attribs & MeshVertAttribs::Normals3D) != MeshVertAttribs::None;
+		bool doPositions3D = shaderProgram.tryGetTrait<ShaderTraits::In3DSpace>() != nullptr;
+		bool doNormals3D = shaderProgram.tryGetTrait<ShaderTraits::HasNormals>() != nullptr;
 
 		FJORDIMM3DENGINE_DEBUG_ASSERT(doPositions3D);
 
