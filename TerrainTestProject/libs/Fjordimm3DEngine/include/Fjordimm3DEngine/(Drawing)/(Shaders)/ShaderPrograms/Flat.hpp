@@ -19,7 +19,7 @@ namespace Fjordimm3DEngine::ShaderPrograms
 
 		/* Fields */
 
-	   public:
+	   private:
 		ShaderTraits::In3DSpace traitIn3DSpace;
 		ShaderTraits::Has3DShape traitHas3DShape;
 

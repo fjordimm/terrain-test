@@ -53,10 +53,18 @@ namespace Fjordimm3DEngine
 
 		void enableAttribsForMesh();
 
+		template <class T, typename std::enable_if<std::is_base_of<ShaderTrait, T>::value>::type* = nullptr>
+		T* tryGetTrait()
+		{
+			std::unordered_map<std::size_t, ShaderTrait*>::const_iterator tryGet = this->traits.find(typeid(T).hash_code());
+			if (tryGet == this->traits.end())
+			{ return nullptr; }
+			else
+			{ return dynamic_cast<T*>(tryGet->second); }
+		}
+
 	   protected:
 		void registerTrait(ShaderTrait* trait);
-		// template <class>
-		// ShaderTrait* tryGetTrait();
 
 		virtual const char* getVertexShaderSourcePath() const = 0;
 		virtual const char* getGeometryShaderSourcePath() const = 0;
