@@ -1,5 +1,5 @@
 
-#include "Fjordimm3DEngine/Head.hpp"
+#include "Fjordimm3DEngine/(World)/Head.hpp"
 
 #include <cstring>
 #include <chrono>
@@ -82,6 +82,15 @@ namespace Fjordimm3DEngine
 		{ glfwSetInputMode(this->windowForGlfw, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE); }
 		else
 		{ Debug::LogFatalError("Machine does not support raw mouse motion."); }
+
+		this->worldState.mainCamera = Forms::Camera::New(this->worldState);
+		this->worldState.mainCamera->tran.acqPosition() = Vec(0.0f, -100.0f, 0.0f);
+		this->worldState.mainCamera->recalculateAndApplyViewMatrix(this->worldState);
+
+		this->worldState.shaderProgramManager.acqFov() = Math::PiOver4;
+		this->worldState.shaderProgramManager.acqAspectRatio() = (float)this->getWindowWidth() / (float)this->getWindowHeight();
+		this->worldState.shaderProgramManager.acqNearClippingPlane() = 0.01f;
+		this->worldState.shaderProgramManager.acqFarClippingPlane() = 100000.0f;
 
 		/* Main loop */
 
@@ -231,184 +240,6 @@ namespace Fjordimm3DEngine
 		/* Update view matrix */
 
 		this->worldState.mainCamera->recalculateAndApplyViewMatrix(this->worldState);
-	}
-
-	// TEMP
-	static ShaderProgram* flatShaderProgram = nullptr;
-	static ShaderProgram* smoothShaderProgram = nullptr;
-	static Mesh* cubeMesh = nullptr;
-	static Mesh* sphereMesh = nullptr;
-
-	void Head::onStart()
-	{
-		/* Projection settings */
-
-		this->worldState.shaderProgramManager.acqFov() = Math::PiOver4;
-		this->worldState.shaderProgramManager.acqAspectRatio() = (float)this->getWindowWidth() / (float)this->getWindowHeight();
-		this->worldState.shaderProgramManager.acqNearClippingPlane() = 0.01f;
-		this->worldState.shaderProgramManager.acqFarClippingPlane() = 100000.0f;
-
-		/* Make shaders */
-
-		flatShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Flat>());
-		smoothShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Smooth>());
-
-		/* Make camera */
-		
-		this->worldState.mainCamera = Forms::Camera::New(this->worldState);
-		this->worldState.mainCamera->tran.acqPosition() = Vec(0.0f, -100.0f, 0.0f);
-		this->worldState.mainCamera->recalculateAndApplyViewMatrix(this->worldState);
-
-		/* Anything else */
-
-		/// Temp ///
-		////////////////////////////////////////////////////////////
-
-		cubeMesh = this->worldState.meshManager.add(flatShaderProgram, MeshSamples::Cube());
-		sphereMesh = this->worldState.meshManager.add(smoothShaderProgram, MeshSamples::Sphere<10>());
-
-		Quat initialSunRotation = Quats::Identity;
-		initialSunRotation = Quats::LocallyRotate(initialSunRotation, Vecs::Up, 0.4f);
-		initialSunRotation = Quats::Rotate(initialSunRotation, Vecs::Right, 0.3f);
-		this->worldState.shaderProgramManager.acqSunRot() = initialSunRotation;
-		this->worldState.shaderProgramManager.acqSunBrightness() = 1.0f;
-		this->worldState.shaderProgramManager.acqSunAmbientLight() = 0.2f;
-		this->worldState.shaderProgramManager.acqSunColor() = Colors::White;
-
-		//////////
-
-		// {
-		// 	std::unique_ptr<PhysicForm> theOrigin = PhysicForm::New(this->worldState);
-		// 	theOrigin->setMeshAndLinkToShaderProgram(sphereMesh);
-		// 	theOrigin->tran.acqScale() = Vec(0.3f, 0.3f, 0.3f);
-		// 	this->worldState.forms.push_back(std::move(theOrigin));
-		// }
-		// {
-		// 	static constexpr int n = 300;
-		// 	static constexpr float frequency = 0.25f;
-		// 	static constexpr float altitude = 3.0f;
-		// 	static constexpr float scale = 1.0f;
-
-		// 	class Terrain : public MeshSample
-		// 	{
-		// 		std::unique_ptr<std::vector<Vec>> vertPositions3D() const
-		// 		{
-		// 			std::unique_ptr<std::vector<Vec>> ret = std::make_unique<std::vector<Vec>>();
-
-		// 			for (int i = 0; i < n + 1; i++)
-		// 			{
-		// 				for (int j = 0; j < n + 1; j++)
-		// 				{
-		// 					float x = (float)i;
-		// 					float y = (float)j;
-		// 					float z = altitude * std::sin(x * frequency) * std::sin(y * frequency);
-		// 					ret->push_back(scale * Vec(x, y, z));
-		// 				}
-		// 			}
-
-		// 			return std::move(ret);
-		// 		}
-
-		// 		std::unique_ptr<std::vector<Vec>> vertNormals3D() const
-		// 		{
-		// 			return nullptr;
-		// 		}
-
-		// 		std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> triangles() const
-		// 		{
-		// 			std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> ret = std::make_unique<std::vector<std::tuple<GLuint, GLuint, GLuint>>>();
-
-		// 			for (int i = 0; i < n; i++)
-		// 			{
-		// 				for (int j = 0; j < n; j++)
-		// 				{
-		// 					GLuint bottomLeft = i * (n + 1) + j;
-		// 					GLuint topLeft = i * (n + 1) + (j + 1);
-		// 					GLuint bottomRight = (i + 1) * (n + 1) + j;
-		// 					GLuint topRight = (i + 1) * (n + 1) + (j + 1);
-
-		// 					ret->push_back(std::make_tuple(bottomLeft, topRight, topLeft));
-		// 					ret->push_back(std::make_tuple(topRight, bottomLeft, bottomRight));
-		// 				}
-		// 			}
-
-		// 			return std::move(ret);
-		// 		}
-		// 	} terrainMeshSample;
-
-		// 	Mesh* terrainMesh = this->worldState.meshManager.add(flatShaderProgram, terrainMeshSample);
-
-		// 	std::unique_ptr<PhysicForm> terrain = PhysicForm::New(this->worldState);
-		// 	terrain->setMeshAndLinkToShaderProgram(terrainMesh);
-		// 	this->worldState.forms.push_back(std::move(terrain));
-		// }
-
-		{
-			long long seed = std::chrono::time_point_cast<std::chrono::microseconds>(std::chrono::system_clock::now()).time_since_epoch().count();
-			std::default_random_engine randGen(seed);
-			std::normal_distribution<float> randDist(0.0f, 3.0f);
-			
-			for (int i = 0; i < 100; i++)
-			{
-				float xPos = randDist(randGen);
-				float yPos = randDist(randGen);
-				float zPos = randDist(randGen);
-
-				Vec vec = Vec(xPos, yPos, zPos);
-				vec *= glm::length2(vec);
-
-				std::unique_ptr<PhysicForm> form1 = PhysicForm::New(this->worldState);
-				form1->setMeshAndLinkToShaderProgram(cubeMesh);
-				form1->tran.acqPosition() = vec;
-				form1->velocity = -0.002f * vec;
-				form1->friction = 0.001f;
-				this->worldState.forms.push_back(std::move(form1));
-			}
-
-			for (int i = 0; i < 100; i++)
-			{
-				float xPos = randDist(randGen);
-				float yPos = randDist(randGen);
-				float zPos = randDist(randGen);
-
-				Vec vec = Vec(xPos, yPos, zPos);
-				vec *= glm::length2(vec);
-
-				std::unique_ptr<PhysicForm> form1 = PhysicForm::New(this->worldState);
-				form1->setMeshAndLinkToShaderProgram(sphereMesh);
-				form1->tran.acqPosition() = vec;
-				form1->velocity = -0.002f * vec;
-				form1->friction = 0.001f;
-				this->worldState.forms.push_back(std::move(form1));
-			}
-		}
-
-		////////////////////////////////////////////////////////////
-	}
-
-	void Head::onUpdate(float deltaTime)
-	{
-		static float timeCounter = 0.0f;
-		static float frameCounter = 0.0f;
-		timeCounter += deltaTime;
-		frameCounter += 1.0f;
-
-		if (timeCounter >= 1500.0f)
-		{
-			// Debug::Logf("fps: %f", frameCounter / (timeCounter / 1000.0f));
-
-			timeCounter = 0.0f;
-			frameCounter = 0.0f;
-		}
-
-		// this->worldState.theSun->recalculateAndApplySunRotMatrix();
-
-		// for (std::unique_ptr<Form>& _form : this->worldState.forms)
-		// {
-		// 	Form* form = _form.get();
-
-		// 	form->tran.rotate(Vecs::Up, 0.01f * deltaTime);
-		// }
 	}
 
 	/* Functions */

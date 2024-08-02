@@ -3,8 +3,9 @@ configure_file(CMakeConfig.h.in CMakeConfig.h)
 
 add_executable(Fjordimm3DEngineExec
 	"src/Fjordimm3DEngine/Program.cpp"
-	"src/Fjordimm3DEngine/Head.cpp"
-	"src/Fjordimm3DEngine/WorldState.cpp"
+	"src/Fjordimm3DEngine/(World)/Head.cpp"
+	"src/Fjordimm3DEngine/(World)/HeadTerrainTest.cpp"
+	"src/Fjordimm3DEngine/(World)/WorldState.cpp"
 	"src/Fjordimm3DEngine/(Debug)/_logging.cpp"
 	"src/Fjordimm3DEngine/(FileLoading)/FileLoading.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderProgram.cpp"
@@ -46,4 +47,4 @@ target_include_directories(Fjordimm3DEngineExec PUBLIC ${CMAKE_CURRENT_SOURCE_DI
 find_package(OpenGL REQUIRED)
 target_link_libraries(Fjordimm3DEngineExec OpenGL::GL)
 
-target_compile_options(Fjordimm3DEngineExec PRIVATE -O2)
+target_compile_options(Fjordimm3DEngineExec PRIVATE)

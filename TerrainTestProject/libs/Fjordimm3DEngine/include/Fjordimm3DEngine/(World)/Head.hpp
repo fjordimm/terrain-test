@@ -9,7 +9,7 @@
 #include <GLFW/glfw3.h>
 #include "Fjordimm3DEngine/(headerGroups)/glmGroup.hpp"
 #include "Fjordimm3DEngine/(PtrForGlfw)/PtrForGlfw.hpp"
-#include "Fjordimm3DEngine/WorldState.hpp"
+#include "Fjordimm3DEngine/(World)/WorldState.hpp"
 #include "Fjordimm3DEngine/(Form)/Form.hpp"
 #include "Fjordimm3DEngine/(Form)/Forms/Camera.hpp"
 
@@ -27,7 +27,7 @@ namespace Fjordimm3DEngine
 
 		/* Fields */
 
-	   private:
+	   protected:
 		GLFWwindow* windowForGlfw;
 		PtrForGlfw ptrForGlfw;
 		WorldState worldState;
@@ -37,7 +37,7 @@ namespace Fjordimm3DEngine
 
 		/* Getters & Setters */
 
-	   private:
+	   protected:
 		inline const int& getWindowWidth() { return this->_windowWidth; }
 		inline const int& getWindowHeight() { return this->_windowHeight; }
 
@@ -46,22 +46,22 @@ namespace Fjordimm3DEngine
 	   public:
 		void start(int windowWidth = 600, int windowHeight = 600, const std::string windowTitle = "Placeholder Window Title");
 	
-	   private:
+	   protected:
 		void mainLoop();
 		void endGlfw();
 		void doCameraMovements(float deltaTime);
 
-		void onStart();
-		void onUpdate(float deltaTime);
+		virtual void onStart() = 0;
+		virtual void onUpdate(float deltaTime) = 0;
 
 		/* Functions */
 
-	   private:
+	   protected:
 		static void CalculateDeltaTime(float& deltaTime, float& totalTime); // In milliseconds
 
 		/* Methods for External Use */
 
-	   private:
+	   protected:
 		static void onWindowResize(GLFWwindow* windowForGlfw, int width, int height);
 	};
 }

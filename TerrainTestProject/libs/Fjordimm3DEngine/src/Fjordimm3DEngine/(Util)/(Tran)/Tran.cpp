@@ -3,7 +3,7 @@
 
 #include <sstream>
 #include "Fjordimm3DEngine/(Debug)/Debug.hpp"
-#include "Fjordimm3DEngine/WorldState.hpp"
+#include "Fjordimm3DEngine/(World)/WorldState.hpp"
 
 namespace Fjordimm3DEngine
 {
