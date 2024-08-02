@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include <vector>
 #include <list>
 #include <tuple>
 #include <cstdlib>
@@ -10,6 +11,7 @@
 #include "Fjordimm3DEngine/(Util)/(Tran)/Tran.hpp"
 #include "Fjordimm3DEngine/(Drawing)/(Meshes)/Mesh.hpp"
 #include "Fjordimm3DEngine/(Drawing)/(Meshes)/MeshVertAttribs.hpp"
+#include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderTrait.hpp"
 
 namespace Fjordimm3DEngine
 {
@@ -26,6 +28,9 @@ namespace Fjordimm3DEngine
 		/* Fields */
 
 	   private:
+		std::vector<ShaderTrait*> traits;
+		std::size_t stride;
+		
 		GLuint vertexShader;
 		GLuint geometryShader;
 		GLuint fragmentShader;
@@ -44,21 +49,15 @@ namespace Fjordimm3DEngine
 		std::list<std::tuple<Mesh*, Tran*>>::const_iterator addForm(Mesh* mesh, Tran* tran);
 		void removeForm(const std::list<std::tuple<Mesh*, Tran*>>::const_iterator& iter);
 		void drawAllTrans() const;
-		
-		virtual MeshVertAttribs attribFlagsForMeshSamples() const = 0;
 
-		virtual void enableAttribsForMesh() = 0;
+		void enableAttribsForMesh();
 
 	   protected:
+		void registerTrait(ShaderTrait* trait);
+
 		virtual const char* getVertexShaderSourcePath() const = 0;
 		virtual const char* getGeometryShaderSourcePath() const = 0;
 		virtual const char* getFragmentShaderSourcePath() const = 0;
-
-		virtual std::size_t getStride() = 0;
-		
-		virtual void setupUniforms() = 0;
-		virtual void setupAttributes() = 0;
-		virtual void updateUniformsFromTran(Tran& tran) const = 0;
 
 	   private:
 		void checkShaderCompilation(GLuint shader) const;

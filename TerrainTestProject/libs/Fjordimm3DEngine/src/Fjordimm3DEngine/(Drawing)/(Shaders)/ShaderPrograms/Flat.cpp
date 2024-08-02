@@ -5,7 +5,13 @@ namespace Fjordimm3DEngine::ShaderPrograms
 {
 	/* Constructors */
 
-	Flat::Flat() {}
+	Flat::Flat() :
+		traitIn3DSpace(),
+		traitHas3DShape()
+	{
+		this->registerTrait(&this->traitIn3DSpace);
+		this->registerTrait(&this->traitHas3DShape);
+	}
 
 	/* Methods */
 

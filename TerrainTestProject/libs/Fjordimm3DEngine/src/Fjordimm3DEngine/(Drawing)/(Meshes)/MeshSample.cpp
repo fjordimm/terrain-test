@@ -14,7 +14,9 @@ namespace Fjordimm3DEngine
 
 	std::unique_ptr<MeshData> MeshSample::make(const ShaderProgram& shaderProgram) const
 	{
-		MeshVertAttribs attribs = shaderProgram.attribFlagsForMeshSamples();
+		// TODO
+		MeshVertAttribs attribs = MeshVertAttribs::Positions3D;
+		// MeshVertAttribs attribs = shaderProgram.attribFlagsForMeshSamples();
 		bool doPositions3D = (attribs & MeshVertAttribs::Positions3D) != MeshVertAttribs::None;
 		bool doNormals3D = (attribs & MeshVertAttribs::Normals3D) != MeshVertAttribs::None;
 

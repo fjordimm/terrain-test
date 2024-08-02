@@ -8,7 +8,7 @@
 
 namespace Fjordimm3DEngine::FileLoading
 {
-	std::unique_ptr<const std::string> LoadFile(const std::string name)
+	std::unique_ptr<const std::string> LoadFileAsText(const std::string name)
 	{
 		std::string fullName = std::string(CMAKECONFIG_SOURCE_DIR) + "/libs/Fjordimm3DEngine/" + name;
 

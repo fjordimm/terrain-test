@@ -15,7 +15,7 @@ namespace Fjordimm3DEngine
 		forms(),
 		hasCapturedCursorForCamera(false),
 		mainCamera(nullptr),
-		mainCameraMovementSpeed(0.003f),
+		mainCameraMovementSpeed(0.001f),
 		mainCameraRotationSpeed(0.0025f)
 	{}
 }

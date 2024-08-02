@@ -22,7 +22,7 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Shader programs */
 
 		flatShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Flat>());
-		smoothShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Smooth>());
+		// smoothShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Smooth>());
 
 		/* Meshes */
 
@@ -38,7 +38,7 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		{
 			Quat initialSunRotation = Quats::Identity;
-			initialSunRotation = Quats::LocallyRotate(initialSunRotation, Vecs::Up, 0.4f);
+			initialSunRotation = Quats::LocallyRotate(initialSunRotation, Vecs::Up, Math::PiOver2 + 0.4f);
 			initialSunRotation = Quats::Rotate(initialSunRotation, Vecs::Right, 0.3f);
 			this->worldState.shaderProgramManager.acqSunRot() = initialSunRotation;
 			this->worldState.shaderProgramManager.acqSunBrightness() = 1.0f;
@@ -54,6 +54,18 @@ namespace Fjordimm3DEngine::TerrainTest
 			theOrigin->tran.acqScale() = Vec(0.3f, 0.3f, 0.3f);
 			this->worldState.forms.push_back(std::move(theOrigin));
 		}
+
+		{
+			std::unique_ptr<PhysicForm> form1 = PhysicForm::New(this->worldState);
+			form1->setMeshAndLinkToShaderProgram(this->cubeMesh);
+			form1->tran.acqPosition() += Vec(0.0f, 0.0f, 3.0f);
+			this->worldState.forms.push_back(std::move(form1));
+		}
+
+		/// TEMP ///
+		//////////////////////////////////////////////////////////
+		
+		//////////////////////////////////////////////////////////
 	}
 
 	void TerrainTestHead::onUpdate(float deltaTime)

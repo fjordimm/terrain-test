@@ -9,6 +9,8 @@ namespace Fjordimm3DEngine
 	/* Constructors */
 
 	ShaderProgram::ShaderProgram() :
+		traits(),
+		stride(0),
 		vertexShader(-1),
 		geometryShader(-1),
 		fragmentShader(-1),
@@ -20,21 +22,21 @@ namespace Fjordimm3DEngine
 
 	void ShaderProgram::compileAndActivate()
 	{
-		std::unique_ptr<const std::string> _vertexShaderSource = FileLoading::LoadFile(this->getVertexShaderSourcePath());
+		std::unique_ptr<const std::string> _vertexShaderSource = FileLoading::LoadFileAsText(this->getVertexShaderSourcePath());
 		const char* vertexShaderSource = _vertexShaderSource->c_str();
 		this->vertexShader = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(this->vertexShader, 1, &vertexShaderSource, nullptr);
 		glCompileShader(this->vertexShader);
 		checkShaderCompilation(this->vertexShader);
 
-		std::unique_ptr<const std::string> _geometryShaderSource = FileLoading::LoadFile(this->getGeometryShaderSourcePath());
+		std::unique_ptr<const std::string> _geometryShaderSource = FileLoading::LoadFileAsText(this->getGeometryShaderSourcePath());
 		const char* geometryShaderSource = _geometryShaderSource->c_str();
 		this->geometryShader = glCreateShader(GL_GEOMETRY_SHADER);
 		glShaderSource(this->geometryShader, 1, &geometryShaderSource, nullptr);
 		glCompileShader(this->geometryShader);
 		checkShaderCompilation(this->geometryShader);
 
-		std::unique_ptr<const std::string> _fragmentShaderSource = FileLoading::LoadFile(this->getFragmentShaderSourcePath());
+		std::unique_ptr<const std::string> _fragmentShaderSource = FileLoading::LoadFileAsText(this->getFragmentShaderSourcePath());
 		const char* fragmentShaderSource = _fragmentShaderSource->c_str();
 		this->fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(this->fragmentShader, 1, &fragmentShaderSource, nullptr);
@@ -49,8 +51,11 @@ namespace Fjordimm3DEngine
 		glLinkProgram(this->program);
 		glUseProgram(this->program);
 
-		this->setupUniforms();
-		this->setupAttributes();
+		for (ShaderTrait* trait : this->traits)
+		{
+			trait->setupUniforms(this->program);
+			trait->setupAttributes(this->program);
+		}
 	}
 
 	void ShaderProgram::use() const
@@ -80,10 +85,27 @@ namespace Fjordimm3DEngine
 			{
 				glBindVertexArray(mesh->getVaoForDrawing());
 
-				this->updateUniformsFromTran(*tran);
+				for (ShaderTrait* trait : this->traits)
+				{
+					trait->updateUniformsFromTran(*tran);
+				}
 				glDrawElements(GL_TRIANGLES, mesh->getElementsLen(), GL_UNSIGNED_INT, 0);
 			}
 		}
+	}
+
+	void ShaderProgram::enableAttribsForMesh()
+	{
+		for (ShaderTrait* trait : this->traits)
+		{
+			trait->enableAttribsForMesh(this->stride);
+		}
+	}
+
+	void ShaderProgram::registerTrait(ShaderTrait* trait)
+	{
+		this->traits.push_back(trait);
+		this->stride += trait->attribsSize();
 	}
 
 	void ShaderProgram::checkShaderCompilation(GLuint shader) const

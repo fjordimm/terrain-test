@@ -1,7 +1,7 @@
 
 #include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderProgramManager.hpp"
 
-#include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderPrograms/(Abstract)/InSpace.hpp"
+// #include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderPrograms/(Abstract)/InSpace.hpp"
 #include "Fjordimm3DEngine/(Debug)/Debug.hpp"
 
 namespace Fjordimm3DEngine
@@ -67,26 +67,26 @@ namespace Fjordimm3DEngine
 
 			shaderProgram->use();
 			
-			ShaderPrograms::InSpace* inSpaceShaderProgram = dynamic_cast<ShaderPrograms::InSpace*>(shaderProgram);
-			if (inSpaceShaderProgram != nullptr)
-			{
-				if (madeNewProjectionMatrix)
-				{
-					inSpaceShaderProgram->setUniProj(this->_cached_projectionMatrix);
-				}
+			// ShaderPrograms::InSpace* inSpaceShaderProgram = dynamic_cast<ShaderPrograms::InSpace*>(shaderProgram);
+			// if (inSpaceShaderProgram != nullptr)
+			// {
+			// 	if (madeNewProjectionMatrix)
+			// 	{
+			// 		inSpaceShaderProgram->setUniProj(this->_cached_projectionMatrix);
+			// 	}
 
-				if (madeNewSunRotMatrix)
-				{
-					inSpaceShaderProgram->setUniSunRot(this->_cached_sunRotMatrix);
-				}
+			// 	if (madeNewSunRotMatrix)
+			// 	{
+			// 		inSpaceShaderProgram->setUniSunRot(this->_cached_sunRotMatrix);
+			// 	}
 
-				if (madeNewSunlight)
-				{
-					inSpaceShaderProgram->setUniSunBrightness(this->_sunBrightness);
-					inSpaceShaderProgram->setUniSunAmbientLight(this->_sunAmbientLight);
-					inSpaceShaderProgram->setUniSunColor(this->_sunColor.toVec());
-				}
-			}
+			// 	if (madeNewSunlight)
+			// 	{
+			// 		inSpaceShaderProgram->setUniSunBrightness(this->_sunBrightness);
+			// 		inSpaceShaderProgram->setUniSunAmbientLight(this->_sunAmbientLight);
+			// 		inSpaceShaderProgram->setUniSunColor(this->_sunColor.toVec());
+			// 	}
+			// }
 
 			shaderProgram->drawAllTrans();
 		}
@@ -98,12 +98,12 @@ namespace Fjordimm3DEngine
 		{
 			ShaderProgram* shaderProgram = shaderProgram_.get();
 
-			ShaderPrograms::InSpace* inSpaceShaderProgram = dynamic_cast<ShaderPrograms::InSpace*>(shaderProgram);
-			if (inSpaceShaderProgram != nullptr)
-			{
-				inSpaceShaderProgram->use();
-				inSpaceShaderProgram->setUniView(val);
-			}
+			// ShaderPrograms::InSpace* inSpaceShaderProgram = dynamic_cast<ShaderPrograms::InSpace*>(shaderProgram);
+			// if (inSpaceShaderProgram != nullptr)
+			// {
+			// 	inSpaceShaderProgram->use();
+			// 	inSpaceShaderProgram->setUniView(val);
+			// }
 		}
 	}
 

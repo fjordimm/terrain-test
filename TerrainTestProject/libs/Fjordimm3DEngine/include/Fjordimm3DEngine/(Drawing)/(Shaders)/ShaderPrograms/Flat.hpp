@@ -1,11 +1,13 @@
 
 #pragma once
 
-#include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderPrograms/(Abstract)/ThreeDShape.hpp"
+#include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderProgram.hpp"
+#include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderTraits/In3DSpace.hpp"
+#include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderTraits/Has3DShape.hpp"
 
 namespace Fjordimm3DEngine::ShaderPrograms
 {
-	class Flat : public ShaderPrograms::ThreeDShape
+	class Flat : public ShaderProgram
 	{
 		/* Constructors */
 
@@ -14,6 +16,12 @@ namespace Fjordimm3DEngine::ShaderPrograms
 		Flat& operator=(const Flat&) = delete;
 		
 		Flat();
+
+		/* Fields */
+
+	   private:
+		ShaderTraits::In3DSpace traitIn3DSpace;
+		ShaderTraits::Has3DShape traitHas3DShape;
 
 		/* Methods */
 
