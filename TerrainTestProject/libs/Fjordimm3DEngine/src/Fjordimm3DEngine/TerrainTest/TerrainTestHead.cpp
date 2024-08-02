@@ -1,13 +1,14 @@
 
-#include "Fjordimm3DEngine/(World)/HeadTerrainTest.hpp"
+#include "Fjordimm3DEngine/TerrainTest/TerrainTestHead.hpp"
+
 #include "Fjordimm3DEngine/(headerGroups)/allShaderPrograms.hpp"
 #include "Fjordimm3DEngine/(headerGroups)/allMeshSamples.hpp"
 
-namespace Fjordimm3DEngine
+namespace Fjordimm3DEngine::TerrainTest
 {
 	/* Constructors */
 
-	HeadTerrainTest::HeadTerrainTest() : Head(),
+	TerrainTestHead::TerrainTestHead() : Head(),
 		flatShaderProgram(nullptr),
 		smoothShaderProgram(nullptr),
 		cubeMesh(nullptr),
@@ -16,7 +17,7 @@ namespace Fjordimm3DEngine
 
 	/* Methods */
 
-	void HeadTerrainTest::initializeShadersAndFixedMeshes()
+	void TerrainTestHead::initializeShadersAndFixedMeshes()
 	{
 		/* Shader programs */
 
@@ -29,7 +30,7 @@ namespace Fjordimm3DEngine
 		sphereMesh = this->worldState.meshManager.add(this->smoothShaderProgram, MeshSamples::Sphere<10>());
 	}
 
-	void HeadTerrainTest::onStart()
+	void TerrainTestHead::onStart()
 	{
 		this->initializeShadersAndFixedMeshes();
 
@@ -55,7 +56,7 @@ namespace Fjordimm3DEngine
 		}
 	}
 
-	void HeadTerrainTest::onUpdate(float deltaTime)
+	void TerrainTestHead::onUpdate(float deltaTime)
 	{
 
 	}

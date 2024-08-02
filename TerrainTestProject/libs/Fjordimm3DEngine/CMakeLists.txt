@@ -4,7 +4,6 @@ configure_file(CMakeConfig.h.in CMakeConfig.h)
 add_executable(Fjordimm3DEngineExec
 	"src/Fjordimm3DEngine/Program.cpp"
 	"src/Fjordimm3DEngine/(World)/Head.cpp"
-	"src/Fjordimm3DEngine/(World)/HeadTerrainTest.cpp"
 	"src/Fjordimm3DEngine/(World)/WorldState.cpp"
 	"src/Fjordimm3DEngine/(Debug)/_logging.cpp"
 	"src/Fjordimm3DEngine/(FileLoading)/FileLoading.cpp"
@@ -31,6 +30,7 @@ add_executable(Fjordimm3DEngineExec
 	"src/Fjordimm3DEngine/(PtrForGlfw)/PtrForGlfw.cpp"
 	"src/Fjordimm3DEngine/(InputManager)/InputManager.cpp"
 	"src/Fjordimm3DEngine/(Util)/(Color)/Color.cpp"
+	"src/Fjordimm3DEngine/TerrainTest/TerrainTestHead.cpp"
 )
 
 target_include_directories(Fjordimm3DEngineExec PUBLIC include)

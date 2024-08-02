@@ -4,17 +4,17 @@
 #include "Fjordimm3DEngine/(World)/Head.hpp"
 #include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderProgram.hpp"
 
-namespace Fjordimm3DEngine
+namespace Fjordimm3DEngine::TerrainTest
 {
-	class HeadTerrainTest : public Head
+	class TerrainTestHead : public Head
 	{
 		/* Constructors */
 
 	   public:
-		HeadTerrainTest(const HeadTerrainTest&) = delete;
-		HeadTerrainTest& operator=(const HeadTerrainTest&) = delete;
+		TerrainTestHead(const TerrainTestHead&) = delete;
+		TerrainTestHead& operator=(const TerrainTestHead&) = delete;
 
-		HeadTerrainTest();
+		TerrainTestHead();
 		
 		/* Fields */
 
