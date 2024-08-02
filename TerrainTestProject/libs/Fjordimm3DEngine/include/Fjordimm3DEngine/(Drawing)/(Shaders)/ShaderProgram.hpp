@@ -11,7 +11,6 @@
 #include <GLFW/glfw3.h>
 #include "Fjordimm3DEngine/(Util)/(Tran)/Tran.hpp"
 #include "Fjordimm3DEngine/(Drawing)/(Meshes)/Mesh.hpp"
-#include "Fjordimm3DEngine/(Drawing)/(Meshes)/MeshVertAttribs.hpp"
 #include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderTrait.hpp"
 
 namespace Fjordimm3DEngine

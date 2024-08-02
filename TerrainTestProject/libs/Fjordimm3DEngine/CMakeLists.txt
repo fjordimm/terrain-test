@@ -18,7 +18,6 @@ add_executable(Fjordimm3DEngineExec
 	"src/Fjordimm3DEngine/(Drawing)/(Meshes)/MeshData.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/(Meshes)/Mesh.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/(Meshes)/MeshSample.cpp"
-	"src/Fjordimm3DEngine/(Drawing)/(Meshes)/MeshVertAttribs.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/(Meshes)/MeshSamples/Cube.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/(Meshes)/MeshSamples/Sphere.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/(Meshes)/MeshManager.cpp"
