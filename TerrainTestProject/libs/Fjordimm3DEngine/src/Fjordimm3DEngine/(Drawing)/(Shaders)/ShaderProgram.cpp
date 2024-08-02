@@ -51,8 +51,10 @@ namespace Fjordimm3DEngine
 		glLinkProgram(this->program);
 		glUseProgram(this->program);
 
-		for (ShaderTrait* trait : this->traits)
+		for (const std::pair<std::size_t, ShaderTrait*>& _trait : this->traits)
 		{
+			ShaderTrait* trait = _trait.second;
+
 			trait->setupUniforms(this->program);
 			trait->setupAttributes(this->program);
 		}
@@ -85,8 +87,10 @@ namespace Fjordimm3DEngine
 			{
 				glBindVertexArray(mesh->getVaoForDrawing());
 
-				for (ShaderTrait* trait : this->traits)
+				for (const std::pair<std::size_t, ShaderTrait*>& _trait : this->traits)
 				{
+					ShaderTrait* trait = _trait.second;
+
 					trait->updateUniformsFromTran(*tran);
 				}
 				glDrawElements(GL_TRIANGLES, mesh->getElementsLen(), GL_UNSIGNED_INT, 0);
@@ -96,15 +100,17 @@ namespace Fjordimm3DEngine
 
 	void ShaderProgram::enableAttribsForMesh()
 	{
-		for (ShaderTrait* trait : this->traits)
+		for (const std::pair<std::size_t, ShaderTrait*>& _trait : this->traits)
 		{
+			ShaderTrait* trait = _trait.second;
+
 			trait->enableAttribsForMesh(this->stride);
 		}
 	}
 
 	void ShaderProgram::registerTrait(ShaderTrait* trait)
 	{
-		this->traits.push_back(trait);
+		this->traits[typeid(*trait).hash_code()] = trait;
 		this->stride += trait->attribsSize();
 	}
 

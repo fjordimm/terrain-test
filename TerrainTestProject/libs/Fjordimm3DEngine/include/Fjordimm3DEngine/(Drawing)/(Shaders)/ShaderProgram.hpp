@@ -1,7 +1,8 @@
 
 #pragma once
 
-#include <vector>
+#include <unordered_map>
+#include <typeinfo>
 #include <list>
 #include <tuple>
 #include <cstdlib>
@@ -28,7 +29,7 @@ namespace Fjordimm3DEngine
 		/* Fields */
 
 	   private:
-		std::vector<ShaderTrait*> traits;
+		std::unordered_map<std::size_t, ShaderTrait*> traits;
 		std::size_t stride;
 		
 		GLuint vertexShader;
@@ -54,6 +55,8 @@ namespace Fjordimm3DEngine
 
 	   protected:
 		void registerTrait(ShaderTrait* trait);
+		// template <class>
+		// ShaderTrait* tryGetTrait();
 
 		virtual const char* getVertexShaderSourcePath() const = 0;
 		virtual const char* getGeometryShaderSourcePath() const = 0;
