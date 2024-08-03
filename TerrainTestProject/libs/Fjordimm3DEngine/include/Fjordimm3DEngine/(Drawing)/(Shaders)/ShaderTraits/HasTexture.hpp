@@ -18,7 +18,8 @@ namespace Fjordimm3DEngine::ShaderTraits
 		/* Fields */
 
 	   private:
-		GLint uniTextureSampler;
+		GLint uniTextureSampler0;
+		GLint uniTextureSampler1;
 
 		/* Methods */
 

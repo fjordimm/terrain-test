@@ -22,25 +22,40 @@ namespace Fjordimm3DEngine::TerrainTest
 	{
 		/// TEMP ///
 		//////////////////////////////////////////////////////////
-		GLuint tex;
-		glGenTextures(1, &tex);
+		{
+			GLuint tex0;
+			glGenTextures(1, &tex0);
 
-		glBindTexture(GL_TEXTURE_2D, tex);
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, tex0);
 
-		// GLubyte hahaPixels[] =
-		// {
-		// 	255,0,0,255,   127,127,127,255,
-		// 	127,127,127,255,   0,255,0,255
-		// };
-		std::size_t w;
-		std::size_t h;
-		std::unique_ptr<std::vector<unsigned char>> starImg = FileLoading::LoadImage("res/textures/star.png", w, h);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 32, 32, 0, GL_RGBA, GL_UNSIGNED_BYTE, starImg->data());
+			std::size_t w;
+			std::size_t h;
+			std::unique_ptr<std::vector<unsigned char>> starImg = FileLoading::LoadImage("res/textures/star.png", w, h);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 32, 32, 0, GL_RGBA, GL_UNSIGNED_BYTE, starImg->data());
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		}
+		{
+			GLuint tex1;
+			glGenTextures(1, &tex1);
+
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, tex1);
+
+			std::size_t w;
+			std::size_t h;
+			std::unique_ptr<std::vector<unsigned char>> testImg = FileLoading::LoadImage("res/textures/test.png", w, h);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 3, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, testImg->data());
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		}
 		// TODO: glGenerateMipmap()
 		//////////////////////////////////////////////////////////
 

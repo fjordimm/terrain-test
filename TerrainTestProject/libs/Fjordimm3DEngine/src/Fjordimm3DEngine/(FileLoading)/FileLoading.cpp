@@ -59,7 +59,6 @@ namespace Fjordimm3DEngine::FileLoading
 			
 			std::unique_ptr<std::vector<unsigned char>> ret = std::make_unique<std::vector<unsigned char>>();
 			ret->resize(4 * imageWidth * imageHeight);
-			Debug::Log("yowza");
 			for (std::size_t r = 0; r < imageHeight; r++)
 			{
 				for (std::size_t c = 0; c < imageWidth; c++)
