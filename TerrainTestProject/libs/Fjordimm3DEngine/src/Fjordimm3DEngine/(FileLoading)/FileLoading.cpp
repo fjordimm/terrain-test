@@ -64,10 +64,12 @@ namespace Fjordimm3DEngine::FileLoading
 			{
 				for (std::size_t c = 0; c < imageWidth; c++)
 				{
-					ret->at(4 * (r * imageWidth + c) + 0) = buf[4 * (r * imageWidth + c) + 0];
-					ret->at(4 * (r * imageWidth + c) + 1) = buf[4 * (r * imageWidth + c) + 1];
-					ret->at(4 * (r * imageWidth + c) + 2) = buf[4 * (r * imageWidth + c) + 2];
-					ret->at(4 * (r * imageWidth + c) + 3) = buf[4 * (r * imageWidth + c) + 3];
+					std::size_t rP = imageHeight - 1 - r;
+
+					ret->at(4 * (r * imageWidth + c) + 0) = buf[4 * (rP * imageWidth + c) + 0];
+					ret->at(4 * (r * imageWidth + c) + 1) = buf[4 * (rP * imageWidth + c) + 1];
+					ret->at(4 * (r * imageWidth + c) + 2) = buf[4 * (rP * imageWidth + c) + 2];
+					ret->at(4 * (r * imageWidth + c) + 3) = buf[4 * (rP * imageWidth + c) + 3];
 				}
 			}
 

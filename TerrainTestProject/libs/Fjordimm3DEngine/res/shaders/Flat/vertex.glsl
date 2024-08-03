@@ -17,6 +17,6 @@ void main()
 	vec4 trans = uni_TransPos * uni_TransRot * uni_TransScale * vec4(attrib_Position, 1.0);
 
 	v_Coord = trans;
-	v_TextureCoord = 7.0 * attrib_Position.xz;
+	v_TextureCoord = attrib_Position.xz;
 	gl_Position = uni_Proj * uni_View * trans;
 }
