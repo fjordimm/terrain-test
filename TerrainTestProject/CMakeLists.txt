@@ -7,4 +7,5 @@ project (TerrainTestProject
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory(libs/Fjordimm3DEngine)
+add_subdirectory("libs/Fjordimm3DEngine")
+add_subdirectory("libs/LodePNG")

@@ -1,5 +1,5 @@
 
-configure_file(CMakeConfig.h.in CMakeConfig.h)
+configure_file("cmakeconfig/CMakeConfig.h.in" "cmakeconfig/CMakeConfig.h")
 
 add_executable(Fjordimm3DEngineExec
 	"src/Fjordimm3DEngine/Program.cpp"
@@ -35,18 +35,21 @@ add_executable(Fjordimm3DEngineExec
 	"src/Fjordimm3DEngine/TerrainTest/TerrainTestHead.cpp"
 )
 
-target_include_directories(Fjordimm3DEngineExec PUBLIC include)
-target_include_directories(Fjordimm3DEngineExec PUBLIC "${PROJECT_BINARY_DIR}/libs/Fjordimm3DEngine")
+target_include_directories(Fjordimm3DEngineExec PUBLIC "include")
+target_include_directories(Fjordimm3DEngineExec PUBLIC "${PROJECT_BINARY_DIR}/libs/Fjordimm3DEngine/cmakeconfig")
 
-target_include_directories(Fjordimm3DEngineExec PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../GLFW/include)
-target_link_libraries(Fjordimm3DEngineExec ${CMAKE_CURRENT_SOURCE_DIR}/../GLFW/lib/ninja-libglfw3.a)
+target_include_directories(Fjordimm3DEngineExec PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../GLFW/include")
+target_link_libraries(Fjordimm3DEngineExec "${CMAKE_CURRENT_SOURCE_DIR}/../GLFW/lib/ninja-libglfw3.a")
 
-target_include_directories(Fjordimm3DEngineExec PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../GLEW/include)
-target_link_libraries(Fjordimm3DEngineExec ${CMAKE_CURRENT_SOURCE_DIR}/../GLEW/lib/ninja-libglew32.a)
+target_include_directories(Fjordimm3DEngineExec PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../GLEW/include")
+target_link_libraries(Fjordimm3DEngineExec "${CMAKE_CURRENT_SOURCE_DIR}/../GLEW/lib/ninja-libglew32.a")
 
-target_include_directories(Fjordimm3DEngineExec PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../GLM/include)
+target_include_directories(Fjordimm3DEngineExec PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../GLM/include")
 
 find_package(OpenGL REQUIRED)
 target_link_libraries(Fjordimm3DEngineExec OpenGL::GL)
 
-target_compile_options(Fjordimm3DEngineExec PRIVATE)
+target_include_directories(Fjordimm3DEngineExec PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../LodePNG/include")
+target_link_libraries(Fjordimm3DEngineExec LodePNG)
+
+target_compile_options(Fjordimm3DEngineExec PRIVATE -O2)

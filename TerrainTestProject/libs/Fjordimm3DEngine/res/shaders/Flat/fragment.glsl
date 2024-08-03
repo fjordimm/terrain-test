@@ -21,6 +21,9 @@ void main()
 	shadingMult = uni_SunBrightness * shadingMult; // clamp in range [0.0, uni_SunBrightness]
 	shadingMult = (uni_SunBrightness - uni_SunAmbientLight) * shadingMult + uni_SunAmbientLight; // clamp in range [uni_SunAmbientLight, uni_SunBrightness]
 
-	vec4 litColor = vec4(shadingMult * uni_SunColor, 1.0);
-	f_Color = texture(uni_TextureSampler, g_TextureCoord) * litColor;
+	// vec4 litColor = shadingMult * uni_SunColor;
+	// vec3 litColor = vec3(1.0, 1.0, 1.0);
+	// vec4 texColor = texture(uni_TextureSampler, g_TextureCoord);
+	// f_Color = vec4(texColor.r * litColor.r, texColor.g * litColor.g, texColor.b * litColor.b, 1.0);
+	f_Color = texture(uni_TextureSampler, g_TextureCoord);
 }

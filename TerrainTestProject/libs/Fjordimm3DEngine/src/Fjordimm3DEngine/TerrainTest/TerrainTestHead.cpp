@@ -26,17 +26,17 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		glBindTexture(GL_TEXTURE_2D, tex);
 
-		float hahaPixels[] =
+		GLubyte hahaPixels[] =
 		{
-			1.0f,0.0f,0.0f,     0.4f,0.4f,0.4f,
-			0.4f,0.4f,0.4f,     0.0f,0.0f,1.0f,
+			255,0,0,255,   127,127,127,255,
+			127,127,127,255,   0,255,0,255
 		};
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_FLOAT, hahaPixels);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 2, 2, 0, GL_RGBA, GL_UNSIGNED_BYTE, hahaPixels);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		// TODO: glGenerateMipmap()
 		//////////////////////////////////////////////////////////
 
