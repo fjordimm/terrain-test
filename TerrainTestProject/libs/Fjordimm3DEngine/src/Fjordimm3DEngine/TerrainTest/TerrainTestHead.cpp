@@ -19,15 +19,36 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	void TerrainTestHead::initializeShadersAndFixedMeshes()
 	{
+		/// TEMP ///
+		//////////////////////////////////////////////////////////
+		GLuint tex;
+		glGenTextures(1, &tex);
+
+		glBindTexture(GL_TEXTURE_2D, tex);
+
+		float hahaPixels[] =
+		{
+			1.0f,0.0f,0.0f,     0.4f,0.4f,0.4f,
+			0.4f,0.4f,0.4f,     0.0f,0.0f,1.0f,
+		};
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_FLOAT, hahaPixels);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		// TODO: glGenerateMipmap()
+		//////////////////////////////////////////////////////////
+
 		/* Shader programs */
 
 		flatShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Flat>());
-		smoothShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Smooth>());
+		// smoothShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Smooth>());
 
 		/* Meshes */
 
 		cubeMesh = this->worldState.meshManager.add(this->flatShaderProgram, MeshSamples::Cube());
-		sphereMesh = this->worldState.meshManager.add(this->smoothShaderProgram, MeshSamples::Sphere<10>());
+		// sphereMesh = this->worldState.meshManager.add(this->smoothShaderProgram, MeshSamples::Sphere<10>());
 	}
 
 	void TerrainTestHead::onStart()
@@ -46,14 +67,24 @@ namespace Fjordimm3DEngine::TerrainTest
 			this->worldState.shaderProgramManager.acqSunColor() = Colors::White;
 		}
 
-		/* Forms */
+		/* Camera settings */
 
 		{
-			std::unique_ptr<PhysicForm> theOrigin = PhysicForm::New(this->worldState);
-			theOrigin->setMeshAndLinkToShaderProgram(this->sphereMesh);
-			theOrigin->tran.acqScale() = Vec(0.3f, 0.3f, 0.3f);
-			this->worldState.forms.push_back(std::move(theOrigin));
+			this->worldState.mainCamera->tran.acqPosition() = Vec(0.0f, -15.0f, 0.0f);
+			this->worldState.shaderProgramManager.acqFov() = Math::PiOver3;
+			this->worldState.mainCamera->recalculateAndApplyViewMatrix(this->worldState);
+
+			this->worldState.mainCameraMovementSpeed = 0.0003f;
 		}
+
+		/* Forms */
+
+		// {
+		// 	std::unique_ptr<PhysicForm> theOrigin = PhysicForm::New(this->worldState);
+		// 	theOrigin->setMeshAndLinkToShaderProgram(this->sphereMesh);
+		// 	theOrigin->tran.acqScale() = Vec(0.3f, 0.3f, 0.3f);
+		// 	this->worldState.forms.push_back(std::move(theOrigin));
+		// }
 
 		{
 			std::unique_ptr<PhysicForm> form1 = PhysicForm::New(this->worldState);
@@ -61,11 +92,6 @@ namespace Fjordimm3DEngine::TerrainTest
 			form1->tran.acqPosition() += Vec(0.0f, 0.0f, 3.0f);
 			this->worldState.forms.push_back(std::move(form1));
 		}
-
-		/// TEMP ///
-		//////////////////////////////////////////////////////////
-		
-		//////////////////////////////////////////////////////////
 	}
 
 	void TerrainTestHead::onUpdate(float deltaTime)

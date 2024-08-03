@@ -29,10 +29,6 @@ namespace Fjordimm3DEngine
 		// Immediately after the call of this function,
 		//   someone must call ShaderProgram.enableAttribsForMesh(),
 		//   and they must call Mesh.updateGlBufferData()
-
-		// shaderManager.doAttribs();
-
-		// this->updateGlBufferData();
 	}
 
 	void Mesh::cleanupForGl()

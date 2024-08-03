@@ -84,7 +84,7 @@ namespace Fjordimm3DEngine
 		{ Debug::LogFatalError("Machine does not support raw mouse motion."); }
 
 		this->worldState.mainCamera = Forms::Camera::New(this->worldState);
-		this->worldState.mainCamera->tran.acqPosition() = Vec(0.0f, -100.0f, 0.0f);
+		this->worldState.mainCamera->tran.acqPosition() = Vec(0.0f, -10.0f, 0.0f);
 		this->worldState.mainCamera->recalculateAndApplyViewMatrix(this->worldState);
 
 		this->worldState.shaderProgramManager.acqFov() = Math::PiOver4;
@@ -145,6 +145,7 @@ namespace Fjordimm3DEngine
 		glfwTerminate();
 	}
 	
+	// TODO: store a forward vector that doesn't account for verticallness so you don't lose precision when looking straight up or down
 	void Head::doCameraMovements(float deltaTime)
 	{
 		if (this->worldState.inputManager.getAnyMouseButton().pressedOnce)
