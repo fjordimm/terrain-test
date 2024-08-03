@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include "lodepng.h"
 #include "CMakeConfig.h"
 #include "Fjordimm3DEngine/(Debug)/Debug.hpp"
 
@@ -12,26 +13,65 @@ namespace Fjordimm3DEngine::FileLoading
 	{
 		std::string fullName = std::string(CMAKECONFIG_SOURCE_DIR) + "/libs/Fjordimm3DEngine/" + name;
 
-		FILE* file = fopen(fullName.c_str(), "r");
+		FILE* file = std::fopen(fullName.c_str(), "r");
 
 		if (!file)
 		{
-			Debug::LogNonfatalError("Couldn't open file, returned nullptr.");
+			Debug::LogNonfatalError("Couldn't open file, returning nullptr.");
 			return nullptr;
 		}
 
-		fseek(file, 0, SEEK_END);
-		size_t size = ftell(file);
-		fseek(file, 0, SEEK_SET);
+		std::fseek(file, 0, SEEK_END);
+		size_t size = std::ftell(file);
+		std::fseek(file, 0, SEEK_SET);
 
 		char* buf = new char[size + 1];
 
-		size_t charsRead = fread(buf, sizeof(char), size, file);
+		size_t charsRead = std::fread(buf, sizeof(char), size, file);
 		buf[charsRead] = '\0';
 
-		fclose(file);
+		std::fclose(file);
 
 		std::unique_ptr<const std::string> ret(new const std::string(buf));
 		return std::move(ret);
+	}
+	
+	std::unique_ptr<std::vector<unsigned char>> LoadImage(const std::string name, std::size_t& imageWidth, std::size_t& imageHeight)
+	{
+		std::string fullName = std::string(CMAKECONFIG_SOURCE_DIR) + "/libs/Fjordimm3DEngine/" + name;
+
+		std::vector<unsigned char> buf;
+		unsigned int width;
+		unsigned int height;
+
+		unsigned int lodepngError = lodepng::decode(buf, width, height, fullName.c_str());
+		if (lodepngError)
+		{
+			Debug::LogNonfatalError("Couldn't open image, returning nullptr.");
+			imageWidth = 0;
+			imageHeight = 0;
+			return nullptr;
+		}
+		else
+		{
+			imageWidth = width;
+			imageHeight = height;
+			
+			std::unique_ptr<std::vector<unsigned char>> ret = std::make_unique<std::vector<unsigned char>>();
+			ret->resize(4 * imageWidth * imageHeight);
+			Debug::Log("yowza");
+			for (std::size_t r = 0; r < imageHeight; r++)
+			{
+				for (std::size_t c = 0; c < imageWidth; c++)
+				{
+					ret->at(4 * (r * imageWidth + c) + 0) = buf[4 * (r * imageWidth + c) + 0];
+					ret->at(4 * (r * imageWidth + c) + 1) = buf[4 * (r * imageWidth + c) + 1];
+					ret->at(4 * (r * imageWidth + c) + 2) = buf[4 * (r * imageWidth + c) + 2];
+					ret->at(4 * (r * imageWidth + c) + 3) = buf[4 * (r * imageWidth + c) + 3];
+				}
+			}
+
+			return std::move(ret);
+		}
 	}
 }

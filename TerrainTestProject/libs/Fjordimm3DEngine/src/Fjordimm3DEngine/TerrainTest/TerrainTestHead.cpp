@@ -3,6 +3,7 @@
 
 #include "Fjordimm3DEngine/(headerGroups)/allShaderPrograms.hpp"
 #include "Fjordimm3DEngine/(headerGroups)/allMeshSamples.hpp"
+#include "Fjordimm3DEngine/(FileLoading)/FileLoading.hpp"
 
 namespace Fjordimm3DEngine::TerrainTest
 {
@@ -26,12 +27,15 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		glBindTexture(GL_TEXTURE_2D, tex);
 
-		GLubyte hahaPixels[] =
-		{
-			255,0,0,255,   127,127,127,255,
-			127,127,127,255,   0,255,0,255
-		};
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 2, 2, 0, GL_RGBA, GL_UNSIGNED_BYTE, hahaPixels);
+		// GLubyte hahaPixels[] =
+		// {
+		// 	255,0,0,255,   127,127,127,255,
+		// 	127,127,127,255,   0,255,0,255
+		// };
+		std::size_t w;
+		std::size_t h;
+		std::unique_ptr<std::vector<unsigned char>> starImg = FileLoading::LoadImage("res/textures/star.png", w, h);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 32, 32, 0, GL_RGBA, GL_UNSIGNED_BYTE, starImg->data());
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
