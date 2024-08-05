@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <unordered_map>
+#include <map>
 #include <typeinfo>
 #include <unordered_set>
 #include <tuple>
@@ -27,7 +27,7 @@ namespace Fjordimm3DEngine
 		/* Fields */
 
 	   private:
-		std::unordered_map<std::size_t, ShaderTrait*> traits;
+		std::map<std::size_t, ShaderTrait*> traits;
 		std::size_t stride;
 		
 		GLuint vertexShader;
@@ -54,7 +54,7 @@ namespace Fjordimm3DEngine
 		template <class T, typename std::enable_if<std::is_base_of<ShaderTrait, T>::value>::type* = nullptr>
 		T* tryGetTrait() const
 		{
-			std::unordered_map<std::size_t, ShaderTrait*>::const_iterator tryGet = this->traits.find(typeid(T).hash_code());
+			std::map<std::size_t, ShaderTrait*>::const_iterator tryGet = this->traits.find(typeid(T).hash_code());
 			if (tryGet == this->traits.end())
 			{ return nullptr; }
 			else

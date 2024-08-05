@@ -35,6 +35,27 @@ namespace Fjordimm3DEngine::MeshSamples
 		return std::move(ret);
 	}
 
+	// 1        0.0f, 1.0f
+	// 2        1.0f, 1.0f
+	// 3        1.0f, 0.0f
+	// 4        0.0f, 0.0f
+
+	std::unique_ptr<std::vector<Vec2>> Cube::vertTextureCoords() const
+	{
+		std::unique_ptr<std::vector<Vec2>> ret(new std::vector<Vec2>{
+			Vec2(0.0f, 0.0f),
+			Vec2(1.0f, 0.0f),
+			Vec2(0.0f, 0.0f),
+			Vec2(1.0f, 0.0f),
+			Vec2(0.0f, 1.0f),
+			Vec2(1.0f, 1.0f),
+			Vec2(0.0f, 1.0f),
+			Vec2(1.0f, 1.0f)
+		});
+
+		return std::move(ret);
+	}
+
 	std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> Cube::triangles() const
 	{
 		std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> ret(new std::vector<std::tuple<GLuint, GLuint, GLuint>>{

@@ -1,6 +1,8 @@
 
 #include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderTraits/In3DSpace.hpp"
 
+#include "Fjordimm3DEngine/(Debug)/Debug.hpp"
+
 namespace Fjordimm3DEngine::ShaderTraits
 {
 	/* Constructors */

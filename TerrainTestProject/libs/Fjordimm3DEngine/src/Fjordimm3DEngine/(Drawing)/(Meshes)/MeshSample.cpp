@@ -18,6 +18,7 @@ namespace Fjordimm3DEngine
 	{
 		bool doPositions3D = shaderProgram.tryGetTrait<ShaderTraits::In3DSpace>() != nullptr;
 		bool doNormals3D = shaderProgram.tryGetTrait<ShaderTraits::HasNormals>() != nullptr;
+		bool doTextureCoords = shaderProgram.tryGetTrait<ShaderTraits::HasTexture>() != nullptr;
 
 		FJORDIMM3DENGINE_DEBUG_ASSERT(doPositions3D);
 
@@ -43,12 +44,20 @@ namespace Fjordimm3DEngine
 				numFloatsPerVertex += 3;
 			}
 
-			if (doPositions3D && doNormals3D)
+			std::unique_ptr<const std::vector<Vec2>> vertTextureCoords = nullptr;
+			if (doTextureCoords)
 			{
-				FJORDIMM3DENGINE_DEBUG_ASSERT(vertPositions3D->size() == vertNormals3D->size());
+				vertTextureCoords = this->vertTextureCoords();
+				numFloatsPerVertex += 2;
 			}
 
 			vertsVertLen = vertPositions3D->size();
+			if (doPositions3D)
+			{ FJORDIMM3DENGINE_DEBUG_ASSERT(vertPositions3D->size() == vertsVertLen); }
+			if (doNormals3D)
+			{ FJORDIMM3DENGINE_DEBUG_ASSERT(vertNormals3D->size() == vertsVertLen); }
+			if (doTextureCoords)
+			{ FJORDIMM3DENGINE_DEBUG_ASSERT(vertTextureCoords->size() == vertsVertLen); }
 
 			vertsLen = vertsVertLen * numFloatsPerVertex;
 
@@ -75,6 +84,14 @@ namespace Fjordimm3DEngine
 					verts[i * numFloatsPerVertex + cumlOffset + 2] = vertNormals3D->at(i).z;
 
 					cumlOffset += 3;
+				}
+
+				if (doTextureCoords)
+				{
+					verts[i * numFloatsPerVertex + cumlOffset + 0] = vertTextureCoords->at(i).x;
+					verts[i * numFloatsPerVertex + cumlOffset + 1] = vertTextureCoords->at(i).y;
+
+					cumlOffset += 2;
 				}
 			}
 		}

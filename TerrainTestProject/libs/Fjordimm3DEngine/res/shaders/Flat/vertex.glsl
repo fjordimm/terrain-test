@@ -8,6 +8,7 @@ uniform mat4 uni_View;
 uniform mat4 uni_Proj;
 
 in vec3 attrib_Position;
+in vec2 attrib_TextureCoord;
 
 out vec4 v_Coord;
 out vec2 v_TextureCoord;
@@ -17,6 +18,6 @@ void main()
 	vec4 trans = uni_TransPos * uni_TransRot * uni_TransScale * vec4(attrib_Position, 1.0);
 
 	v_Coord = trans;
-	v_TextureCoord = attrib_Position.xz;
+	v_TextureCoord = attrib_TextureCoord;
 	gl_Position = uni_Proj * uni_View * trans;
 }

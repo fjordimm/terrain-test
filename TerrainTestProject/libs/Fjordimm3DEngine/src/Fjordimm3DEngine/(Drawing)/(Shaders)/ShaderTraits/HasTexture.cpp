@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include "Fjordimm3DEngine/(FileLoading)/FileLoading.hpp"
+#include "Fjordimm3DEngine/(Debug)/Debug.hpp"
 
 namespace Fjordimm3DEngine::ShaderTraits
 {
@@ -25,7 +26,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 
 	std::size_t HasTexture::attribsSize()
 	{
-		return 0;
+		return 2 * sizeof(float);
 	}
 
 	void HasTexture::setupAttributes(GLuint program)

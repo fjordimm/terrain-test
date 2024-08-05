@@ -12,6 +12,7 @@ namespace Fjordimm3DEngine::MeshSamples
 	   protected:
 		std::unique_ptr<std::vector<Vec>> vertPositions3D() const final;
 		std::unique_ptr<std::vector<Vec>> vertNormals3D() const final;
+		std::unique_ptr<std::vector<Vec2>> vertTextureCoords() const final;
 		std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> triangles() const final;
 	};
 }

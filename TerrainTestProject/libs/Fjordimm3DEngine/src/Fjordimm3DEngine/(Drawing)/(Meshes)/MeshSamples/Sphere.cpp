@@ -59,6 +59,12 @@ namespace Fjordimm3DEngine::MeshSamples
 	}
 
 	template <std::size_t Size>
+	std::unique_ptr<std::vector<Vec2>> Sphere<Size>::vertTextureCoords() const
+	{
+
+	}
+
+	template <std::size_t Size>
 	std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> Sphere<Size>::triangles() const
 	{
 		const int numLayers = Size;
