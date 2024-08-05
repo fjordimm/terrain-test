@@ -23,7 +23,6 @@ add_executable(Fjordimm3DEngineExec
 	"src/Fjordimm3DEngine/(Drawing)/(Meshes)/MeshSample.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/(Meshes)/MeshSamples/Cube.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/(Meshes)/MeshSamples/Sphere.cpp"
-	"src/Fjordimm3DEngine/(Drawing)/(Meshes)/MeshManager.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/(Textures)/Texture.cpp"
 	"src/Fjordimm3DEngine/(Util)/(Tran)/Tran.cpp"
 	"src/Fjordimm3DEngine/(Util)/(Tran)/Vec.cpp"

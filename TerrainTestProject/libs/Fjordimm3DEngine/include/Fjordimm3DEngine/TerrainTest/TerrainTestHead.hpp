@@ -21,7 +21,7 @@ namespace Fjordimm3DEngine::TerrainTest
 	   private:
 		ShaderProgram* flatShaderProgram;
 		ShaderProgram* smoothShaderProgram;
-		Mesh* cubeMesh;
+		std::unique_ptr<Mesh> cubeMesh;
 		Mesh* sphereMesh;
 
 		/* Methods */

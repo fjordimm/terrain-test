@@ -18,6 +18,12 @@ namespace Fjordimm3DEngine
 		}
 	}
 
+	std::unique_ptr<Texture> Texture::New()
+	{
+		std::unique_ptr<Texture> ret = std::make_unique<Texture>();
+		return std::move(ret);
+	}
+
 	/* Methods */
 
 	void Texture::initializeTextureForGl(int index, const std::string& filename)

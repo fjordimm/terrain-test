@@ -10,10 +10,12 @@
 #include <GLFW/glfw3.h>
 #include "Fjordimm3DEngine/(Drawing)/(Meshes)/MeshData.hpp"
 #include "Fjordimm3DEngine/(Util)/(Tran)/Vec.hpp"
-#include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderProgram.hpp"
 
 namespace Fjordimm3DEngine
 {
+	// Forward declarations
+	class ShaderProgram;
+	
 	class MeshSample
 	{
 		/* Constructors */

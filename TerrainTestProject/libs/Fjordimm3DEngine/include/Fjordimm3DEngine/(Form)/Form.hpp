@@ -5,7 +5,6 @@
 #include "Fjordimm3DEngine/(Util)/(Tran)/Tran.hpp"
 #include "Fjordimm3DEngine/(Drawing)/FormDrawContent.hpp"
 #include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderProgram.hpp"
-#include "Fjordimm3DEngine/(Drawing)/(Meshes)/MeshManager.hpp"
 #include "Fjordimm3DEngine/(World)/WorldState.hpp"
 
 namespace Fjordimm3DEngine

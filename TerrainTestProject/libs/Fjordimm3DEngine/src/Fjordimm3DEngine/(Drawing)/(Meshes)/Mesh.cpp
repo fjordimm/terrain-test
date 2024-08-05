@@ -1,6 +1,8 @@
 
 #include "Fjordimm3DEngine/(Drawing)/(Meshes)/Mesh.hpp"
 
+#include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderProgram.hpp"
+
 namespace Fjordimm3DEngine
 {
 	/* Constructors */
@@ -12,6 +14,16 @@ namespace Fjordimm3DEngine
 		vbo(-1),
 		ebo(-1)
 	{}
+
+	std::unique_ptr<Mesh> Mesh::New(ShaderProgram* shaderProgram, std::unique_ptr<MeshData> meshData)
+	{
+		std::unique_ptr<Mesh> ret = std::make_unique<Mesh>(shaderProgram, std::move(meshData));
+		ret->generateGlVaoAndBuffers();
+		shaderProgram->enableAttribsForMesh();
+		ret->updateGlBufferData();
+
+		return std::move(ret);
+	}
 
 	/* Methods */
 

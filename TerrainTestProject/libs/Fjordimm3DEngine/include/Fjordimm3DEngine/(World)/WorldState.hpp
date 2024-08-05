@@ -5,7 +5,6 @@
 #include <memory>
 #include "Fjordimm3DEngine/(InputManager)/InputManager.hpp"
 #include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderProgramManager.hpp"
-#include "Fjordimm3DEngine/(Drawing)/(Meshes)/MeshManager.hpp"
 
 namespace Fjordimm3DEngine
 {
@@ -28,7 +27,6 @@ namespace Fjordimm3DEngine
 	   public:
 		InputManager inputManager;
 		ShaderProgramManager shaderProgramManager;
-		MeshManager meshManager;
 		std::list<std::unique_ptr<Form>> forms;
 
 		bool hasCapturedCursorForCamera;

@@ -11,7 +11,6 @@ namespace Fjordimm3DEngine
 	WorldState::WorldState() :
 		inputManager(),
 		shaderProgramManager(),
-		meshManager(),
 		forms(),
 		hasCapturedCursorForCamera(false),
 		mainCamera(nullptr),

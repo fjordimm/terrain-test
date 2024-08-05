@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include <memory>
 #include <string>
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -17,11 +18,14 @@ namespace Fjordimm3DEngine
 
 		/* Constructors */
 
-	   public:
+	   private:
 		Texture(const Texture&) = delete;
 		Texture& operator=(const Texture&) = delete;
 		
 		Texture();
+
+	   public:
+		static std::unique_ptr<Texture> New();
 		
 		/* Fields */
 
@@ -36,6 +40,10 @@ namespace Fjordimm3DEngine
 
 	//    private:
 	// 	static GLenum TextureEnumForGl(int index);
+
+		/* Friends */
+
+		friend std::unique_ptr<Texture> std::make_unique<Fjordimm3DEngine::Texture>();
 	};
 
 	// TODO: glGenerateMipmap()
