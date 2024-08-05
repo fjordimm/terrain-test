@@ -65,7 +65,7 @@ namespace Fjordimm3DEngine
 		{
 			ShaderProgram* shaderProgram = shaderProgram_.get();
 
-			shaderProgram->use();
+			shaderProgram->useForGl();
 			
 			ShaderTraits::In3DSpace* traitIn3DSpace = shaderProgram->tryGetTrait<ShaderTraits::In3DSpace>();
 			if (traitIn3DSpace != nullptr)
@@ -88,7 +88,7 @@ namespace Fjordimm3DEngine
 				}
 			}
 
-			shaderProgram->drawAllTrans();
+			shaderProgram->drawAllForms();
 		}
 	}
 
@@ -101,7 +101,7 @@ namespace Fjordimm3DEngine
 			ShaderTraits::In3DSpace* traitIn3DSpace = shaderProgram->tryGetTrait<ShaderTraits::In3DSpace>();
 			if (traitIn3DSpace != nullptr)
 			{
-				shaderProgram->use();
+				shaderProgram->useForGl();
 				traitIn3DSpace->setUniView(val);
 			}
 		}

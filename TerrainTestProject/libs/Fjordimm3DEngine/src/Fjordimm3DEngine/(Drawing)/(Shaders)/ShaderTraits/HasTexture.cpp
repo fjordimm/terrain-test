@@ -10,8 +10,8 @@ namespace Fjordimm3DEngine::ShaderTraits
 	/* Constructors */
 
 	HasTexture::HasTexture() :
-		uniTextureSampler0(-1),
-		uniTextureSampler1(-1)
+		uniHasTexture(-1),
+		uniTextureSampler0(-1)
 	{}
 
 	/* Methods */
@@ -31,12 +31,21 @@ namespace Fjordimm3DEngine::ShaderTraits
 
 	void HasTexture::setupUniforms(GLuint program)
 	{
+		this->uniHasTexture = glGetUniformLocation(program, "uni_HasTexture");
+		glUniform1i(this->uniHasTexture, false);
+
 		this->uniTextureSampler0 = glGetUniformLocation(program, "uni_TextureSampler0");
 		glUniform1i(this->uniTextureSampler0, 0);
 
-		this->uniTextureSampler1 = glGetUniformLocation(program, "uni_TextureSampler1");
-		glUniform1i(this->uniTextureSampler1, 1);
+		// this->uniTextureSampler1 = glGetUniformLocation(program, "uni_TextureSampler1");
+		// glUniform1i(this->uniTextureSampler1, 1);
 	}
 
-	void HasTexture::updateUniformsFromTran(Tran& tran) const {}
+	void HasTexture::updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const
+	{
+		this->setUniHasTexture(formDrawContent->texture);
+	}
+
+	void HasTexture::setUniHasTexture(bool val) const
+	{ glUniform1i(this->uniHasTexture, val); }
 }

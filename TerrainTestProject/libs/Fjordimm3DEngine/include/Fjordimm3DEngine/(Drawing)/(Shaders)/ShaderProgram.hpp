@@ -34,7 +34,7 @@ namespace Fjordimm3DEngine
 		GLuint geometryShader;
 		GLuint fragmentShader;
 
-		std::unordered_set<FormDrawContent*> forms;
+		std::unordered_set<FormDrawContent*> formDrawContents;
 
 	   protected:
 		GLuint program;
@@ -45,9 +45,9 @@ namespace Fjordimm3DEngine
 		void compileAndActivate();
 		void useForGl() const;
 
-		void addForm(FormDrawContent* formDrawContent);
-		void removeForm(FormDrawContent* formDrawContent);
-		void drawAllTrans() const;
+		void addFormDrawContent(FormDrawContent* formDrawContent);
+		void removeFormDrawContent(FormDrawContent* formDrawContent);
+		void drawAllForms() const;
 
 		void enableAttribsForMesh();
 

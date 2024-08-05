@@ -37,4 +37,6 @@ namespace Fjordimm3DEngine
 	   private:
 		static GLenum TextureEnumForGl(int index);
 	};
+
+	// TODO: glGenerateMipmap()
 }

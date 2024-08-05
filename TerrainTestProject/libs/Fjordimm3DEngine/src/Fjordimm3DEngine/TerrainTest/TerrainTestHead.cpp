@@ -37,6 +37,7 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		/// TEMP ///
 		//////////////////////////////////////////////////////////
+		/*
 		std::size_t sw;
 		std::size_t sh;
 		std::unique_ptr<std::vector<unsigned char>> starImg = FileLoading::LoadImage("res/textures/star.png", sw, sh);
@@ -73,7 +74,7 @@ namespace Fjordimm3DEngine::TerrainTest
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		}
-		// TODO: glGenerateMipmap()
+		*/
 		//////////////////////////////////////////////////////////
 
 		/* Sun settings */
@@ -108,8 +109,12 @@ namespace Fjordimm3DEngine::TerrainTest
 		// }
 
 		{
+			Texture texture1;
+			texture1.initializeTextureForGl(0, "res/textures/star.png");
+
 			std::unique_ptr<PhysicForm> form1 = PhysicForm::New(this->worldState);
-			form1->setMeshAndLinkToShaderProgram(this->cubeMesh);
+			form1->changeMesh(this->cubeMesh);
+			form1->changeTexture(&texture1);
 			form1->tran.acqPosition() += Vec(0.0f, 0.0f, 3.0f);
 			this->worldState.forms.push_back(std::move(form1));
 		}

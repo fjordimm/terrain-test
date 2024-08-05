@@ -64,7 +64,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 		glUniform3fv(this->uniSunColor, 1, glm::value_ptr(uniSunColor_val));
 	}
 
-	void In3DSpace::updateUniformsFromTran(Tran& tran) const {}
+	void In3DSpace::updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const {}
 
 	void In3DSpace::setUniView(const glm::mat4& val) const
 	{ glUniformMatrix4fv(this->uniView, 1, GL_FALSE, glm::value_ptr(val)); }

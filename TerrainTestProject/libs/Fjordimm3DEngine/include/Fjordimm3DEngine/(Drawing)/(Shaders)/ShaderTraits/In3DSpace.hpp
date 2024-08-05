@@ -34,7 +34,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 		std::size_t attribsSize() final;
 		void setupAttributes(GLuint program) final;
 		void setupUniforms(GLuint program) final;
-		void updateUniformsFromTran(Tran& tran) const final;
+		void updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const final;
 
 		void setUniView(const glm::mat4& val) const;
 		void setUniProj(const glm::mat4& val) const;

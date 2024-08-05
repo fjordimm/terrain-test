@@ -15,7 +15,7 @@ namespace Fjordimm3DEngine
 		geometryShader(-1),
 		fragmentShader(-1),
 		program(-1),
-		forms()
+		formDrawContents()
 	{}
 
 	/* Methods */
@@ -65,37 +65,37 @@ namespace Fjordimm3DEngine
 		glUseProgram(this->program);
 	}
 
-	void ShaderProgram::addForm(FormDrawContent* formDrawContent)
+	void ShaderProgram::addFormDrawContent(FormDrawContent* formDrawContent)
 	{
-		this->forms.emplace(formDrawContent);
+		this->formDrawContents.emplace(formDrawContent);
 	}
 
-	void ShaderProgram::removeForm(FormDrawContent* formDrawContent)
+	void ShaderProgram::removeFormDrawContent(FormDrawContent* formDrawContent)
 	{
-		this->forms.erase(formDrawContent);
+		this->formDrawContents.erase(formDrawContent);
 	}
 
-	void ShaderProgram::drawAllTrans() const
+	void ShaderProgram::drawAllForms() const
 	{
-		for (const std::tuple<Mesh*, Tran*>& _tup : this->forms)
+		for (FormDrawContent* formDrawContent : this->formDrawContents)
 		{
-			Mesh* mesh = std::get<0>(_tup);
-			Tran* tran = std::get<1>(_tup);
-
-			if (mesh != nullptr)
+			if (formDrawContent->mesh)
 			{
-				glBindVertexArray(mesh->getVaoForDrawing());
+				formDrawContent->mesh->useForGl();
 
 				for (const std::pair<std::size_t, ShaderTrait*>& _trait : this->traits)
 				{
 					ShaderTrait* trait = _trait.second;
 
-					trait->updateUniformsFromTran(*tran);
+					trait->updateUniformsFromFormDrawContent(formDrawContent);
 				}
 
-				// ----- textures -----
+				if (formDrawContent->texture)
+				{
+					formDrawContent->texture->useForGl();
+				}
 
-				glDrawElements(GL_TRIANGLES, mesh->getElementsLen(), GL_UNSIGNED_INT, 0);
+				glDrawElements(GL_TRIANGLES, formDrawContent->mesh->getElementsLen(), GL_UNSIGNED_INT, 0);
 			}
 		}
 	}

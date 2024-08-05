@@ -17,13 +17,25 @@ namespace Fjordimm3DEngine
 
 	void Form::changeMesh(Mesh* mesh)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(mesh);
+
 		ShaderProgram* oldShaderProgram = nullptr;
 		if (this->formDrawContent.mesh != nullptr)
 		{ oldShaderProgram = this->formDrawContent.mesh->getShaderProgram(); }
 		
 		ShaderProgram* newShaderProgram = mesh->getShaderProgram();
 
-		if (oldShaderProgram != nullptr && oldShaderProgram != )
+		if (oldShaderProgram != newShaderProgram)
+		{
+			if (oldShaderProgram != nullptr)
+			{
+				oldShaderProgram->removeFormDrawContent(&this->formDrawContent);
+			}
+
+			newShaderProgram->addFormDrawContent(&this->formDrawContent);
+		}
+
+		this->formDrawContent.mesh = mesh;
 	}
 
 	void Form::changeTexture(Texture* texture)

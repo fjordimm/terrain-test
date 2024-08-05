@@ -49,9 +49,9 @@ namespace Fjordimm3DEngine
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->meshData->elementsLen * sizeof(this->meshData->elements[0]), this->meshData->elements.get(), GL_DYNAMIC_DRAW);
 	}
 
-	GLuint Mesh::getVaoForDrawing()
+	void Mesh::useForGl()
 	{
-		return this->vao;
+		glBindVertexArray(this->vao);
 	}
 
 	// TODO: optimize draw() by only binding the vao if the previously drawn vao wasn't the same one

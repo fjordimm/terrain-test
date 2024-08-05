@@ -34,11 +34,11 @@ namespace Fjordimm3DEngine::ShaderTraits
 		glUniformMatrix4fv(this->uniTransPos, 1, GL_FALSE, glm::value_ptr(uniTransPos_val));
 	}
 	
-	void Has3DShape::updateUniformsFromTran(Tran& tran) const
+	void Has3DShape::updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const
 	{
-		this->setUniTransScale(tran.getScaleMatrix());
-		this->setUniTransRot(tran.getRotationMatrix());
-		this->setUniTransPos(tran.getPositionMatrix());
+		this->setUniTransScale(formDrawContent->tran->getScaleMatrix());
+		this->setUniTransRot(formDrawContent->tran->getRotationMatrix());
+		this->setUniTransPos(formDrawContent->tran->getPositionMatrix());
 	}
 
 	void Has3DShape::setUniTransScale(const glm::mat4& val) const

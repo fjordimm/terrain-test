@@ -34,7 +34,7 @@ namespace Fjordimm3DEngine
 
 		std::size_t imageWidth;
 		std::size_t imageHeight;
-		std::unique_ptr<std::vector<unsigned char>> image = FileLoading::LoadImage("res/textures/star.png", imageWidth, imageHeight);
+		std::unique_ptr<std::vector<unsigned char>> image = FileLoading::LoadImage(filename, imageWidth, imageHeight);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->data());
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

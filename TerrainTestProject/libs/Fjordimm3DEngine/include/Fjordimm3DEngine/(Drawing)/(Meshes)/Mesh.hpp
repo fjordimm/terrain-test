@@ -52,12 +52,14 @@ namespace Fjordimm3DEngine
 
 	   public:
 		void updateGlBufferData();
-		GLuint getVaoForDrawing();
+		void useForGl();
 
 		/* Friends */
 
 		friend class MeshManager;
 		friend std::unique_ptr<Mesh> std::make_unique<Mesh>(Fjordimm3DEngine::ShaderProgram*&, std::unique_ptr<Fjordimm3DEngine::MeshData>&&);
+
+		// TODO: you don't need a mesh manager (you might want a private constructor and have a New function or something tho)
 
 		// TODO: cleanupForGl
 	};

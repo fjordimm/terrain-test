@@ -30,5 +30,5 @@ namespace Fjordimm3DEngine::ShaderTraits
 
 	void HasNormals::setupUniforms(GLuint program) {}
 
-	void HasNormals::updateUniformsFromTran(Tran& tran) const {}
+	void HasNormals::updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const {}
 }
