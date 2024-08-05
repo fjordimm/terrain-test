@@ -17,10 +17,10 @@ namespace Fjordimm3DEngine::ShaderTraits
 
 	/* Methods */
 
-	void In3DSpace::enableAttribsForMesh(std::size_t stride)
+	void In3DSpace::enableAttribsForMesh(std::size_t stride, void* strideOffset)
 	{
 		glEnableVertexAttribArray(this->attribPosition);
-		glVertexAttribPointer(this->attribPosition, 3, GL_FLOAT, GL_FALSE, stride, 0);
+		glVertexAttribPointer(this->attribPosition, 3, GL_FLOAT, GL_FALSE, stride, strideOffset);
 	}
 
 	std::size_t In3DSpace::attribsSize()

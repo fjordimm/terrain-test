@@ -102,11 +102,13 @@ namespace Fjordimm3DEngine
 
 	void ShaderProgram::enableAttribsForMesh()
 	{
+		std::size_t strideOffset = 0;
 		for (const std::pair<std::size_t, ShaderTrait*>& _trait : this->traits)
 		{
 			ShaderTrait* trait = _trait.second;
 
-			trait->enableAttribsForMesh(this->stride);
+			trait->enableAttribsForMesh(this->stride, (void*)strideOffset);
+			strideOffset += trait->attribsSize();
 		}
 	}
 

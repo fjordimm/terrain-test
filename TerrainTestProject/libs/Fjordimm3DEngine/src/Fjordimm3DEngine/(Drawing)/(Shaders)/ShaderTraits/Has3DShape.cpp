@@ -13,7 +13,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 
 	/* Methods */
 
-	void Has3DShape::enableAttribsForMesh(std::size_t stride) {}
+	void Has3DShape::enableAttribsForMesh(std::size_t stride, void* strideOffset) {}
 
 	std::size_t Has3DShape::attribsSize() { return 0; }
 

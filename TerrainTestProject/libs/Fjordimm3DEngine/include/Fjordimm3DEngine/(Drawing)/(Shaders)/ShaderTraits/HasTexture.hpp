@@ -18,13 +18,15 @@ namespace Fjordimm3DEngine::ShaderTraits
 		/* Fields */
 
 	   private:
+		GLint attribTextureCoord;
+		
 		GLint uniHasTexture;
 		GLint uniTextureSampler0;
 
 		/* Methods */
 
 	   public:
-		void enableAttribsForMesh(std::size_t stride) final;
+		void enableAttribsForMesh(std::size_t stride, void* strideOffset) final;
 		std::size_t attribsSize() final;
 		void setupAttributes(GLuint program) final;
 		void setupUniforms(GLuint program) final;

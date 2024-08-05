@@ -23,7 +23,7 @@ namespace Fjordimm3DEngine
 		/* Methods */
 
 	   public:
-		virtual void enableAttribsForMesh(std::size_t stride) = 0;
+		virtual void enableAttribsForMesh(std::size_t stride, void* strideOffset) = 0;
 		virtual std::size_t attribsSize() = 0;
 		virtual void setupAttributes(GLuint program) = 0;
 		virtual void setupUniforms(GLuint program) = 0;

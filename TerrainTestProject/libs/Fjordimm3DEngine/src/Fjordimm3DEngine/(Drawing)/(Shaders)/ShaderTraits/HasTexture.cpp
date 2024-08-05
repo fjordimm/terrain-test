@@ -10,14 +10,17 @@ namespace Fjordimm3DEngine::ShaderTraits
 	/* Constructors */
 
 	HasTexture::HasTexture() :
+		attribTextureCoord(-1),
 		uniHasTexture(-1),
 		uniTextureSampler0(-1)
 	{}
 
 	/* Methods */
 
-	void HasTexture::enableAttribsForMesh(std::size_t stride)
+	void HasTexture::enableAttribsForMesh(std::size_t stride, void* strideOffset)
 	{
+		glEnableVertexAttribArray(this->attribTextureCoord);
+		glVertexAttribPointer(this->attribTextureCoord, 2, GL_FLOAT, GL_FALSE, stride, strideOffset);
 	}
 
 	std::size_t HasTexture::attribsSize()
@@ -27,6 +30,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 
 	void HasTexture::setupAttributes(GLuint program)
 	{
+		this->attribTextureCoord = glGetAttribLocation(program, "attrib_TextureCoord");
 	}
 
 	void HasTexture::setupUniforms(GLuint program)

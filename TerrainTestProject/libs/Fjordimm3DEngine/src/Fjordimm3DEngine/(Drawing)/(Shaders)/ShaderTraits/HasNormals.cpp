@@ -11,11 +11,10 @@ namespace Fjordimm3DEngine::ShaderTraits
 
 	/* Methods */
 
-	void HasNormals::enableAttribsForMesh(std::size_t stride)
+	void HasNormals::enableAttribsForMesh(std::size_t stride, void* strideOffset)
 	{
-		// TODO: the stride itself is fine but the offset is broken if you add any more attributes
 		glEnableVertexAttribArray(this->attribNormal);
-		glVertexAttribPointer(this->attribNormal, 3, GL_FLOAT, GL_FALSE, stride, (void*)(stride - 3 * sizeof(float)));
+		glVertexAttribPointer(this->attribNormal, 3, GL_FLOAT, GL_FALSE, stride, strideOffset);
 	}
 
 	std::size_t HasNormals::attribsSize()
