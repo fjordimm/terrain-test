@@ -34,8 +34,8 @@ namespace Fjordimm3DEngine
 		void initializeTextureForGl(int index, const std::string& filename);
 		void useForGl();
 
-	   private:
-		static GLenum TextureEnumForGl(int index);
+	//    private:
+	// 	static GLenum TextureEnumForGl(int index);
 	};
 
 	// TODO: glGenerateMipmap()

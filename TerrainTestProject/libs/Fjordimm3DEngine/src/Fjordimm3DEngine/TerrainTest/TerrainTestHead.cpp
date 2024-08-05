@@ -4,6 +4,7 @@
 #include "Fjordimm3DEngine/(headerGroups)/allShaderPrograms.hpp"
 #include "Fjordimm3DEngine/(headerGroups)/allMeshSamples.hpp"
 #include "Fjordimm3DEngine/(FileLoading)/FileLoading.hpp"
+#include "Fjordimm3DEngine/(Debug)/Debug.hpp"
 
 namespace Fjordimm3DEngine::TerrainTest
 {
