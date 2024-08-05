@@ -86,13 +86,13 @@ namespace Fjordimm3DEngine::Debug
 		std::exit(EXIT_FAILURE);
 	}
 
-	void _Assert(bool expr)
+	void _Assert(bool expr, int lineNum, const char* filename)
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
 		if (!expr)
 		{
-			std::fprintf(stderr, "%s[[[ ASSERTION FAILED ]]]%s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fprintf(stderr, "%s[[[ ASSERTION FAILED ]]] at line %d in \"%s\"%s\n", PRINTCOLOR_ERROR, lineNum, filename, PRINTCOLOR_NONE);
 			std::fflush(stderr);
 			std::exit(EXIT_FAILURE);
 		}

@@ -1,23 +1,40 @@
 
 #pragma once
 
+#include <string>
+#define GLEW_STATIC
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 namespace Fjordimm3DEngine
 {
-	class ___
+	class Texture
 	{
+		/* Constants */
+
+	   public:
+		static constexpr int NumTexs = 6;
+
 		/* Constructors */
 
 	   public:
-		___(const ___&) = delete;
-		___& operator=(const ___&) = delete;
+		Texture(const Texture&) = delete;
+		Texture& operator=(const Texture&) = delete;
 		
-		___();
+		Texture();
 		
 		/* Fields */
 
 	   private:
-		int a;
+		GLuint texs[NumTexs];
 
 		/* Methods */
+
+	   public:
+		void initializeTextureForGl(int index, const std::string& filename);
+		void useForGl();
+
+	   private:
+		static GLenum TextureEnumForGl(int index);
 	};
 }

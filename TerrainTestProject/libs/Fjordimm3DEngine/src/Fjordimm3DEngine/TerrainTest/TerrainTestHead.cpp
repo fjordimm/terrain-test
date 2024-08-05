@@ -20,45 +20,6 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	void TerrainTestHead::initializeShadersAndFixedMeshes()
 	{
-		/// TEMP ///
-		//////////////////////////////////////////////////////////
-		{
-			GLuint tex0;
-			glGenTextures(1, &tex0);
-
-			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, tex0);
-
-			std::size_t w;
-			std::size_t h;
-			std::unique_ptr<std::vector<unsigned char>> starImg = FileLoading::LoadImage("res/textures/star.png", w, h);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 32, 32, 0, GL_RGBA, GL_UNSIGNED_BYTE, starImg->data());
-
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		}
-		{
-			GLuint tex1;
-			glGenTextures(1, &tex1);
-
-			glActiveTexture(GL_TEXTURE1);
-			glBindTexture(GL_TEXTURE_2D, tex1);
-
-			std::size_t w;
-			std::size_t h;
-			std::unique_ptr<std::vector<unsigned char>> testImg = FileLoading::LoadImage("res/textures/test.png", w, h);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 3, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, testImg->data());
-
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		}
-		// TODO: glGenerateMipmap()
-		//////////////////////////////////////////////////////////
-
 		/* Shader programs */
 
 		flatShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Flat>());
@@ -73,6 +34,47 @@ namespace Fjordimm3DEngine::TerrainTest
 	void TerrainTestHead::onStart()
 	{
 		this->initializeShadersAndFixedMeshes();
+
+		/// TEMP ///
+		//////////////////////////////////////////////////////////
+		std::size_t sw;
+		std::size_t sh;
+		std::unique_ptr<std::vector<unsigned char>> starImg = FileLoading::LoadImage("res/textures/star.png", sw, sh);
+
+		std::size_t tw;
+		std::size_t th;
+		std::unique_ptr<std::vector<unsigned char>> testImg = FileLoading::LoadImage("res/textures/test.png", tw, th);
+
+		{
+			GLuint tex0;
+			glGenTextures(1, &tex0);
+
+			glActiveTexture(GL_TEXTURE0);
+			glBindTexture(GL_TEXTURE_2D, tex0);
+
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, sw, sh, 0, GL_RGBA, GL_UNSIGNED_BYTE, starImg->data());
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		}
+		{
+			GLuint tex1;
+			glGenTextures(1, &tex1);
+
+			glActiveTexture(GL_TEXTURE1);
+			glBindTexture(GL_TEXTURE_2D, tex1);
+
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tw, th, 0, GL_RGBA, GL_UNSIGNED_BYTE, testImg->data());
+
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		}
+		// TODO: glGenerateMipmap()
+		//////////////////////////////////////////////////////////
 
 		/* Sun settings */
 

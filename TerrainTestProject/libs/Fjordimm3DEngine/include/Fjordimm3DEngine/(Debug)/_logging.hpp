@@ -13,10 +13,10 @@ namespace Fjordimm3DEngine::Debug
 	void Logf(char const* const format, ...);
 	void Exit();
 
-	void _Assert(bool expr);
+	void _Assert(bool expr, int lineNum, const char* filename);
 	#ifdef CMAKECONFIG_DO_ASSERTIONS
-		#define FJORDIMM3DENGINE_DEBUG_ASSERT(Expr) Fjordimm3DEngine::Debug::_Assert(Expr)
+		#define FJORDIMM3DENGINE_DEBUG_ASSERT(EXPR) Fjordimm3DEngine::Debug::_Assert(EXPR, __LINE__, __FILE__)
 	#else
-		#define FJORDIMM3DENGINE_DEBUG_ASSERT(Expr) Fjordimm3DEngine::Debug::Log("howeiieieie")
+		#define FJORDIMM3DENGINE_DEBUG_ASSERT(EXPR) Fjordimm3DEngine::Debug::Log("howeiieieie")
 	#endif
 }

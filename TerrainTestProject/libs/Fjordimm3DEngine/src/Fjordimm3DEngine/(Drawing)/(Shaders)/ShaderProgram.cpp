@@ -15,7 +15,7 @@ namespace Fjordimm3DEngine
 		geometryShader(-1),
 		fragmentShader(-1),
 		program(-1),
-		trans()
+		forms()
 	{}
 
 	/* Methods */
@@ -27,21 +27,21 @@ namespace Fjordimm3DEngine
 		this->vertexShader = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(this->vertexShader, 1, &vertexShaderSource, nullptr);
 		glCompileShader(this->vertexShader);
-		checkShaderCompilation(this->vertexShader);
+		CheckShaderCompilation(this->vertexShader);
 
 		std::unique_ptr<const std::string> _geometryShaderSource = FileLoading::LoadFileAsText(this->getGeometryShaderSourcePath());
 		const char* geometryShaderSource = _geometryShaderSource->c_str();
 		this->geometryShader = glCreateShader(GL_GEOMETRY_SHADER);
 		glShaderSource(this->geometryShader, 1, &geometryShaderSource, nullptr);
 		glCompileShader(this->geometryShader);
-		checkShaderCompilation(this->geometryShader);
+		CheckShaderCompilation(this->geometryShader);
 
 		std::unique_ptr<const std::string> _fragmentShaderSource = FileLoading::LoadFileAsText(this->getFragmentShaderSourcePath());
 		const char* fragmentShaderSource = _fragmentShaderSource->c_str();
 		this->fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(this->fragmentShader, 1, &fragmentShaderSource, nullptr);
 		glCompileShader(this->fragmentShader);
-		checkShaderCompilation(this->fragmentShader);
+		CheckShaderCompilation(this->fragmentShader);
 
 		this->program = glCreateProgram();
 		glAttachShader(this->program, this->vertexShader);
@@ -60,25 +60,24 @@ namespace Fjordimm3DEngine
 		}
 	}
 
-	void ShaderProgram::use() const
+	void ShaderProgram::useForGl() const
 	{
 		glUseProgram(this->program);
 	}
 
-	std::list<std::tuple<Mesh*, Tran*>>::const_iterator ShaderProgram::addForm(Mesh* mesh, Tran* tran)
+	void ShaderProgram::addForm(FormDrawContent* formDrawContent)
 	{
-		this->trans.push_back(std::make_tuple(mesh, tran));
-		return this->trans.end();
+		this->forms.emplace(formDrawContent);
 	}
 
-	void ShaderProgram::removeForm(const std::list<std::tuple<Mesh*, Tran*>>::const_iterator& iter)
+	void ShaderProgram::removeForm(FormDrawContent* formDrawContent)
 	{
-		this->trans.erase(iter);
+		this->forms.erase(formDrawContent);
 	}
 
 	void ShaderProgram::drawAllTrans() const
 	{
-		for (const std::tuple<Mesh*, Tran*>& _tup : this->trans)
+		for (const std::tuple<Mesh*, Tran*>& _tup : this->forms)
 		{
 			Mesh* mesh = std::get<0>(_tup);
 			Tran* tran = std::get<1>(_tup);
@@ -93,6 +92,9 @@ namespace Fjordimm3DEngine
 
 					trait->updateUniformsFromTran(*tran);
 				}
+
+				// ----- textures -----
+
 				glDrawElements(GL_TRIANGLES, mesh->getElementsLen(), GL_UNSIGNED_INT, 0);
 			}
 		}
@@ -114,7 +116,7 @@ namespace Fjordimm3DEngine
 		this->stride += trait->attribsSize();
 	}
 
-	void ShaderProgram::checkShaderCompilation(GLuint shader) const
+	void ShaderProgram::CheckShaderCompilation(GLuint shader)
 	{
 		GLint status;
 		glGetShaderiv(shader, GL_COMPILE_STATUS, &status);

@@ -1,7 +1,7 @@
 
 #pragma once
 
-namespace Fjordimm3DEngine::_______
+namespace Fjordimm3DEngine
 {
 	class ___
 	{

@@ -7,7 +7,8 @@
                 "${workspaceFolder}/TerrainTestProject/libs/GLM/include",
                 "${workspaceFolder}/TerrainTestProject/libs/Fjordimm3DEngine/include",
                 "${workspaceFolder}/TerrainTestProject/build/libs/Fjordimm3DEngine",
-                "${workspaceFolder}/TerrainTestProject/build/libs/Fjordimm3DEngine/cmakeconfig"
+                "${workspaceFolder}/TerrainTestProject/build/libs/Fjordimm3DEngine/cmakeconfig",
+                "${workspaceFolder}/TerrainTestProject/libs/GLFW/include"
             ],
             "defines": [
                 "_DEBUG",

@@ -3,14 +3,13 @@
 
 #include <unordered_map>
 #include <typeinfo>
-#include <list>
+#include <unordered_set>
 #include <tuple>
 #include <cstdlib>
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "Fjordimm3DEngine/(Util)/(Tran)/Tran.hpp"
-#include "Fjordimm3DEngine/(Drawing)/(Meshes)/Mesh.hpp"
+#include "Fjordimm3DEngine/(Drawing)/FormDrawContent.hpp"
 #include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderTrait.hpp"
 
 namespace Fjordimm3DEngine
@@ -35,7 +34,7 @@ namespace Fjordimm3DEngine
 		GLuint geometryShader;
 		GLuint fragmentShader;
 
-		std::list<std::tuple<Mesh*, Tran*>> trans;
+		std::unordered_set<FormDrawContent*> forms;
 
 	   protected:
 		GLuint program;
@@ -44,10 +43,10 @@ namespace Fjordimm3DEngine
 
 	   public:
 		void compileAndActivate();
-		void use() const;
+		void useForGl() const;
 
-		std::list<std::tuple<Mesh*, Tran*>>::const_iterator addForm(Mesh* mesh, Tran* tran);
-		void removeForm(const std::list<std::tuple<Mesh*, Tran*>>::const_iterator& iter);
+		void addForm(FormDrawContent* formDrawContent);
+		void removeForm(FormDrawContent* formDrawContent);
 		void drawAllTrans() const;
 
 		void enableAttribsForMesh();
@@ -70,7 +69,7 @@ namespace Fjordimm3DEngine
 		virtual const char* getFragmentShaderSourcePath() const = 0;
 
 	   private:
-		void checkShaderCompilation(GLuint shader) const;
+		static void CheckShaderCompilation(GLuint shader);
 	};
 
 	// TODO: cleanup gl shaders and shader programs

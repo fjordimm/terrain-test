@@ -1,7 +1,7 @@
 
-#include "Fjordimm3DEngine/_______/___.hpp"
+#include "Fjordimm3DEngine/"
 
-namespace Fjordimm3DEngine::_______
+namespace Fjordimm3DEngine
 {
 	/* Constructors */
 
