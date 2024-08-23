@@ -5,7 +5,8 @@ namespace Fjordimm3DEngine::MeshSamples
 {
 	std::unique_ptr<std::vector<Vec>> Cube::vertPositions3D() const
 	{
-		std::unique_ptr<std::vector<Vec>> ret(new std::vector<Vec>{
+		std::unique_ptr<std::vector<Vec>> ret(new std::vector<Vec>
+		{
 			Vec(-1.0f, +1.0f, -1.0f),
 			Vec(+1.0f, +1.0f, -1.0f),
 			Vec(-1.0f, -1.0f, -1.0f),
@@ -21,7 +22,8 @@ namespace Fjordimm3DEngine::MeshSamples
 
 	std::unique_ptr<std::vector<Vec>> Cube::vertNormals3D() const
 	{
-		std::unique_ptr<std::vector<Vec>> ret(new std::vector<Vec>{
+		std::unique_ptr<std::vector<Vec>> ret(new std::vector<Vec>
+		{
 			glm::normalize(Vec(-1.0f, +1.0f, -1.0f)),
 			glm::normalize(Vec(+1.0f, +1.0f, -1.0f)),
 			glm::normalize(Vec(-1.0f, -1.0f, -1.0f)),
@@ -42,7 +44,8 @@ namespace Fjordimm3DEngine::MeshSamples
 
 	std::unique_ptr<std::vector<Vec2>> Cube::vertTextureCoords() const
 	{
-		std::unique_ptr<std::vector<Vec2>> ret(new std::vector<Vec2>{
+		std::unique_ptr<std::vector<Vec2>> ret(new std::vector<Vec2>
+		{
 			Vec2(0.0f, 0.0f),
 			Vec2(1.0f, 0.0f),
 			Vec2(0.0f, 0.0f),
@@ -58,7 +61,8 @@ namespace Fjordimm3DEngine::MeshSamples
 
 	std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> Cube::triangles() const
 	{
-		std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> ret(new std::vector<std::tuple<GLuint, GLuint, GLuint>>{
+		std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> ret(new std::vector<std::tuple<GLuint, GLuint, GLuint>>
+		{
 			// bottom
 			std::make_tuple<GLuint, GLuint, GLuint>(0, 3, 2),
 			std::make_tuple<GLuint, GLuint, GLuint>(3, 0, 1),

@@ -24,13 +24,12 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Shader programs */
 
 		flatShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Flat>());
-		// smoothShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Smooth>());
+		smoothShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Smooth>());
 
 		/* Meshes */
 
-		// cubeMesh = this->worldState.meshManager.add(this->flatShaderProgram, MeshSamples::Cube());
-		cubeMesh = Mesh::New(this->flatShaderProgram, MeshSamples::Cube().make(*(this->flatShaderProgram)));
-		// sphereMesh = this->worldState.meshManager.add(this->smoothShaderProgram, MeshSamples::Sphere<10>());
+		cubeMesh = Mesh::New(this->flatShaderProgram, MeshSamples::Cube());
+		sphereMesh = Mesh::New(this->smoothShaderProgram, MeshSamples::Sphere<10>());
 	}
 
 	void TerrainTestHead::onStart()
@@ -119,6 +118,12 @@ namespace Fjordimm3DEngine::TerrainTest
 			form1->changeTexture(texture1.get());
 			form1->tran.acqPosition() += Vec(0.0f, 0.0f, 3.0f);
 			this->worldState.forms.push_back(std::move(form1));
+
+			std::unique_ptr<PhysicForm> form2 = PhysicForm::New(this->worldState);
+			form2->changeMesh(this->sphereMesh.get());
+			form2->changeTexture(texture1.get());
+			form2->tran.acqPosition() += Vec(0.0f, 0.0f, 12.0f);
+			this->worldState.forms.push_back(std::move(form2));
 		}
 	}
 
