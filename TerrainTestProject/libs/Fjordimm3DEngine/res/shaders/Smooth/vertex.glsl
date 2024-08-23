@@ -9,11 +9,11 @@ uniform mat4 uni_Proj;
 
 in vec3 attrib_Position;
 in vec3 attrib_Normal;
-in vec3 attrib_TextureCoord;
+in vec2 attrib_TextureCoord;
 
 out vec4 v_Coord;
 out vec3 v_Normal;
-out vec3 v_TextureCoord;
+out vec2 v_TextureCoord;
 
 void main()
 {

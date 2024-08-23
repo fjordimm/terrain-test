@@ -32,6 +32,6 @@ void main()
 
 	f_Color = vec4(shadingMult * uni_SunColor, 1.0);
 
-	// if (uni_HasTexture)
-	// { f_Color = texture(uni_TextureSampler0, g_TextureCoord) * f_Color; }
+	if (uni_HasTexture)
+	{ f_Color = texture(uni_TextureSampler0, g_TextureCoord) * f_Color; }
 }
