@@ -67,7 +67,8 @@ namespace Fjordimm3DEngine::MeshSamples
 		for (std::size_t i = 0; i < retPre->size(); i++)
 		{
 			Vec vecPre = retPre->at(i);
-			ret->push_back(Vec2(vecPre.x, vecPre.z));
+			Vec2 vec = Vec2(vecPre.x * 0.5f + 0.5f, vecPre.z * 0.5f + 0.5f);
+			ret->push_back(vec);
 		}
 
 		return ret;
