@@ -48,7 +48,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 
 	void HasTexture::updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const
 	{
-		this->setUniHasTexture(formDrawContent->texture);
+		this->setUniHasTexture(formDrawContent->texture != nullptr);
 	}
 
 	void HasTexture::setUniHasTexture(bool val) const

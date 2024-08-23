@@ -5,8 +5,11 @@ uniform mat4 uni_SunRot;
 uniform float uni_SunBrightness;
 uniform float uni_SunAmbientLight;
 uniform vec3 uni_SunColor;
+uniform bool uni_HasTexture;
+uniform sampler2D uni_TextureSampler0;
 
 in vec3 g_Normal;
+in vec2 g_TextureCoord;
 
 out vec4 f_Color;
 
@@ -28,4 +31,7 @@ void main()
 	shadingMult += mix(-DITHERING_NOISE_GRANULARITY, DITHERING_NOISE_GRANULARITY, dithering_random(rotatedNormal.xy));
 
 	f_Color = vec4(shadingMult * uni_SunColor, 1.0);
+
+	// if (uni_HasTexture)
+	// { f_Color = texture(uni_TextureSampler0, g_TextureCoord) * f_Color; }
 }

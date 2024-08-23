@@ -9,9 +9,11 @@ uniform mat4 uni_Proj;
 
 in vec3 attrib_Position;
 in vec3 attrib_Normal;
+in vec3 attrib_TextureCoord;
 
 out vec4 v_Coord;
 out vec3 v_Normal;
+out vec3 v_TextureCoord;
 
 void main()
 {
@@ -19,5 +21,6 @@ void main()
 
 	v_Coord = trans;
 	v_Normal = attrib_Normal;
+	v_TextureCoord = attrib_TextureCoord;
 	gl_Position = uni_Proj * uni_View * trans;
 }

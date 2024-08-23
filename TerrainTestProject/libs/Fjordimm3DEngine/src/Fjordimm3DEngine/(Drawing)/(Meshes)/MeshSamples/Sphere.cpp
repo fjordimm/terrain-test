@@ -61,7 +61,16 @@ namespace Fjordimm3DEngine::MeshSamples
 	template <std::size_t Size>
 	std::unique_ptr<std::vector<Vec2>> Sphere<Size>::vertTextureCoords() const
 	{
+		std::unique_ptr<std::vector<Vec>> retPre = this->vertPositions3D();
 
+		std::unique_ptr<std::vector<Vec2>> ret = std::make_unique<std::vector<Vec2>>();
+		for (std::size_t i = 0; i < retPre->size(); i++)
+		{
+			Vec vecPre = retPre->at(i);
+			ret->push_back(Vec2(vecPre.x, vecPre.z));
+		}
+
+		return ret;
 	}
 
 	template <std::size_t Size>

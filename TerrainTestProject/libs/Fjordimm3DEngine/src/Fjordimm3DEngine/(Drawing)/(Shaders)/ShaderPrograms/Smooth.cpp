@@ -8,11 +8,13 @@ namespace Fjordimm3DEngine::ShaderPrograms
 	Smooth::Smooth() :
 		traitIn3DSpace(),
 		traitHas3DShape(),
-		traitHasNormals()
+		traitHasNormals(),
+		traitHasTexture()
 	{
 		this->registerTrait(&this->traitIn3DSpace);
 		this->registerTrait(&this->traitHas3DShape);
 		this->registerTrait(&this->traitHasNormals);
+		this->registerTrait(&this->traitHasTexture);
 	}
 
 	/* Methods */

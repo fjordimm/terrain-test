@@ -22,6 +22,7 @@ namespace Fjordimm3DEngine::ShaderPrograms
 		ShaderTraits::In3DSpace traitIn3DSpace;
 		ShaderTraits::Has3DShape traitHas3DShape;
 		ShaderTraits::HasNormals traitHasNormals;
+		ShaderTraits::HasTexture traitHasTexture;
 
 		/* Methods */
 
