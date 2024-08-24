@@ -13,6 +13,7 @@ namespace Fjordimm3DEngine
 		Color() = delete;
 
 		Color(float r, float g, float b, float a);
+		Color(float r, float g, float b);
 		Color(const Color& that);
 		Color& operator=(const Color& that);
 		
