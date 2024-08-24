@@ -29,10 +29,15 @@ namespace Fjordimm3DEngine
 		return *this;
 	}
 
+	/* Methods */
+
 	Vec Color::toVec() const
 	{
 		return Vec(this->r, this->g, this->b);
 	}
 
-	/* Methods */
+	Vec4 Color::toVec4() const
+	{
+		return Vec4(this->r, this->g, this->b, this->a);
+	}
 }

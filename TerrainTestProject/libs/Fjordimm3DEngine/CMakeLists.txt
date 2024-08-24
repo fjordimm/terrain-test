@@ -17,6 +17,7 @@ add_executable(Fjordimm3DEngineExec
 	"src/Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderTraits/Has3DShape.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderTraits/HasNormals.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderTraits/HasTexture.cpp"
+	"src/Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderTraits/HasMaterial.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/FormDrawContent.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/(Meshes)/MeshData.cpp"
 	"src/Fjordimm3DEngine/(Drawing)/(Meshes)/Mesh.cpp"

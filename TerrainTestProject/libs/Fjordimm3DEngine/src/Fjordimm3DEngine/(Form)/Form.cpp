@@ -9,7 +9,7 @@ namespace Fjordimm3DEngine
 
 	Form::Form(WorldState& worldState) :
 		tran(),
-		formDrawContent(&this->tran, nullptr, nullptr),
+		formDrawContent(&this->tran, nullptr, Colors::White, nullptr),
 		shaderProgramSpot{}
 	{}
 
@@ -36,6 +36,11 @@ namespace Fjordimm3DEngine
 		}
 
 		this->formDrawContent.mesh = mesh;
+	}
+
+	void Form::changeMaterialColor(Color materialColor)
+	{
+		this->formDrawContent.materialColor = materialColor;
 	}
 
 	void Form::changeTexture(Texture* texture)

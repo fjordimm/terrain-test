@@ -8,10 +8,12 @@ namespace Fjordimm3DEngine::ShaderPrograms
 	Flat::Flat() :
 		traitIn3DSpace(),
 		traitHas3DShape(),
+		traitHasMaterial(),
 		traitHasTexture()
 	{
 		this->registerTrait(&this->traitIn3DSpace);
 		this->registerTrait(&this->traitHas3DShape);
+		this->registerTrait(&this->traitHasMaterial);
 		this->registerTrait(&this->traitHasTexture);
 	}
 

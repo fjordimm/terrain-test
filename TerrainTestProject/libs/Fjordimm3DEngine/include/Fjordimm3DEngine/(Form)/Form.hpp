@@ -46,6 +46,7 @@ namespace Fjordimm3DEngine
 
 	   public:
 		void changeMesh(Mesh* mesh);
+		void changeMaterialColor(Color materialColor);
 		void changeTexture(Texture* texture);
 
 	   private:

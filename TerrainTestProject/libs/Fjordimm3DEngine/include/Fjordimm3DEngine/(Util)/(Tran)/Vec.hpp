@@ -7,8 +7,9 @@
 
 namespace Fjordimm3DEngine
 {
-	typedef glm::vec3 Vec;
 	typedef glm::vec2 Vec2;
+	typedef glm::vec3 Vec;
+	typedef glm::vec4 Vec4;
 
 	namespace Vecs
 	{

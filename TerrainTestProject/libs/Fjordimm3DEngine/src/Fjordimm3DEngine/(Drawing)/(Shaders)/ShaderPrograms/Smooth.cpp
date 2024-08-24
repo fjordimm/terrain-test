@@ -9,11 +9,13 @@ namespace Fjordimm3DEngine::ShaderPrograms
 		traitIn3DSpace(),
 		traitHas3DShape(),
 		traitHasNormals(),
+		traitHasMaterial(),
 		traitHasTexture()
 	{
 		this->registerTrait(&this->traitIn3DSpace);
 		this->registerTrait(&this->traitHas3DShape);
 		this->registerTrait(&this->traitHasNormals);
+		this->registerTrait(&this->traitHasMaterial);
 		this->registerTrait(&this->traitHasTexture);
 	}
 

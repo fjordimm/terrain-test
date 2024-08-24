@@ -115,13 +115,15 @@ namespace Fjordimm3DEngine::TerrainTest
 
 			std::unique_ptr<PhysicForm> form1 = PhysicForm::New(this->worldState);
 			form1->changeMesh(this->cubeMesh.get());
-			form1->changeTexture(texture1.get());
+			form1->changeMaterialColor(Colors::Orange);
+			// form1->changeTexture(texture1.get());
 			form1->tran.acqPosition() += Vec(0.0f, 0.0f, 3.0f);
 			this->worldState.forms.push_back(std::move(form1));
 
 			std::unique_ptr<PhysicForm> form2 = PhysicForm::New(this->worldState);
 			form2->changeMesh(this->sphereMesh.get());
-			form2->changeTexture(texture1.get());
+			form2->changeMaterialColor(Colors::Cyan);
+			// form2->changeTexture(texture1.get());
 			form2->tran.acqPosition() += Vec(0.0f, 0.0f, 12.0f);
 			this->worldState.forms.push_back(std::move(form2));
 		}

@@ -28,6 +28,7 @@ namespace Fjordimm3DEngine
 
 	   public:
 		Vec toVec() const;
+		Vec4 toVec4() const;
 	};
 
 	namespace Colors
