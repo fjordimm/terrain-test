@@ -5,6 +5,7 @@ add_executable(Fjordimm3DEngineExec
 	"src/Fjordimm3DEngine/Program.cpp"
 	"src/Fjordimm3DEngine/(World)/Head.cpp"
 	"src/Fjordimm3DEngine/(World)/WorldState.cpp"
+	"src/Fjordimm3DEngine/(Debug)/_globals.cpp"
 	"src/Fjordimm3DEngine/(Debug)/_logging.cpp"
 	"src/Fjordimm3DEngine/(FileLoading)/FileLoading.cpp"
 	"src/Fjordimm3DEngine/(Util)/(Math)/_functions.cpp"

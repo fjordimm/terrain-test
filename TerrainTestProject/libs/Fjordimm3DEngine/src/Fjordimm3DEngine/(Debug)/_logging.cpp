@@ -1,6 +1,6 @@
 
 #include "Fjordimm3DEngine/(Debug)/Debug.hpp"
-#include "Fjordimm3DEngine/(Debug)/_logging.hpp"
+// #include "Fjordimm3DEngine/(Debug)/_logging.hpp"
 
 #include <cstdio>
 #include <cstdarg>

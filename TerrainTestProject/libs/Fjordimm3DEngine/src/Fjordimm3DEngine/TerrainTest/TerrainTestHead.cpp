@@ -29,7 +29,7 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Meshes */
 
 		cubeMesh = Mesh::New(this->flatShaderProgram, MeshSamples::Cube());
-		sphereMesh = Mesh::New(this->smoothShaderProgram, MeshSamples::Sphere<15>());
+		sphereMesh = Mesh::New(this->smoothShaderProgram, MeshSamples::Sphere<10>());
 	}
 
 	void TerrainTestHead::onStart()
@@ -40,14 +40,11 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		{
 			Quat initialSunRotation = Quats::Identity;
-			// initialSunRotation = Quats::LocallyRotate(initialSunRotation, Vecs::Up, Math::PiOver2 + 0.4f);
-			// initialSunRotation = Quats::Rotate(initialSunRotation, Vecs::Right, 0.3f);
+			initialSunRotation = Quats::LocallyRotate(initialSunRotation, Vecs::Up, Math::PiOver2 + 0.4f);
+			initialSunRotation = Quats::Rotate(initialSunRotation, Vecs::Right, 0.3f);
 			this->worldState.shaderProgramManager.acqSunRot() = initialSunRotation;
 			this->worldState.shaderProgramManager.acqSunBrightness() = 1.0f;
-			// this->worldState.shaderProgramManager.acqSunAmbientLight() = 0.2f;
-			// this->worldState.shaderProgramManager.acqSunAmbientLight() = 0.1f;
-			this->worldState.shaderProgramManager.acqSunAmbientLight() = 0.149f;
-			// this->worldState.shaderProgramManager.acqSunAmbientLight() = 0.0f;
+			this->worldState.shaderProgramManager.acqSunAmbientLight() = 0.2f;
 			this->worldState.shaderProgramManager.acqSunColor() = Colors::White;
 		}
 
@@ -66,39 +63,11 @@ namespace Fjordimm3DEngine::TerrainTest
 		{
 			std::unique_ptr<PhysicForm> theOrigin = PhysicForm::New(this->worldState);
 			theOrigin->changeMesh(this->sphereMesh.get());
-			theOrigin->tran.acqScale() = Vec(5.0f, 5.0f, 5.0f);
-			theOrigin->tran.acqPosition() = Vec(15.0f, 0.0f, 0.0f);
-			theOrigin->changeMaterialColor(Colors::White);
-			this->worldState.forms.push_back(std::move(theOrigin));
-		}
-		{
-			std::unique_ptr<PhysicForm> theOrigin = PhysicForm::New(this->worldState);
-			theOrigin->changeMesh(this->sphereMesh.get());
-			theOrigin->tran.acqScale() = Vec(5.0f, 5.0f, 5.0f);
-			theOrigin->tran.acqPosition() = Vec(0.0f, 0.0f, 0.0f);
-			theOrigin->changeMaterialColor(Color(0.151f, 0.151f, 0.151f));
-			this->worldState.forms.push_back(std::move(theOrigin));
-		}
-		{
-			std::unique_ptr<PhysicForm> theOrigin = PhysicForm::New(this->worldState);
-			theOrigin->changeMesh(this->sphereMesh.get());
-			theOrigin->tran.acqScale() = Vec(5.0f, 5.0f, 5.0f);
-			theOrigin->tran.acqPosition() = Vec(-15.0f, 0.0f, 0.0f);
+			theOrigin->tran.acqScale() = Vec(0.1f, 0.1f, 0.1f);
 			theOrigin->changeMaterialColor(Color(0.1f, 0.1f, 0.1f));
 			this->worldState.forms.push_back(std::move(theOrigin));
 		}
-
-		// {
-		// 	std::unique_ptr<PhysicForm> theOrigin = PhysicForm::New(this->worldState);
-		// 	theOrigin->changeMesh(this->sphereMesh.get());
-		// 	// theOrigin->tran.acqScale() = Vec(0.2f, 0.2f, 0.2f);
-		// 	theOrigin->tran.acqScale() = Vec(5.0f, 5.0f, 5.0f);
-		// 	// theOrigin->changeMaterialColor(Color(0.1f, 0.1f, 0.1f));
-		// 	// theOrigin->changeMaterialColor(Color(0.2f, 0.2f, 0.2f));
-		// 	theOrigin->changeMaterialColor(Colors::White);
-		// 	this->worldState.forms.push_back(std::move(theOrigin));
-		// }
-
+		
 		{
 			
 		}
