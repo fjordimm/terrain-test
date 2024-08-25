@@ -18,15 +18,22 @@ namespace Fjordimm3DEngine::TerrainTest
 			/* Constructors */
 
 		   public:
+			Chunk() = delete;
 			Chunk(const Chunk&) = delete;
 			Chunk& operator=(const Chunk&) = delete;
 			
-			Chunk();
+			Chunk(Form* form);
 
 			/* Fields */
 
-		   public:
+		   private:
 			std::unique_ptr<Mesh> mesh;
+			Form* form;
+
+			/* Getters and Setters */
+
+		   public:
+			inline Form* const& getForm() const { return this->form; }
 
 			/* Methods */
 		};

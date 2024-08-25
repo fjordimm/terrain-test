@@ -35,7 +35,7 @@ namespace Fjordimm3DEngine
 		int _windowWidth;
 		int _windowHeight;
 
-		/* Getters & Setters */
+		/* Getters and Setters */
 
 	   protected:
 		inline const int& getWindowWidth() { return this->_windowWidth; }

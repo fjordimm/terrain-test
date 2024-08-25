@@ -7,6 +7,17 @@
 
 namespace Fjordimm3DEngine::TerrainTest
 {
+	/* Subclass 'Chunk' */
+
+		/* Constructors */
+
+		TerrainManager::Chunk::Chunk(Form* form) :
+			mesh(nullptr),
+			form(form)
+		{}
+
+		/* Methods */
+
 	/* Constructors */
 
 	TerrainManager::TerrainManager() :
