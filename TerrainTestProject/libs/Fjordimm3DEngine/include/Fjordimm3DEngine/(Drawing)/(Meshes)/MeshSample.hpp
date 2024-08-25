@@ -33,9 +33,5 @@ namespace Fjordimm3DEngine
 
 	   protected:
 		virtual void generateData(bool doVertPositions3D, std::vector<Vec>& vertPositions3D, bool doVertNormals3D, std::vector<Vec>& vertNormals3D, bool doVertTextureCoords, std::vector<Vec2>& vertTextureCoords, std::vector<std::tuple<GLuint, GLuint, GLuint>>& triangles) const = 0;
-		// virtual std::unique_ptr<std::vector<Vec>> vertPositions3D() const = 0;
-		// virtual std::unique_ptr<std::vector<Vec>> vertNormals3D() const = 0;
-		// virtual std::unique_ptr<std::vector<Vec2>> vertTextureCoords() const = 0;
-		// virtual std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> triangles() const = 0;
 	};
 }

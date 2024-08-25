@@ -21,17 +21,17 @@ namespace Fjordimm3DEngine::ShaderPrograms
 
 	/* Methods */
 
-	const char* Smooth::getVertexShaderSourcePath() const
+	char const* Smooth::getVertexShaderSourcePath() const
 	{
 		return "res/shaders/Smooth/vertex.glsl";
 	}
 
-	const char* Smooth::getGeometryShaderSourcePath() const
+	char const* Smooth::getGeometryShaderSourcePath() const
 	{
 		return "res/shaders/Smooth/geometry.glsl";
 	}
 	
-	const char* Smooth::getFragmentShaderSourcePath() const
+	char const* Smooth::getFragmentShaderSourcePath() const
 	{
 		return "res/shaders/Smooth/fragment.glsl";
 	}

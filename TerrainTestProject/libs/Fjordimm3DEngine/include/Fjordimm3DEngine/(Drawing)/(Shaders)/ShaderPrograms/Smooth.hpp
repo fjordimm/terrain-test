@@ -27,8 +27,8 @@ namespace Fjordimm3DEngine::ShaderPrograms
 
 		/* Methods */
 
-		const char* getVertexShaderSourcePath() const final;
-		const char* getGeometryShaderSourcePath() const final;
-		const char* getFragmentShaderSourcePath() const final;
+		char const* getVertexShaderSourcePath() const final;
+		char const* getGeometryShaderSourcePath() const final;
+		char const* getFragmentShaderSourcePath() const final;
 	};
 }

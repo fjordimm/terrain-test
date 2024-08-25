@@ -112,7 +112,7 @@ namespace Fjordimm3DEngine
 		return this->_cached_rightVec;
 	}
 	
-	glm::mat4 const Tran::getScaleMatrix()
+	glm::mat4 const& Tran::getScaleMatrix()
 	{
 		if (this->_mayHaveChangedScale)
 		{

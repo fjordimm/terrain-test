@@ -50,7 +50,7 @@ namespace Fjordimm3DEngine
 		Vec const& getForwardVec();
 		Vec const& getUpVec();
 		Vec const& getRightVec();
-		const glm::mat4 getScaleMatrix();
+		glm::mat4 const& getScaleMatrix();
 
 		/* Methods */
 

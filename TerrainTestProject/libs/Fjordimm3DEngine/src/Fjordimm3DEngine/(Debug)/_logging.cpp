@@ -20,7 +20,7 @@ static constexpr char PRINTCOLOR_NONE[] = "";
 
 namespace Fjordimm3DEngine::Debug
 {
-	void Log(const char* msg)
+	void Log(char const* msg)
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
@@ -28,7 +28,7 @@ namespace Fjordimm3DEngine::Debug
 		std::fflush(stderr);
 	}
 
-	void LogWarning(const char* msg)
+	void LogWarning(char const* msg)
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
@@ -36,7 +36,7 @@ namespace Fjordimm3DEngine::Debug
 		std::fflush(stderr);
 	}
 
-	void LogNonfatalError(const char* msg)
+	void LogNonfatalError(char const* msg)
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
@@ -44,7 +44,7 @@ namespace Fjordimm3DEngine::Debug
 		std::fflush(stderr);
 	}
 
-	void LogFatalError(const char* msg)
+	void LogFatalError(char const* msg)
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 		
@@ -86,7 +86,7 @@ namespace Fjordimm3DEngine::Debug
 		std::exit(EXIT_FAILURE);
 	}
 
-	void _Assert(bool expr, int lineNum, const char* filename)
+	void _Assert(bool expr, int lineNum, char const* filename)
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 

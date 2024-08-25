@@ -22,22 +22,22 @@ namespace Fjordimm3DEngine
 
 	void ShaderProgram::compileAndActivate()
 	{
-		std::unique_ptr<const std::string> _vertexShaderSource = FileLoading::LoadFileAsText(this->getVertexShaderSourcePath());
-		const char* vertexShaderSource = _vertexShaderSource->c_str();
+		std::unique_ptr<std::string const> _vertexShaderSource = FileLoading::LoadFileAsText(this->getVertexShaderSourcePath());
+		char const* vertexShaderSource = _vertexShaderSource->c_str();
 		this->vertexShader = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(this->vertexShader, 1, &vertexShaderSource, nullptr);
 		glCompileShader(this->vertexShader);
 		CheckShaderCompilation(this->vertexShader);
 
-		std::unique_ptr<const std::string> _geometryShaderSource = FileLoading::LoadFileAsText(this->getGeometryShaderSourcePath());
-		const char* geometryShaderSource = _geometryShaderSource->c_str();
+		std::unique_ptr<std::string const> _geometryShaderSource = FileLoading::LoadFileAsText(this->getGeometryShaderSourcePath());
+		char const* geometryShaderSource = _geometryShaderSource->c_str();
 		this->geometryShader = glCreateShader(GL_GEOMETRY_SHADER);
 		glShaderSource(this->geometryShader, 1, &geometryShaderSource, nullptr);
 		glCompileShader(this->geometryShader);
 		CheckShaderCompilation(this->geometryShader);
 
-		std::unique_ptr<const std::string> _fragmentShaderSource = FileLoading::LoadFileAsText(this->getFragmentShaderSourcePath());
-		const char* fragmentShaderSource = _fragmentShaderSource->c_str();
+		std::unique_ptr<std::string const> _fragmentShaderSource = FileLoading::LoadFileAsText(this->getFragmentShaderSourcePath());
+		char const* fragmentShaderSource = _fragmentShaderSource->c_str();
 		this->fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(this->fragmentShader, 1, &fragmentShaderSource, nullptr);
 		glCompileShader(this->fragmentShader);

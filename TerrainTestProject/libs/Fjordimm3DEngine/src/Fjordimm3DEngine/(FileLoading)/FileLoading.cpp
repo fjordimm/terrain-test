@@ -32,7 +32,7 @@ namespace Fjordimm3DEngine::FileLoading
 
 		std::fclose(file);
 
-		std::unique_ptr<const std::string> ret(new const std::string(buf));
+		std::unique_ptr<std::string const> ret(new std::string const(buf));
 		return std::move(ret);
 	}
 	

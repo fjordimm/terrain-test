@@ -46,9 +46,9 @@ namespace Fjordimm3DEngine
 	   public:
 		inline ShaderProgram* getShaderProgram() { return this->shaderProgram; }
 		inline std::size_t getVerticesLen() { return this->meshData->verticesLen; }
-		inline const float* getVertices() { return this->meshData->vertices.get(); }
+		inline float const* getVertices() { return this->meshData->vertices.get(); }
 		inline std::size_t getElementsLen() { return this->meshData->elementsLen; }
-		inline const GLuint* getElements() { return this->meshData->elements.get(); }
+		inline GLuint const* getElements() { return this->meshData->elements.get(); }
 
 		/* Methods */
 

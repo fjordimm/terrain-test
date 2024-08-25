@@ -5,15 +5,15 @@
 
 namespace Fjordimm3DEngine::Debug
 {
-	void Log(const char* msg);
-	void LogWarning(const char* msg);
-	void LogNonfatalError(const char* msg);
-	void LogFatalError(const char* msg);
+	void Log(char const* msg);
+	void LogWarning(char const* msg);
+	void LogNonfatalError(char const* msg);
+	void LogFatalError(char const* msg);
 	void Printf(char const* const format, ...);
 	void Logf(char const* const format, ...);
 	void Exit();
 
-	void _Assert(bool expr, int lineNum, const char* filename);
+	void _Assert(bool expr, int lineNum, char const* filename);
 	#ifdef CMAKECONFIG_DO_ASSERTIONS
 		#define FJORDIMM3DENGINE_DEBUG_ASSERT(EXPR) Fjordimm3DEngine::Debug::_Assert(EXPR, __LINE__, __FILE__)
 	#else

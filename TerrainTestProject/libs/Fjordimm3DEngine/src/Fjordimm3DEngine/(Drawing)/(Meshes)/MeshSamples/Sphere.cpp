@@ -17,10 +17,10 @@ namespace Fjordimm3DEngine::MeshSamples
 	{
 		FJORDIMM3DENGINE_DEBUG_ASSERT(Size > 0);
 
-		const int numLayers = Size;
-		const int numVertsPerLayer = Size * 2 + 2;
-		const int numVerts = 1 + numLayers * numVertsPerLayer + 1;
-		const int numTriangles = numVertsPerLayer * (1 + 2 * (numLayers - 1) + 1);
+		int const numLayers = Size;
+		int const numVertsPerLayer = Size * 2 + 2;
+		int const numVerts = 1 + numLayers * numVertsPerLayer + 1;
+		int const numTriangles = numVertsPerLayer * (1 + 2 * (numLayers - 1) + 1);
 
 		/* Vertices */
 

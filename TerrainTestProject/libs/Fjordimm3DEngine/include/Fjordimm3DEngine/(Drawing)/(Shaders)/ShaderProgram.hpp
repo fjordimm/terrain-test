@@ -64,9 +64,9 @@ namespace Fjordimm3DEngine
 	   protected:
 		void registerTrait(ShaderTrait* trait);
 
-		virtual const char* getVertexShaderSourcePath() const = 0;
-		virtual const char* getGeometryShaderSourcePath() const = 0;
-		virtual const char* getFragmentShaderSourcePath() const = 0;
+		virtual char const* getVertexShaderSourcePath() const = 0;
+		virtual char const* getGeometryShaderSourcePath() const = 0;
+		virtual char const* getFragmentShaderSourcePath() const = 0;
 
 	   private:
 		static void CheckShaderCompilation(GLuint shader);

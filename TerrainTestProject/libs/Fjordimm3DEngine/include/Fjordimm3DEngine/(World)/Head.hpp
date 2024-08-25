@@ -44,7 +44,7 @@ namespace Fjordimm3DEngine
 		/* Methods */
 
 	   public:
-		void start(int windowWidth = 600, int windowHeight = 600, const std::string windowTitle = "Placeholder Window Title");
+		void start(int windowWidth = 600, int windowHeight = 600, std::string const& windowTitle = "Placeholder Window Title");
 	
 	   protected:
 		void mainLoop();

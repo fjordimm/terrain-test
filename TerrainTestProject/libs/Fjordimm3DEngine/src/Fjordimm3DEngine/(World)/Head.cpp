@@ -30,7 +30,7 @@ namespace Fjordimm3DEngine
 	
 	/* Methods */
 
-	void Head::start(int windowWidth, int windowHeight, const std::string windowTitle)
+	void Head::start(int windowWidth, int windowHeight, std::string const& windowTitle)
 	{
 		this->_windowWidth = windowWidth;
 		this->_windowHeight = windowHeight;

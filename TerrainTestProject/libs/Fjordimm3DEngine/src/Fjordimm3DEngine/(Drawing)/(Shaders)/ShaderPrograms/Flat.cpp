@@ -19,17 +19,17 @@ namespace Fjordimm3DEngine::ShaderPrograms
 
 	/* Methods */
 
-	const char* Flat::getVertexShaderSourcePath() const
+	char const* Flat::getVertexShaderSourcePath() const
 	{
 		return "res/shaders/Flat/vertex.glsl";
 	}
 
-	const char* Flat::getGeometryShaderSourcePath() const
+	char const* Flat::getGeometryShaderSourcePath() const
 	{
 		return "res/shaders/Flat/geometry.glsl";
 	}
 	
-	const char* Flat::getFragmentShaderSourcePath() const
+	char const* Flat::getFragmentShaderSourcePath() const
 	{
 		return "res/shaders/Flat/fragment.glsl";
 	}
