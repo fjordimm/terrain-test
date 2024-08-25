@@ -14,7 +14,8 @@ namespace Fjordimm3DEngine::TerrainTest
 		flatShaderProgram(nullptr),
 		smoothShaderProgram(nullptr),
 		cubeMesh(nullptr),
-		sphereMesh(nullptr)
+		sphereMesh(nullptr),
+		terrainManager()
 	{}
 
 	/* Methods */
@@ -58,7 +59,7 @@ namespace Fjordimm3DEngine::TerrainTest
 			this->worldState.mainCameraMovementSpeed = 0.0003f;
 		}
 
-		/* Forms */
+		/* Other */
 
 		{
 			std::unique_ptr<PhysicForm> theOrigin = PhysicForm::New(this->worldState);
@@ -69,7 +70,7 @@ namespace Fjordimm3DEngine::TerrainTest
 		}
 		
 		{
-			
+			this->terrainManager.beginGeneration();
 		}
 	}
 

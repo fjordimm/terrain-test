@@ -3,6 +3,7 @@
 
 #include "Fjordimm3DEngine/(World)/Head.hpp"
 #include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderProgram.hpp"
+#include "Fjordimm3DEngine/TerrainTest/(TerrainGeneration)/TerrainManager.hpp"
 
 namespace Fjordimm3DEngine::TerrainTest
 {
@@ -23,6 +24,7 @@ namespace Fjordimm3DEngine::TerrainTest
 		ShaderProgram* smoothShaderProgram;
 		std::unique_ptr<Mesh> cubeMesh;
 		std::unique_ptr<Mesh> sphereMesh;
+		TerrainManager terrainManager;
 
 		/* Methods */
 

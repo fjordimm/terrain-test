@@ -35,8 +35,11 @@ add_executable(Fjordimm3DEngineExec
 	"src/Fjordimm3DEngine/(PtrForGlfw)/PtrForGlfw.cpp"
 	"src/Fjordimm3DEngine/(InputManager)/InputManager.cpp"
 	"src/Fjordimm3DEngine/(Util)/(Color)/Color.cpp"
-	"src/Fjordimm3DEngine/TerrainTest/TerrainTestHead.cpp"
 	"src/Fjordimm3DEngine/(Util)/(Random)/Random.cpp"
+	"src/Fjordimm3DEngine/TerrainTest/TerrainTestHead.cpp"
+	"src/Fjordimm3DEngine/TerrainTest/(TerrainGeneration)/TerrainManager.cpp"
+	"src/Fjordimm3DEngine/TerrainTest/(TerrainGeneration)/TerrainGene.cpp"
+	"src/Fjordimm3DEngine/TerrainTest/(TerrainGeneration)/ChunkMeshGeneration.cpp"
 )
 
 target_include_directories(Fjordimm3DEngineExec PUBLIC "include")

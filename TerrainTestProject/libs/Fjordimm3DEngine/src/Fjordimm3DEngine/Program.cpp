@@ -9,15 +9,6 @@ int main(void)
 
 	// TODO: assertions checking for nullptr
 
-	Random::Reseed();
-
-	{
-		for (int i = 0; i < 8; i++)
-		{
-			Debug::Logf("%i", Random::Bool());
-		}
-	}
-
 	TerrainTest::TerrainTestHead head;
 	head.start(1300, 750);
 
