@@ -9,7 +9,7 @@
 
 namespace Fjordimm3DEngine::FileLoading
 {
-	std::unique_ptr<const std::string> LoadFileAsText(const std::string name)
+	std::unique_ptr<std::string const> LoadFileAsText(std::string const& name)
 	{
 		std::string fullName = std::string(CMAKECONFIG_SOURCE_DIR) + "/libs/Fjordimm3DEngine/" + name;
 
@@ -36,7 +36,7 @@ namespace Fjordimm3DEngine::FileLoading
 		return std::move(ret);
 	}
 	
-	std::unique_ptr<std::vector<unsigned char>> LoadImage(std::string const name, std::size_t& imageWidth, std::size_t& imageHeight)
+	std::unique_ptr<std::vector<unsigned char>> LoadImage(std::string const& name, std::size_t& imageWidth, std::size_t& imageHeight)
 	{
 		std::string fullName = std::string(CMAKECONFIG_SOURCE_DIR) + "/libs/Fjordimm3DEngine/" + name;
 
