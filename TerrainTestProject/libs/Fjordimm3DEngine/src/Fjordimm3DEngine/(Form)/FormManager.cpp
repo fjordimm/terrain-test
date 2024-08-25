@@ -1,6 +1,7 @@
 
 #include "Fjordimm3DEngine/(Form)/FormManager.hpp"
 
+#include "Fjordimm3DEngine/(Form)/Form.hpp"
 #include "Fjordimm3DEngine/(Debug)/Debug.hpp"
 
 namespace Fjordimm3DEngine
