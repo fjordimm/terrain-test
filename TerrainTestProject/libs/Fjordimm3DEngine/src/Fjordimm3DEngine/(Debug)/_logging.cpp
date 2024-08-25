@@ -40,7 +40,7 @@ namespace Fjordimm3DEngine::Debug
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
-		std::fprintf(stderr, "%s[[[ NONFATAL ERROR ]]]%s %s\n", PRINTCOLOR_WARNING, PRINTCOLOR_NONE, msg);
+		std::fprintf(stderr, "%s[[[ NONFATAL ERROR ]]]%s %s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE, msg);
 		std::fflush(stderr);
 	}
 

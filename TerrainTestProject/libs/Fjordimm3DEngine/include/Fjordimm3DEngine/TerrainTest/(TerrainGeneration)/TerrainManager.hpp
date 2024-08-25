@@ -3,6 +3,7 @@
 
 #include <memory>
 #include "Fjordimm3DEngine/(Drawing)/(Meshes)/Mesh.hpp"
+#include "Fjordimm3DEngine/(World)/WorldState.hpp"
 
 namespace Fjordimm3DEngine::TerrainTest
 {
@@ -24,6 +25,6 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Methods */
 
 	   public:
-		void beginGeneration();
+		void beginGeneration(WorldState& worldState, ShaderProgram* shaderProgram);
 	};
 }

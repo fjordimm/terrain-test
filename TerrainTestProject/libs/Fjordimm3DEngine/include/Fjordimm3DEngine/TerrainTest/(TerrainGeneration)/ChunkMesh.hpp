@@ -30,13 +30,13 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Constructors */
 
 	   public:
-		ChunkMesh(TerrainGene& terrainGene, int32_t size, float chunkScale, int64_t xOff, int64_t yOff, LodTransitions lodTransitions = LodTransitions::None);
+		ChunkMesh(TerrainGene& terrainGene, std::size_t size, float chunkScale, int64_t xOff, int64_t yOff, LodTransitions lodTransitions = LodTransitions::None);
 
 		/* Fields */
 
 	   private:
 		TerrainGene& terrainGene;
-		int32_t size;
+		std::size_t size;
 		float chunkScale;
 		int64_t xOff;
 		int64_t yOff;

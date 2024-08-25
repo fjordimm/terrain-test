@@ -14,8 +14,8 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	float TerrainGene::heightAt(float xPre, float yPre)
 	{
-		double x = 0.2 * ((double)xPre - 0.0);
-		double y = 0.2 * ((double)yPre - 0.0);
+		double x = 1.0 * ((double)xPre - 0.0);
+		double y = 1.0 * ((double)yPre - 0.0);
 
 		double z = 0.0;
 

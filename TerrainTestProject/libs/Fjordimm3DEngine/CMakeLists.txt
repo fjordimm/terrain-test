@@ -39,7 +39,7 @@ add_executable(Fjordimm3DEngineExec
 	"src/Fjordimm3DEngine/TerrainTest/TerrainTestHead.cpp"
 	"src/Fjordimm3DEngine/TerrainTest/(TerrainGeneration)/TerrainManager.cpp"
 	"src/Fjordimm3DEngine/TerrainTest/(TerrainGeneration)/TerrainGene.cpp"
-	"src/Fjordimm3DEngine/TerrainTest/(TerrainGeneration)/ChunkMeshGeneration.cpp"
+	"src/Fjordimm3DEngine/TerrainTest/(TerrainGeneration)/ChunkMesh.cpp"
 )
 
 target_include_directories(Fjordimm3DEngineExec PUBLIC "include")
