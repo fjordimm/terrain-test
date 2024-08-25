@@ -29,6 +29,7 @@ add_executable(Fjordimm3DEngineExec
 	"src/Fjordimm3DEngine/(Util)/(Tran)/Tran.cpp"
 	"src/Fjordimm3DEngine/(Util)/(Tran)/Vec.cpp"
 	"src/Fjordimm3DEngine/(Util)/(Tran)/Quat.cpp"
+	"src/Fjordimm3DEngine/(Form)/FormManager.cpp"
 	"src/Fjordimm3DEngine/(Form)/Form.cpp"
 	"src/Fjordimm3DEngine/(Form)/Forms/Camera.cpp"
 	"src/Fjordimm3DEngine/(Form)/PhysicForm.cpp"

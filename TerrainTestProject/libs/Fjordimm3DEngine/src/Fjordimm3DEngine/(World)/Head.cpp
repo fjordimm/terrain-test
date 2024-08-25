@@ -119,9 +119,9 @@ namespace Fjordimm3DEngine
 			this->doCameraMovements(deltaTime);
 			this->worldState.mainCamera->onUpdate(this->worldState, deltaTime);
 
-			for (std::unique_ptr<Form>& _form : this->worldState.forms)
+			for (auto& _form : this->worldState.forms)
 			{
-				Form* form = _form.get();
+				Form* form = _form.second.get();
 				form->onUpdate(this->worldState, deltaTime);
 			}
 

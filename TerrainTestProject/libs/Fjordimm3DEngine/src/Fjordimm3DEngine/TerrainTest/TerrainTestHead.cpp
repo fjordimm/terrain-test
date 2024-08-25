@@ -66,7 +66,7 @@ namespace Fjordimm3DEngine::TerrainTest
 			theOrigin->changeMesh(this->sphereMesh.get());
 			theOrigin->tran.acqScale() = Vec(0.1f, 0.1f, 0.1f);
 			theOrigin->changeMaterialColor(Color(0.1f, 0.1f, 0.1f));
-			this->worldState.forms.push_back(std::move(theOrigin));
+			this->worldState.forms.add(std::move(theOrigin));
 		}
 
 		// TEMP
@@ -79,13 +79,13 @@ namespace Fjordimm3DEngine::TerrainTest
 			form1->changeMesh(this->sphereMesh.get());
 			form1->changeTexture(texture1.get());
 			form1->tran.acqPosition() += Vec(0.0f, 0.0f, 3.0f);
-			this->worldState.forms.push_back(std::move(form1));
+			this->worldState.forms.add(std::move(form1));
 
 			std::unique_ptr<PhysicForm> form2 = PhysicForm::New(this->worldState);
 			form2->changeMesh(this->cubeMesh.get());
 			form2->changeTexture(texture1.get());
 			form2->tran.acqPosition() += Vec(0.0f, 0.0f, 6.0f);
-			this->worldState.forms.push_back(std::move(form2));
+			this->worldState.forms.add(std::move(form2));
 		}
 		///////////////
 		

@@ -10,6 +10,7 @@ namespace Fjordimm3DEngine::TerrainTest
 	/* Constructors */
 
 	TerrainManager::TerrainManager() :
+		terrainGene(),
 		mesh1(nullptr)
 	{}
 
@@ -19,13 +20,22 @@ namespace Fjordimm3DEngine::TerrainTest
 	{
 		Debug::Log("Beginning terrain generation...");
 
-		TerrainGene terrainGene;
+		{
+			this->mesh1 = Mesh::New(shaderProgram, ChunkMesh(terrainGene, 30, 2.0f, 0, 0, LodTransitions::None));
 
-		mesh1 = Mesh::New(shaderProgram, ChunkMesh(terrainGene, 30, 1.0f, 0, 0, LodTransitions::None));
+			std::unique_ptr<PhysicForm> form1 = PhysicForm::New(worldState);
+			form1->changeMesh(this->mesh1.get());
+			form1->tran.acqPosition() += Vecs::Zero;
+			worldState.forms.add(std::move(form1));
+		}
 
-		std::unique_ptr<PhysicForm> form1 = PhysicForm::New(worldState);
-		form1->changeMesh(mesh1.get());
-		form1->tran.acqPosition() += Vec(5.0f, 5.0f, -6.0f);
-		worldState.forms.push_back(std::move(form1));
+		{
+			this->mesh2 = Mesh::New(shaderProgram, ChunkMesh(terrainGene, 30, 1.0f, 2, 0, LodTransitions::Left));
+
+			std::unique_ptr<PhysicForm> form2 = PhysicForm::New(worldState);
+			form2->changeMesh(this->mesh2.get());
+			form2->tran.acqPosition() += Vecs::Zero;
+			worldState.forms.add(std::move(form2));
+		}
 	}
 }

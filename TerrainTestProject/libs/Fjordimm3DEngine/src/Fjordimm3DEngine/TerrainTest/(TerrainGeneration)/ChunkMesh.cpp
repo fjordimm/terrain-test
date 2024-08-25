@@ -49,7 +49,10 @@ namespace Fjordimm3DEngine::TerrainTest
 		std::int64_t yOff = this->yOff;
 		LodTransitions lodTransitions = this->lodTransitions;
 
-		if ((size + 3) * (size + 3) > std::numeric_limits<std::size_t>::max())
+		if (size < 2)
+		{ Debug::LogNonfatalError("The chunk size is too small."); }
+
+		if ((std::size_t)((size + 3) * (size + 3)) > std::numeric_limits<std::size_t>::max())
 		{ Debug::LogNonfatalError("The chunk size is too big."); }
 
 		if (size % 2 != 0)
@@ -72,12 +75,12 @@ namespace Fjordimm3DEngine::TerrainTest
 				bool doYLodTran = (
 					((lodTransitions & LodTransitions::Left) != LodTransitions::None && c < 2)
 					|| ((lodTransitions & LodTransitions::Right) != LodTransitions::None && c > size)
-				) && r % 2 == 0;
+				) && (r % 2 == 0);
 
 				bool doXLodTran = (
 					((lodTransitions & LodTransitions::Bottom) != LodTransitions::None && r < 2)
 					|| ((lodTransitions & LodTransitions::Top) != LodTransitions::None && r > size)
-				) && c % 2 == 0;
+				) && (c % 2 == 0);
 
 				float zVal;
 				if (doYLodTran || doXLodTran)
