@@ -27,7 +27,14 @@ namespace Fjordimm3DEngine
 		/* Methods */
 
 	   public:
-		Form* add(std::unique_ptr<Form> form);
+		template <typename T, typename std::enable_if<std::is_base_of<Form, T>::value>::type* = nullptr>
+		T* add(std::unique_ptr<T> form)
+		{
+			Form* ret = form.get();
+			this->formDict[ret] = std::move(form);
+			return dynamic_cast<T*>(ret);
+		}
+		
 		void remove(Form* form);
 
 		// To make it iterable:

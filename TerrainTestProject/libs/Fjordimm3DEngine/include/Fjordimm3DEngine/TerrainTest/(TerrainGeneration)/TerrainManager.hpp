@@ -27,8 +27,8 @@ namespace Fjordimm3DEngine::TerrainTest
 			/* Fields */
 
 		   private:
-			std::unique_ptr<Mesh> mesh;
 			Form* form;
+			std::unique_ptr<Mesh> mesh;
 
 			/* Getters and Setters */
 
@@ -36,6 +36,9 @@ namespace Fjordimm3DEngine::TerrainTest
 			inline Form* const& getForm() const { return this->form; }
 
 			/* Methods */
+
+		   public:
+			void setMesh(std::unique_ptr<Mesh> mesh);
 		};
 
 		/* Constructors */
@@ -50,9 +53,6 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	   private:
 		TerrainGene terrainGene;
-		
-		std::unique_ptr<Mesh> mesh1;
-		std::unique_ptr<Mesh> mesh2;
 
 		/* Methods */
 

@@ -53,8 +53,8 @@ namespace Fjordimm3DEngine
 		/* Methods */
 
 	   private:
-		void generateGlVaoAndBuffers(); // Only to be used by MeshManager
-		void cleanupForGl(); // Only to be used by MeshManager
+		void generateGlVaoAndBuffers();
+		void cleanupForGl();
 
 	   public:
 		void updateGlBufferData();
@@ -63,8 +63,6 @@ namespace Fjordimm3DEngine
 		/* Friends */
 
 		friend std::unique_ptr<Mesh> std::make_unique<Mesh>(Fjordimm3DEngine::ShaderProgram*&, std::unique_ptr<Fjordimm3DEngine::MeshData>&&);
-
-		// TODO: you don't need a mesh manager (you might want a private constructor and have a New function or something tho)
 
 		// TODO: cleanupForGl
 	};

@@ -14,13 +14,6 @@ namespace Fjordimm3DEngine
 
 	/* Methods */
 
-	Form* FormManager::add(std::unique_ptr<Form> form)
-	{
-		Form* ret = form.get();
-		this->formDict[ret] = std::move(form);
-		return ret;
-	}
-
 	void FormManager::remove(Form* form)
 	{
 		auto tryGet = this->formDict.find(form);
