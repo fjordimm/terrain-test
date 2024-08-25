@@ -29,7 +29,7 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		/* Meshes */
 
-		// cubeMesh = Mesh::New(this->flatShaderProgram, MeshSamples::Cube());
+		cubeMesh = Mesh::New(this->flatShaderProgram, MeshSamples::Cube());
 		sphereMesh = Mesh::New(this->smoothShaderProgram, MeshSamples::Sphere<10>());
 	}
 
@@ -80,6 +80,12 @@ namespace Fjordimm3DEngine::TerrainTest
 			form1->changeTexture(texture1.get());
 			form1->tran.acqPosition() += Vec(0.0f, 0.0f, 3.0f);
 			this->worldState.forms.push_back(std::move(form1));
+
+			std::unique_ptr<PhysicForm> form2 = PhysicForm::New(this->worldState);
+			form2->changeMesh(this->cubeMesh.get());
+			form2->changeTexture(texture1.get());
+			form2->tran.acqPosition() += Vec(0.0f, 0.0f, 6.0f);
+			this->worldState.forms.push_back(std::move(form2));
 		}
 		///////////////
 		

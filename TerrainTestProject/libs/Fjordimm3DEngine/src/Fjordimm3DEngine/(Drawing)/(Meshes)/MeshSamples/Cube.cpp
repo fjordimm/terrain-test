@@ -1,93 +1,76 @@
 
 #include "Fjordimm3DEngine/(Drawing)/(Meshes)/MeshSamples/Cube.hpp"
 
+#include "Fjordimm3DEngine/(Debug)/Debug.hpp"
+
 namespace Fjordimm3DEngine::MeshSamples
 {
-	std::unique_ptr<std::vector<Vec>> Cube::vertPositions3D() const
+	void Cube::generateData(bool doVertPositions3D, std::vector<Vec>& vertPositions3D, bool doVertNormals3D, std::vector<Vec>& vertNormals3D, bool doVertTextureCoords, std::vector<Vec2>& vertTextureCoords, std::vector<std::tuple<GLuint, GLuint, GLuint>>& triangles) const
 	{
-		std::unique_ptr<std::vector<Vec>> ret(new std::vector<Vec>
+		/* Vertices */
+
 		{
-			Vec(-1.0f, +1.0f, -1.0f),
-			Vec(+1.0f, +1.0f, -1.0f),
-			Vec(-1.0f, -1.0f, -1.0f),
-			Vec(+1.0f, -1.0f, -1.0f),
-			Vec(-1.0f, +1.0f, +1.0f),
-			Vec(+1.0f, +1.0f, +1.0f),
-			Vec(-1.0f, -1.0f, +1.0f),
-			Vec(+1.0f, -1.0f, +1.0f)
-		});
+			if (doVertPositions3D)
+			{
+				vertPositions3D.push_back(Vec(-1.0f, +1.0f, -1.0f));
+				vertPositions3D.push_back(Vec(+1.0f, +1.0f, -1.0f));
+				vertPositions3D.push_back(Vec(-1.0f, -1.0f, -1.0f));
+				vertPositions3D.push_back(Vec(+1.0f, -1.0f, -1.0f));
+				vertPositions3D.push_back(Vec(-1.0f, +1.0f, +1.0f));
+				vertPositions3D.push_back(Vec(+1.0f, +1.0f, +1.0f));
+				vertPositions3D.push_back(Vec(-1.0f, -1.0f, +1.0f));
+				vertPositions3D.push_back(Vec(+1.0f, -1.0f, +1.0f));
+			}
+			if (doVertNormals3D)
+			{
+				vertNormals3D.push_back(glm::normalize(Vec(-1.0f, +1.0f, -1.0f)));
+				vertNormals3D.push_back(glm::normalize(Vec(+1.0f, +1.0f, -1.0f)));
+				vertNormals3D.push_back(glm::normalize(Vec(-1.0f, -1.0f, -1.0f)));
+				vertNormals3D.push_back(glm::normalize(Vec(+1.0f, -1.0f, -1.0f)));
+				vertNormals3D.push_back(glm::normalize(Vec(-1.0f, +1.0f, +1.0f)));
+				vertNormals3D.push_back(glm::normalize(Vec(+1.0f, +1.0f, +1.0f)));
+				vertNormals3D.push_back(glm::normalize(Vec(-1.0f, -1.0f, +1.0f)));
+				vertNormals3D.push_back(glm::normalize(Vec(+1.0f, -1.0f, +1.0f)));
+			}
+			if (doVertTextureCoords)
+			{
+				vertTextureCoords.push_back(Vec2(0.0f, 0.0f));
+				vertTextureCoords.push_back(Vec2(1.0f, 0.0f));
+				vertTextureCoords.push_back(Vec2(0.0f, 0.0f));
+				vertTextureCoords.push_back(Vec2(1.0f, 0.0f));
+				vertTextureCoords.push_back(Vec2(0.0f, 1.0f));
+				vertTextureCoords.push_back(Vec2(1.0f, 1.0f));
+				vertTextureCoords.push_back(Vec2(0.0f, 1.0f));
+				vertTextureCoords.push_back(Vec2(1.0f, 1.0f));
+			}
+		}
 
-		return std::move(ret);
-	}
+		/* Triangles */
 
-	std::unique_ptr<std::vector<Vec>> Cube::vertNormals3D() const
-	{
-		std::unique_ptr<std::vector<Vec>> ret(new std::vector<Vec>
-		{
-			glm::normalize(Vec(-1.0f, +1.0f, -1.0f)),
-			glm::normalize(Vec(+1.0f, +1.0f, -1.0f)),
-			glm::normalize(Vec(-1.0f, -1.0f, -1.0f)),
-			glm::normalize(Vec(+1.0f, -1.0f, -1.0f)),
-			glm::normalize(Vec(-1.0f, +1.0f, +1.0f)),
-			glm::normalize(Vec(+1.0f, +1.0f, +1.0f)),
-			glm::normalize(Vec(-1.0f, -1.0f, +1.0f)),
-			glm::normalize(Vec(+1.0f, -1.0f, +1.0f))
-		});
-
-		return std::move(ret);
-	}
-
-	// 1        0.0f, 1.0f
-	// 2        1.0f, 1.0f
-	// 3        1.0f, 0.0f
-	// 4        0.0f, 0.0f
-
-	std::unique_ptr<std::vector<Vec2>> Cube::vertTextureCoords() const
-	{
-		std::unique_ptr<std::vector<Vec2>> ret(new std::vector<Vec2>
-		{
-			Vec2(0.0f, 0.0f),
-			Vec2(1.0f, 0.0f),
-			Vec2(0.0f, 0.0f),
-			Vec2(1.0f, 0.0f),
-			Vec2(0.0f, 1.0f),
-			Vec2(1.0f, 1.0f),
-			Vec2(0.0f, 1.0f),
-			Vec2(1.0f, 1.0f)
-		});
-
-		return std::move(ret);
-	}
-
-	std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> Cube::triangles() const
-	{
-		std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> ret(new std::vector<std::tuple<GLuint, GLuint, GLuint>>
 		{
 			// bottom
-			std::make_tuple<GLuint, GLuint, GLuint>(0, 3, 2),
-			std::make_tuple<GLuint, GLuint, GLuint>(3, 0, 1),
+			triangles.push_back(std::make_tuple<GLuint, GLuint, GLuint>(0, 3, 2));
+			triangles.push_back(std::make_tuple<GLuint, GLuint, GLuint>(3, 0, 1));
 
 			// top
-			std::make_tuple<GLuint, GLuint, GLuint>(6, 5, 4),
-			std::make_tuple<GLuint, GLuint, GLuint>(5, 6, 7),
+			triangles.push_back(std::make_tuple<GLuint, GLuint, GLuint>(6, 5, 4));
+			triangles.push_back(std::make_tuple<GLuint, GLuint, GLuint>(5, 6, 7));
 
 			// front
-			std::make_tuple<GLuint, GLuint, GLuint>(2, 7, 6),
-			std::make_tuple<GLuint, GLuint, GLuint>(7, 2, 3),
+			triangles.push_back(std::make_tuple<GLuint, GLuint, GLuint>(2, 7, 6));
+			triangles.push_back(std::make_tuple<GLuint, GLuint, GLuint>(7, 2, 3));
 
 			// back
-			std::make_tuple<GLuint, GLuint, GLuint>(1, 4, 5),
-			std::make_tuple<GLuint, GLuint, GLuint>(4, 1, 0),
+			triangles.push_back(std::make_tuple<GLuint, GLuint, GLuint>(1, 4, 5));
+			triangles.push_back(std::make_tuple<GLuint, GLuint, GLuint>(4, 1, 0));
 
 			// left
-			std::make_tuple<GLuint, GLuint, GLuint>(0, 6, 4),
-			std::make_tuple<GLuint, GLuint, GLuint>(6, 0, 2),
+			triangles.push_back(std::make_tuple<GLuint, GLuint, GLuint>(0, 6, 4));
+			triangles.push_back(std::make_tuple<GLuint, GLuint, GLuint>(6, 0, 2));
 
 			// right
-			std::make_tuple<GLuint, GLuint, GLuint>(3, 5, 7),
-			std::make_tuple<GLuint, GLuint, GLuint>(5, 3, 1)
-		});
-
-		return std::move(ret);
+			triangles.push_back(std::make_tuple<GLuint, GLuint, GLuint>(3, 5, 7));
+			triangles.push_back(std::make_tuple<GLuint, GLuint, GLuint>(5, 3, 1));
+		}
 	}
 }

@@ -15,6 +15,6 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	void TerrainManager::beginGeneration()
 	{
-		Debug::Log("woeijfowjdf");
+		Debug::Log("Beginning terrain generation...");
 	}
 }

@@ -8,9 +8,6 @@ namespace Fjordimm3DEngine::MeshSamples
 	class Cube : public MeshSample
 	{
 	   protected:
-		std::unique_ptr<std::vector<Vec>> vertPositions3D() const final;
-		std::unique_ptr<std::vector<Vec>> vertNormals3D() const final;
-		std::unique_ptr<std::vector<Vec2>> vertTextureCoords() const final;
-		std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> triangles() const final;
+		void generateData(bool doVertPositions3D, std::vector<Vec>& vertPositions3D, bool doVertNormals3D, std::vector<Vec>& vertNormals3D, bool doVertTextureCoords, std::vector<Vec2>& vertTextureCoords, std::vector<std::tuple<GLuint, GLuint, GLuint>>& triangles) const final;
 	};
 }
