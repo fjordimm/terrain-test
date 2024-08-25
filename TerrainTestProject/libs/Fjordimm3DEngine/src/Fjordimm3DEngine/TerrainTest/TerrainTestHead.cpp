@@ -90,7 +90,7 @@ namespace Fjordimm3DEngine::TerrainTest
 		///////////////
 		
 		{
-			this->terrainManager.beginGeneration(this->worldState, this->flatShaderProgram);
+			this->terrainManager.beginGeneration(this->worldState, this->smoothShaderProgram);
 		}
 	}
 

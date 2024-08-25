@@ -115,11 +115,6 @@ namespace Fjordimm3DEngine::TerrainTest
 				{
 					vertPositions3D[newIndex] = vert;
 				}
-				if (doVertNormals3D)
-				{
-					// TODO:
-					vertNormals3D[newIndex] = glm::normalize(vert);
-				}
 				if (doVertTextureCoords)
 				{
 					vertTextureCoords[newIndex] = Vec2((float)r, (float)c);
@@ -127,10 +122,55 @@ namespace Fjordimm3DEngine::TerrainTest
 			}
 		}
 
+		if (doVertNormals3D)
+		{
+			std::vector<Vec> normalsPre;
+			normalsPre.resize(vertsPre.size());
+
+			for (std::size_t c = 0; c < size + 2; c++)
+			{
+				for (std::size_t r = 0; r < size + 2; r++)
+				{
+					GLuint bottomLeft  = (c + 0) * (size + 1) + (r + 0);
+					GLuint bottomRight = (c + 1) * (size + 1) + (r + 0);
+					GLuint topLeft     = (c + 0) * (size + 1) + (r + 1);
+					GLuint topRight    = (c + 1) * (size + 1) + (r + 1);
+
+					Vec vertexBottomLeft = vertsPre[bottomLeft];
+					Vec vertexBottomRight = vertsPre[bottomRight];
+					Vec vertexTopLeft = vertsPre[topLeft];
+					Vec vertexTopRight = vertsPre[topRight];
+
+					Vec normal1 = glm::normalize(glm::cross(vertexBottomLeft - vertexTopLeft, vertexTopRight - vertexTopLeft));
+					normalsPre[topLeft] += normal1;
+					normalsPre[bottomLeft] += normal1;
+					normalsPre[topRight] += normal1;
+
+					Vec normal2 = glm::normalize(glm::cross(vertexTopRight - vertexBottomRight, vertexBottomLeft - vertexBottomRight));
+					normalsPre[bottomRight] += normal1;
+					normalsPre[topRight] += normal1;
+					normalsPre[bottomLeft] += normal1;
+				}
+			}
+
+			for (std::size_t i = 0; i < normalsPre.size(); i++)
+			{
+				normalsPre[i] = glm::normalize(normalsPre[i]);
+			}
+
+			vertNormals3D.resize((size + 1) * (size + 1));
+			for (std::size_t c = 0; c < size + 1; c++)
+			{
+				for (std::size_t r = 0; r < size + 1; r++)
+				{
+					vertNormals3D[c * (size + 1) + r] = normalsPre[(c + 1) * (size + 3) + (r + 1)];
+				}
+			}
+		}
+
 		/* Triangles */
 
 		triangles.resize(2 * size * size);
-
 		for (std::size_t c = 0; c < size; c++)
 		{
 			for (std::size_t r = 0; r < size; r++)
