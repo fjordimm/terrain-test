@@ -9,23 +9,29 @@ namespace Fjordimm3DEngine::Random
 	{
 		std::default_random_engine _RandomEngine(0);
 
-		std::bernoulli_distribution _DistrBernoulli;
+		std::bernoulli_distribution _Bool;
+		std::uniform_real_distribution<float> _Float0to1(0.0f, 1.0f);
 	}
 
-	void Reseed(unsigned long long seed)
+	void Reseed(unsigned int seed)
 	{
 		_Globals::_RandomEngine.seed(seed);
 	}
 
 	void Reseed()
 	{
-		unsigned long long seed = std::chrono::time_point_cast<std::chrono::duration<unsigned long long, std::micro>>(std::chrono::system_clock::now()).time_since_epoch().count();
+		unsigned int seed = std::chrono::time_point_cast<std::chrono::duration<unsigned int, std::micro>>(std::chrono::system_clock::now()).time_since_epoch().count();
 		_Globals::_RandomEngine.seed(seed);
 	}
 
-	bool FromBernoulli()
+	bool Bool()
 	{
-		return _Globals::_DistrBernoulli(_Globals::_RandomEngine);
+		return _Globals::_Bool(_Globals::_RandomEngine);
+	}
+
+	float Float0to1()
+	{
+		return _Globals::_Float0to1(_Globals::_RandomEngine);
 	}
 
 	bool From(std::bernoulli_distribution& distr)

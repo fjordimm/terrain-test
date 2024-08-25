@@ -12,6 +12,7 @@
 #include "Fjordimm3DEngine/(Util)/(Math)/Math.hpp"
 #include "Fjordimm3DEngine/(Form)/PhysicForm.hpp"
 #include "Fjordimm3DEngine/(headerGroups)/allShaderPrograms.hpp"
+#include "Fjordimm3DEngine/(Util)/(Random)/Random.hpp"
 
 namespace Fjordimm3DEngine
 {
@@ -23,7 +24,9 @@ namespace Fjordimm3DEngine
 		worldState(),
 		_windowWidth(-1),
 		_windowHeight(-1)
-	{}
+	{
+		Random::Reseed();
+	}
 	
 	/* Methods */
 

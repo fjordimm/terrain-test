@@ -14,7 +14,7 @@ int main(void)
 	{
 		for (int i = 0; i < 8; i++)
 		{
-			Debug::Logf("%i", Random::FromBernoulli());
+			Debug::Logf("%i", Random::Bool());
 		}
 	}
 

@@ -9,13 +9,15 @@ namespace Fjordimm3DEngine::Random
 	{
 		extern std::default_random_engine _RandomEngine;
 
-		extern std::bernoulli_distribution _DistrBernoulli;
+		extern std::bernoulli_distribution _Bool;
+		extern std::uniform_real_distribution<float> _Float0to1;
 	}
 
-	void Reseed(unsigned long long seed);
+	void Reseed(unsigned int seed);
 	void Reseed();
 
-	bool FromBernoulli();
+	bool Bool();
+	float Float0to1();
 
 	template <typename T>
 	T From(std::uniform_int_distribution<T>& distr)
