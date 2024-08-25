@@ -2,6 +2,7 @@
 #include "Fjordimm3DEngine/TerrainTest/(TerrainGeneration)/ChunkMesh.hpp"
 
 #include <type_traits>
+#include <limits>
 #include "Fjordimm3DEngine/(Debug)/Debug.hpp"
 
 namespace Fjordimm3DEngine::TerrainTest
@@ -48,8 +49,7 @@ namespace Fjordimm3DEngine::TerrainTest
 		int64_t yOff = this->yOff;
 		LodTransitions lodTransitions = this->lodTransitions;
 
-		// TODO: 65535 was the limit for Unity, but idk the limit for this
-		if ((size + 3) * (size + 3) > 65535)
+		if ((size + 3) * (size + 3) > std::numeric_limits<std::size_t>::max())
 		{ Debug::LogNonfatalError("The chunk size is too big."); }
 
 		if (size % 2 != 0)

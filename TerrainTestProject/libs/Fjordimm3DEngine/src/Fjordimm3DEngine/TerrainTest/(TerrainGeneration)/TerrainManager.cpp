@@ -21,7 +21,7 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		TerrainGene terrainGene;
 
-		mesh1 = Mesh::New(shaderProgram, ChunkMesh(terrainGene, 20, 1.0f, 0, 0, LodTransitions::None));
+		mesh1 = Mesh::New(shaderProgram, ChunkMesh(terrainGene, 1000, 1.0f, 0, 0, LodTransitions::None));
 
 		std::unique_ptr<PhysicForm> form1 = PhysicForm::New(worldState);
 		form1->changeMesh(mesh1.get());
