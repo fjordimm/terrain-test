@@ -29,7 +29,7 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		/* Meshes */
 
-		cubeMesh = Mesh::New(this->flatShaderProgram, MeshSamples::Cube());
+		// cubeMesh = Mesh::New(this->flatShaderProgram, MeshSamples::Cube());
 		sphereMesh = Mesh::New(this->smoothShaderProgram, MeshSamples::Sphere<10>());
 	}
 
@@ -68,6 +68,20 @@ namespace Fjordimm3DEngine::TerrainTest
 			theOrigin->changeMaterialColor(Color(0.1f, 0.1f, 0.1f));
 			this->worldState.forms.push_back(std::move(theOrigin));
 		}
+
+		// TEMP
+		///////////////
+		{
+			std::unique_ptr<Texture> texture1 = Texture::New();
+			texture1->initializeTextureForGl(0, "res/textures/star.png");
+
+			std::unique_ptr<PhysicForm> form1 = PhysicForm::New(this->worldState);
+			form1->changeMesh(this->sphereMesh.get());
+			form1->changeTexture(texture1.get());
+			form1->tran.acqPosition() += Vec(0.0f, 0.0f, 3.0f);
+			this->worldState.forms.push_back(std::move(form1));
+		}
+		///////////////
 		
 		{
 			this->terrainManager.beginGeneration();

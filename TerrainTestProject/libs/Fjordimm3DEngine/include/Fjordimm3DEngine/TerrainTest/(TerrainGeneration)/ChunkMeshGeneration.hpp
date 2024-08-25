@@ -29,5 +29,5 @@ namespace Fjordimm3DEngine::TerrainTest::ChunkMeshGeneration
 
 	/* Functions */
 
-	std::unique_ptr<Mesh> makeMesh(TerrainGene& terrainGene, int32_t size, float chunkScale, int64_t xOff, int64_t yOff, LodTransitions lodTransitions = LodTransitions::None);
+	std::unique_ptr<MeshData> MakeMeshData(TerrainGene& terrainGene, int32_t size, float chunkScale, int64_t xOff, int64_t yOff, LodTransitions lodTransitions = LodTransitions::None);
 }

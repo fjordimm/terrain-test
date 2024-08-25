@@ -22,42 +22,39 @@ namespace Fjordimm3DEngine
 
 		FJORDIMM3DENGINE_DEBUG_ASSERT(doPositions3D);
 
+		/* Generate the data */
+
+		std::size_t numFloatsPerVertex = 0;
+
+		std::vector<Vec> vertPositions3D;
+		if (doPositions3D)
+		{ numFloatsPerVertex += 3; }
+
+		std::vector<Vec> vertNormals3D;
+		if (doNormals3D)
+		{ numFloatsPerVertex += 3; }
+
+		std::vector<Vec2> vertTextureCoords;
+		if (doTextureCoords)
+		{ numFloatsPerVertex += 2; }
+
+		std::vector<std::tuple<GLuint, GLuint, GLuint>> triangles;
+
+		this->generateData(doPositions3D, vertPositions3D, doNormals3D, vertNormals3D, doTextureCoords, vertTextureCoords, triangles);
+
 		/* Make verts */
 
 		std::size_t vertsVertLen = -1;
 		std::size_t vertsLen = -1;
 		std::unique_ptr<float[]> verts = nullptr;
 		{
-			std::size_t numFloatsPerVertex = 0;
-
-			std::unique_ptr<const std::vector<Vec>> vertPositions3D = nullptr;
+			vertsVertLen = vertPositions3D.size();
 			if (doPositions3D)
-			{
-				vertPositions3D = this->vertPositions3D();
-				numFloatsPerVertex += 3;
-			}
-
-			std::unique_ptr<const std::vector<Vec>> vertNormals3D = nullptr;
+			{ FJORDIMM3DENGINE_DEBUG_ASSERT(vertPositions3D.size() == vertsVertLen); }
 			if (doNormals3D)
-			{
-				vertNormals3D = this->vertNormals3D();
-				numFloatsPerVertex += 3;
-			}
-
-			std::unique_ptr<const std::vector<Vec2>> vertTextureCoords = nullptr;
+			{ FJORDIMM3DENGINE_DEBUG_ASSERT(vertNormals3D.size() == vertsVertLen); }
 			if (doTextureCoords)
-			{
-				vertTextureCoords = this->vertTextureCoords();
-				numFloatsPerVertex += 2;
-			}
-
-			vertsVertLen = vertPositions3D->size();
-			if (doPositions3D)
-			{ FJORDIMM3DENGINE_DEBUG_ASSERT(vertPositions3D->size() == vertsVertLen); }
-			if (doNormals3D)
-			{ FJORDIMM3DENGINE_DEBUG_ASSERT(vertNormals3D->size() == vertsVertLen); }
-			if (doTextureCoords)
-			{ FJORDIMM3DENGINE_DEBUG_ASSERT(vertTextureCoords->size() == vertsVertLen); }
+			{ FJORDIMM3DENGINE_DEBUG_ASSERT(vertTextureCoords.size() == vertsVertLen); }
 
 			vertsLen = vertsVertLen * numFloatsPerVertex;
 
@@ -70,26 +67,26 @@ namespace Fjordimm3DEngine
 
 				if (doPositions3D)
 				{
-					verts[i * numFloatsPerVertex + cumlOffset + 0] = vertPositions3D->at(i).x;
-					verts[i * numFloatsPerVertex + cumlOffset + 1] = vertPositions3D->at(i).y;
-					verts[i * numFloatsPerVertex + cumlOffset + 2] = vertPositions3D->at(i).z;
+					verts[i * numFloatsPerVertex + cumlOffset + 0] = vertPositions3D[i].x;
+					verts[i * numFloatsPerVertex + cumlOffset + 1] = vertPositions3D[i].y;
+					verts[i * numFloatsPerVertex + cumlOffset + 2] = vertPositions3D[i].z;
 
 					cumlOffset += 3;
 				}
 
 				if (doNormals3D)
 				{
-					verts[i * numFloatsPerVertex + cumlOffset + 0] = vertNormals3D->at(i).x;
-					verts[i * numFloatsPerVertex + cumlOffset + 1] = vertNormals3D->at(i).y;
-					verts[i * numFloatsPerVertex + cumlOffset + 2] = vertNormals3D->at(i).z;
+					verts[i * numFloatsPerVertex + cumlOffset + 0] = vertNormals3D[i].x;
+					verts[i * numFloatsPerVertex + cumlOffset + 1] = vertNormals3D[i].y;
+					verts[i * numFloatsPerVertex + cumlOffset + 2] = vertNormals3D[i].z;
 
 					cumlOffset += 3;
 				}
 
 				if (doTextureCoords)
 				{
-					verts[i * numFloatsPerVertex + cumlOffset + 0] = vertTextureCoords->at(i).x;
-					verts[i * numFloatsPerVertex + cumlOffset + 1] = vertTextureCoords->at(i).y;
+					verts[i * numFloatsPerVertex + cumlOffset + 0] = vertTextureCoords[i].x;
+					verts[i * numFloatsPerVertex + cumlOffset + 1] = vertTextureCoords[i].y;
 
 					cumlOffset += 2;
 				}
@@ -102,9 +99,7 @@ namespace Fjordimm3DEngine
 		std::size_t elemsLen = -1;
 		std::unique_ptr<GLuint[]> elems = nullptr;
 		{
-			std::unique_ptr<std::vector<std::tuple<GLuint, GLuint, GLuint>>> triangles = this->triangles();
-
-			trianglesLen = triangles->size();
+			trianglesLen = triangles.size();
 
 			elemsLen = trianglesLen * 3;
 
@@ -113,9 +108,9 @@ namespace Fjordimm3DEngine
 
 			for (int i = 0; i < trianglesLen; i++)
 			{
-				elems[i * 3 + 0] = std::get<0>(triangles->at(i));
-				elems[i * 3 + 1] = std::get<1>(triangles->at(i));
-				elems[i * 3 + 2] = std::get<2>(triangles->at(i));
+				elems[i * 3 + 0] = std::get<0>(triangles[i]);
+				elems[i * 3 + 1] = std::get<1>(triangles[i]);
+				elems[i * 3 + 2] = std::get<2>(triangles[i]);
 			}
 		}
 
