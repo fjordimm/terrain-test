@@ -1,8 +1,8 @@
 
 #pragma once
 
-#include <cstdint>
 #include <memory>
+#include <cstdint>
 #include "Fjordimm3DEngine/(Drawing)/(Meshes)/Mesh.hpp"
 #include "Fjordimm3DEngine/TerrainTest/(TerrainGeneration)/TerrainGene.hpp"
 
@@ -30,7 +30,7 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Constructors */
 
 	   public:
-		ChunkMesh(TerrainGene& terrainGene, std::size_t size, float chunkScale, int64_t xOff, int64_t yOff, LodTransitions lodTransitions = LodTransitions::None);
+		ChunkMesh(TerrainGene& terrainGene, std::int64_t size, float chunkScale, std::int64_t xOff, std::int64_t yOff, LodTransitions lodTransitions = LodTransitions::None);
 
 		/* Fields */
 

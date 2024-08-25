@@ -29,7 +29,7 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	/* Constructors */
 	
-	ChunkMesh::ChunkMesh(TerrainGene& terrainGene, std::size_t size, float chunkScale, int64_t xOff, int64_t yOff, LodTransitions lodTransitions) :
+	ChunkMesh::ChunkMesh(TerrainGene& terrainGene, std::int64_t size, float chunkScale, std::int64_t xOff, std::int64_t yOff, LodTransitions lodTransitions) :
 		terrainGene(terrainGene),
 		size(size),
 		chunkScale(chunkScale),
@@ -43,10 +43,10 @@ namespace Fjordimm3DEngine::TerrainTest
 	void ChunkMesh::generateData(bool doVertPositions3D, std::vector<Vec>& vertPositions3D, bool doVertNormals3D, std::vector<Vec>& vertNormals3D, bool doVertTextureCoords, std::vector<Vec2>& vertTextureCoords, std::vector<std::tuple<GLuint, GLuint, GLuint>>& triangles) const
 	{
 		TerrainGene& terrainGene = this->terrainGene;
-		std::size_t size = this->size;
+		std::int64_t size = this->size;
 		float chunkScale = this->chunkScale;
-		int64_t xOff = this->xOff;
-		int64_t yOff = this->yOff;
+		std::int64_t xOff = this->xOff;
+		std::int64_t yOff = this->yOff;
 		LodTransitions lodTransitions = this->lodTransitions;
 
 		if ((size + 3) * (size + 3) > std::numeric_limits<std::size_t>::max())
@@ -59,15 +59,15 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		std::vector<Vec> vertsPre;
 		vertsPre.resize((size + 3) * (size + 3));
-		for (std::size_t c = 0; c < size + 3; c++)
+		for (std::int64_t c = 0; c < size + 3; c++)
 		{
-			for (std::size_t r = 0; r < size + 3; r++)
+			for (std::int64_t r = 0; r < size + 3; r++)
 			{
-				float xVal = chunkScale * (c - 1);
-				float yVal = chunkScale * (r - 1);
+				float xVal = chunkScale * (float)(c - 1);
+				float yVal = chunkScale * (float)(r - 1);
 
-				float xValOff = chunkScale * (c - 1 + size * xOff);
-				float yValOff = chunkScale * (r - 1 + size * yOff);
+				float xValOff = chunkScale * (float)(c - 1 + size * xOff);
+				float yValOff = chunkScale * (float)(r - 1 + size * yOff);
 
 				bool doYLodTran = (
 					((lodTransitions & LodTransitions::Left) != LodTransitions::None && c < 2)
@@ -97,16 +97,16 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		/* Vertices */
 
-		std::size_t numVerts = (size + 1) * (size + 1);
+		std::int64_t numVerts = (size + 1) * (size + 1);
 		if (doVertPositions3D)
 		{ vertPositions3D.resize(numVerts); }
 		if (doVertNormals3D)
 		{ vertNormals3D.resize(numVerts); }
 		if (doVertTextureCoords)
 		{ vertTextureCoords.resize(numVerts); }
-		for (std::size_t c = 0; c < size + 1; c++)
+		for (std::int64_t c = 0; c < size + 1; c++)
 		{
-			for (std::size_t r = 0; r < size + 1; r++)
+			for (std::int64_t r = 0; r < size + 1; r++)
 			{
 				std::size_t newIndex = c * (size + 1) + r;
 				Vec vert = vertsPre[(c + 1) * (size + 3) + (r + 1)];
@@ -127,14 +127,19 @@ namespace Fjordimm3DEngine::TerrainTest
 			std::vector<Vec> normalsPre;
 			normalsPre.resize(vertsPre.size());
 
-			for (std::size_t c = 0; c < size + 2; c++)
+			for (std::size_t i = 0; i < normalsPre.size(); i++)
 			{
-				for (std::size_t r = 0; r < size + 2; r++)
+				normalsPre[i] = Vec(0.0f, 0.0f, 0.0f);
+			}
+
+			for (std::int64_t c = 0; c < size + 2; c++)
+			{
+				for (std::int64_t r = 0; r < size + 2; r++)
 				{
-					GLuint bottomLeft  = (c + 0) * (size + 1) + (r + 0);
-					GLuint bottomRight = (c + 1) * (size + 1) + (r + 0);
-					GLuint topLeft     = (c + 0) * (size + 1) + (r + 1);
-					GLuint topRight    = (c + 1) * (size + 1) + (r + 1);
+					GLuint bottomLeft  = (c + 0) * (size + 3) + (r + 0);
+					GLuint bottomRight = (c + 1) * (size + 3) + (r + 0);
+					GLuint topLeft     = (c + 0) * (size + 3) + (r + 1);
+					GLuint topRight    = (c + 1) * (size + 3) + (r + 1);
 
 					Vec vertexBottomLeft = vertsPre[bottomLeft];
 					Vec vertexBottomRight = vertsPre[bottomRight];
@@ -147,23 +152,18 @@ namespace Fjordimm3DEngine::TerrainTest
 					normalsPre[topRight] += normal1;
 
 					Vec normal2 = glm::normalize(glm::cross(vertexTopRight - vertexBottomRight, vertexBottomLeft - vertexBottomRight));
-					normalsPre[bottomRight] += normal1;
-					normalsPre[topRight] += normal1;
-					normalsPre[bottomLeft] += normal1;
+					normalsPre[bottomRight] += normal2;
+					normalsPre[topRight] += normal2;
+					normalsPre[bottomLeft] += normal2;
 				}
 			}
 
-			for (std::size_t i = 0; i < normalsPre.size(); i++)
-			{
-				normalsPre[i] = glm::normalize(normalsPre[i]);
-			}
-
 			vertNormals3D.resize((size + 1) * (size + 1));
-			for (std::size_t c = 0; c < size + 1; c++)
+			for (std::int64_t c = 0; c < size + 1; c++)
 			{
-				for (std::size_t r = 0; r < size + 1; r++)
+				for (std::int64_t r = 0; r < size + 1; r++)
 				{
-					vertNormals3D[c * (size + 1) + r] = normalsPre[(c + 1) * (size + 3) + (r + 1)];
+					vertNormals3D[c * (size + 1) + r] = glm::normalize(normalsPre[(c + 1) * (size + 3) + (r + 1)]);
 				}
 			}
 		}
@@ -171,9 +171,9 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Triangles */
 
 		triangles.resize(2 * size * size);
-		for (std::size_t c = 0; c < size; c++)
+		for (std::int64_t c = 0; c < size; c++)
 		{
-			for (std::size_t r = 0; r < size; r++)
+			for (std::int64_t r = 0; r < size; r++)
 			{
 				GLuint bottomLeft  = (c + 0) * (size + 1) + (r + 0);
 				GLuint bottomRight = (c + 1) * (size + 1) + (r + 0);

@@ -21,11 +21,11 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		TerrainGene terrainGene;
 
-		mesh1 = Mesh::New(shaderProgram, ChunkMesh(terrainGene, 500, 1.0f, 0, 0, LodTransitions::None));
+		mesh1 = Mesh::New(shaderProgram, ChunkMesh(terrainGene, 30, 1.0f, 0, 0, LodTransitions::None));
 
 		std::unique_ptr<PhysicForm> form1 = PhysicForm::New(worldState);
 		form1->changeMesh(mesh1.get());
-		form1->tran.acqPosition() += Vec(0.0f, 0.0f, -6.0f);
+		form1->tran.acqPosition() += Vec(5.0f, 5.0f, -6.0f);
 		worldState.forms.push_back(std::move(form1));
 	}
 }
