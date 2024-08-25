@@ -14,8 +14,8 @@ namespace Fjordimm3DEngine
 		/* Constructors */
 
 	   public:
-		FormManager(const FormManager&) = delete;
-		FormManager& operator=(const FormManager&) = delete;
+		FormManager(FormManager const&) = delete;
+		FormManager& operator=(FormManager const&) = delete;
 		
 		FormManager();
 		

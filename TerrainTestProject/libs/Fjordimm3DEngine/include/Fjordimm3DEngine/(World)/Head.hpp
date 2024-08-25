@@ -20,8 +20,8 @@ namespace Fjordimm3DEngine
 		/* Constructors */
 
 	   public:
-		Head(const Head&) = delete;
-		Head& operator=(const Head&) = delete;
+		Head(Head const&) = delete;
+		Head& operator=(Head const&) = delete;
 
 		Head();
 
@@ -38,8 +38,8 @@ namespace Fjordimm3DEngine
 		/* Getters and Setters */
 
 	   protected:
-		inline const int& getWindowWidth() { return this->_windowWidth; }
-		inline const int& getWindowHeight() { return this->_windowHeight; }
+		inline int const& getWindowWidth() { return this->_windowWidth; }
+		inline int const& getWindowHeight() { return this->_windowHeight; }
 
 		/* Methods */
 

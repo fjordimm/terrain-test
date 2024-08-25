@@ -19,8 +19,8 @@ namespace Fjordimm3DEngine
 		/* Constructors */
 
 	   public:
-		ShaderProgram(const ShaderProgram&) = delete;
-		ShaderProgram& operator=(const ShaderProgram&) = delete;
+		ShaderProgram(ShaderProgram const&) = delete;
+		ShaderProgram& operator=(ShaderProgram const&) = delete;
 		
 		ShaderProgram();
 		

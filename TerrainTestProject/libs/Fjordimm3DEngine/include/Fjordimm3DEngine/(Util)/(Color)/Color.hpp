@@ -14,8 +14,8 @@ namespace Fjordimm3DEngine
 
 		Color(float r, float g, float b, float a);
 		Color(float r, float g, float b);
-		Color(const Color& that);
-		Color& operator=(const Color& that);
+		Color(Color const& that);
+		Color& operator=(Color const& that);
 		
 		/* Fields */
 

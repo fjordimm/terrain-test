@@ -10,8 +10,8 @@ namespace Fjordimm3DEngine::ShaderTraits
 		/* Constructors */
 
 	   public:
-		Has3DShape(const Has3DShape&) = delete;
-		Has3DShape& operator=(const Has3DShape&) = delete;
+		Has3DShape(Has3DShape const&) = delete;
+		Has3DShape& operator=(Has3DShape const&) = delete;
 		
 		Has3DShape();
 
@@ -31,8 +31,8 @@ namespace Fjordimm3DEngine::ShaderTraits
 		void setupUniforms(GLuint program) final;
 		void updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const final;
 
-		void setUniTransScale(const glm::mat4& val) const;
-		void setUniTransRot(const glm::mat4& val) const;
-		void setUniTransPos(const glm::mat4& val) const;
+		void setUniTransScale(glm::mat4 const& val) const;
+		void setUniTransRot(glm::mat4 const& val) const;
+		void setUniTransPos(glm::mat4 const& val) const;
 	};
 }

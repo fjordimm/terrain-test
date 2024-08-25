@@ -11,8 +11,8 @@ namespace Fjordimm3DEngine::ShaderPrograms
 		/* Constructors */
 
 	   public:
-		Smooth(const Smooth&) = delete;
-		Smooth& operator=(const Smooth&) = delete;
+		Smooth(Smooth const&) = delete;
+		Smooth& operator=(Smooth const&) = delete;
 		
 		Smooth();
 

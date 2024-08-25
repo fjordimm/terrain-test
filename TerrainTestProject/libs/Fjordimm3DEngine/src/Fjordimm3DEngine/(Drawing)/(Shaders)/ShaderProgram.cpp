@@ -51,7 +51,7 @@ namespace Fjordimm3DEngine
 		glLinkProgram(this->program);
 		glUseProgram(this->program);
 
-		for (const std::pair<std::size_t, ShaderTrait*>& _trait : this->traits)
+		for (std::pair<std::size_t, ShaderTrait*> const& _trait : this->traits)
 		{
 			ShaderTrait* trait = _trait.second;
 
@@ -83,7 +83,7 @@ namespace Fjordimm3DEngine
 			{
 				formDrawContent->mesh->useForGl();
 
-				for (const std::pair<std::size_t, ShaderTrait*>& _trait : this->traits)
+				for (std::pair<std::size_t, ShaderTrait*> const& _trait : this->traits)
 				{
 					ShaderTrait* trait = _trait.second;
 
@@ -103,7 +103,7 @@ namespace Fjordimm3DEngine
 	void ShaderProgram::enableAttribsForMesh()
 	{
 		std::size_t strideOffset = 0;
-		for (const std::pair<std::size_t, ShaderTrait*>& _trait : this->traits)
+		for (std::pair<std::size_t, ShaderTrait*> const& _trait : this->traits)
 		{
 			ShaderTrait* trait = _trait.second;
 

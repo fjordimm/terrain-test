@@ -10,8 +10,8 @@ namespace Fjordimm3DEngine::ShaderTraits
 		/* Constructors */
 
 	   public:
-		In3DSpace(const In3DSpace&) = delete;
-		In3DSpace& operator=(const In3DSpace&) = delete;
+		In3DSpace(In3DSpace const&) = delete;
+		In3DSpace& operator=(In3DSpace const&) = delete;
 		
 		In3DSpace();
 
@@ -36,11 +36,11 @@ namespace Fjordimm3DEngine::ShaderTraits
 		void setupUniforms(GLuint program) final;
 		void updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const final;
 
-		void setUniView(const glm::mat4& val) const;
-		void setUniProj(const glm::mat4& val) const;
-		void setUniSunRot(const glm::mat4& val) const;
-		void setUniSunBrightness(const float& val) const;
-		void setUniSunAmbientLight(const float& val) const;
-		void setUniSunColor(const glm::vec3& val) const;
+		void setUniView(glm::mat4 const& val) const;
+		void setUniProj(glm::mat4 const& val) const;
+		void setUniSunRot(glm::mat4 const& val) const;
+		void setUniSunBrightness(float const& val) const;
+		void setUniSunAmbientLight(float const& val) const;
+		void setUniSunColor(glm::vec3 const& val) const;
 	};
 }

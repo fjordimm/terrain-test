@@ -19,8 +19,8 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		   public:
 			Chunk() = delete;
-			Chunk(const Chunk&) = delete;
-			Chunk& operator=(const Chunk&) = delete;
+			Chunk(Chunk const&) = delete;
+			Chunk& operator=(Chunk const&) = delete;
 			
 			Chunk(Form* form);
 
@@ -41,8 +41,8 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Constructors */
 
 	   public:
-		TerrainManager(const TerrainManager&) = delete;
-		TerrainManager& operator=(const TerrainManager&) = delete;
+		TerrainManager(TerrainManager const&) = delete;
+		TerrainManager& operator=(TerrainManager const&) = delete;
 		
 		TerrainManager();
 		

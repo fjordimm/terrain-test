@@ -14,8 +14,8 @@ namespace Fjordimm3DEngine
 
 	   public:
 		Tran();
-		Tran(const Tran& that);
-		Tran& operator=(const Tran& that);
+		Tran(Tran const& that);
+		Tran& operator=(Tran const& that);
 
 		/* Fields */
 
@@ -38,18 +38,18 @@ namespace Fjordimm3DEngine
 		/* Getters and Setters */
 
 	   public:
-		inline const Vec& getPosition() const { return this->_position; }
-		inline const Quat& getRotation() const { return this->_rotation; }
-		inline const Vec& getScale() const { return this->_scale; }
+		inline Vec const& getPosition() const { return this->_position; }
+		inline Quat const& getRotation() const { return this->_rotation; }
+		inline Vec const& getScale() const { return this->_scale; }
 		inline Vec& acqPosition() { this->_mayHaveChangedPosition = true; return this->_position; }
 		inline Quat& acqRotation() { this->_mayHaveChangedRotation = true; return this->_rotation; }
 		inline Vec& acqScale() { this->_mayHaveChangedScale = true; return this->_scale; }
 		
-		const glm::mat4& getPositionMatrix();
-		const glm::mat4& getRotationMatrix();
-		const Vec& getForwardVec();
-		const Vec& getUpVec();
-		const Vec& getRightVec();
+		glm::mat4 const& getPositionMatrix();
+		glm::mat4 const& getRotationMatrix();
+		Vec const& getForwardVec();
+		Vec const& getUpVec();
+		Vec const& getRightVec();
 		const glm::mat4 getScaleMatrix();
 
 		/* Methods */
@@ -58,13 +58,13 @@ namespace Fjordimm3DEngine
 		std::string toString() const;
 		Vec eulerAngles() const;
 
-		void move(const Vec& translation);
-		void locallyMove(const Vec& translation);
-		void moveAlong(const Vec& axis, float distance);
-		void locallyMoveAlong(const Vec& axis, float distance);
-		void rotate(const Vec& axis, float radians);
-		void locallyRotate(const Vec& axis, float radians);
-		void lookTowards(const Vec& target, const Vec& up = Vecs::Up);
+		void move(Vec const& translation);
+		void locallyMove(Vec const& translation);
+		void moveAlong(Vec const& axis, float distance);
+		void locallyMoveAlong(Vec const& axis, float distance);
+		void rotate(Vec const& axis, float radians);
+		void locallyRotate(Vec const& axis, float radians);
+		void lookTowards(Vec const& target, Vec const& up = Vecs::Up);
 		
 	   private:
 		void _updatePositionDeps();

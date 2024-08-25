@@ -14,7 +14,7 @@ namespace Fjordimm3DEngine
 
 	/* Methods */
 
-	std::unique_ptr<MeshData> MeshSample::make(const ShaderProgram& shaderProgram) const
+	std::unique_ptr<MeshData> MeshSample::make(ShaderProgram const& shaderProgram) const
 	{
 		bool doPositions3D = shaderProgram.tryGetTrait<ShaderTraits::In3DSpace>() != nullptr;
 		bool doNormals3D = shaderProgram.tryGetTrait<ShaderTraits::HasNormals>() != nullptr;

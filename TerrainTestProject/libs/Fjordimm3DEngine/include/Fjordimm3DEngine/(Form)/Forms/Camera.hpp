@@ -11,8 +11,8 @@ namespace Fjordimm3DEngine::Forms
 
 	   protected:
 		Camera() = delete;
-		Camera(const Camera&) = delete;
-		Camera& operator=(const Camera&) = delete;
+		Camera(Camera const&) = delete;
+		Camera& operator=(Camera const&) = delete;
 
 		Camera(WorldState& worldState);
 

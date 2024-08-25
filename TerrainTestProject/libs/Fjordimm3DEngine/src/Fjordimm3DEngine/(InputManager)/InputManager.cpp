@@ -61,7 +61,7 @@ namespace Fjordimm3DEngine
 		this->deltaScrollY = 0.0f;
 	}
 
-	const InputVal& InputManager::findKey(int key) const
+	InputVal const& InputManager::findKey(int key) const
 	{
 		auto tryGet = this->keyDict.find(key);
 		if (tryGet != this->keyDict.end())
@@ -74,7 +74,7 @@ namespace Fjordimm3DEngine
 		}
 	}
 
-	const InputVal& InputManager::findMouseButton(int mouseButton) const
+	InputVal const& InputManager::findMouseButton(int mouseButton) const
 	{
 		auto tryGet = this->mouseButtonDict.find(mouseButton);
 		if (tryGet != this->mouseButtonDict.end())

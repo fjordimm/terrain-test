@@ -16,8 +16,8 @@ namespace Fjordimm3DEngine
 
 	   public:
 		MeshData() = delete;
-		MeshData(const MeshData&) = delete;
-		MeshData& operator=(const MeshData&) = delete;
+		MeshData(MeshData const&) = delete;
+		MeshData& operator=(MeshData const&) = delete;
 		
 		MeshData(std::size_t verticesLen, std::unique_ptr<float[]> vertices, std::size_t elementsLen, std::unique_ptr<GLuint[]> elements);
 

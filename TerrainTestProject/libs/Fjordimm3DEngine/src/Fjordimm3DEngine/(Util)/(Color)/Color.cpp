@@ -19,14 +19,14 @@ namespace Fjordimm3DEngine
 		a(1.0f)
 	{}
 
-	Color::Color(const Color& that) :
+	Color::Color(Color const& that) :
 		r(that.r),
 		g(that.g),
 		b(that.b),
 		a(that.a)
 	{}
 
-	Color& Color::operator=(const Color& that)
+	Color& Color::operator=(Color const& that)
 	{
 		this->r = that.r;
 		this->g = that.g;

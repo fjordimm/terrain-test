@@ -10,8 +10,8 @@ namespace Fjordimm3DEngine::ShaderTraits
 		/* Constructors */
 
 	   public:
-		HasTexture(const HasTexture&) = delete;
-		HasTexture& operator=(const HasTexture&) = delete;
+		HasTexture(HasTexture const&) = delete;
+		HasTexture& operator=(HasTexture const&) = delete;
 		
 		HasTexture();
 

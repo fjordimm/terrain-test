@@ -15,8 +15,8 @@ namespace Fjordimm3DEngine
 		/* Constructors */
 
 	   public:
-		ShaderTrait(const ShaderTrait&) = delete;
-		ShaderTrait& operator=(const ShaderTrait&) = delete;
+		ShaderTrait(ShaderTrait const&) = delete;
+		ShaderTrait& operator=(ShaderTrait const&) = delete;
 		
 		ShaderTrait();
 

@@ -92,7 +92,7 @@ namespace Fjordimm3DEngine
 		}
 	}
 
-	void ShaderProgramManager::setViewMatrix(const glm::mat4& val)
+	void ShaderProgramManager::setViewMatrix(glm::mat4 const& val)
 	{
 		for (std::unique_ptr<ShaderProgram>& shaderProgram_ : this->shaderPrograms)
 		{

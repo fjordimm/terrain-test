@@ -11,8 +11,8 @@ namespace Fjordimm3DEngine::ShaderPrograms
 		/* Constructors */
 
 	   public:
-		Flat(const Flat&) = delete;
-		Flat& operator=(const Flat&) = delete;
+		Flat(Flat const&) = delete;
+		Flat& operator=(Flat const&) = delete;
 		
 		Flat();
 

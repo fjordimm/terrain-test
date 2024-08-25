@@ -3,17 +3,17 @@
 
 namespace Fjordimm3DEngine::Quats
 {
-	Quat Rotate(const Quat& quat, const Vec& axis, float radians)
+	Quat Rotate(Quat const& quat, Vec const& axis, float radians)
 	{
 		return glm::angleAxis(radians, axis) * quat;
 	}
 
-	Quat LocallyRotate(const Quat& quat, const Vec& axis, float radians)
+	Quat LocallyRotate(Quat const& quat, Vec const& axis, float radians)
 	{
 		return quat * glm::angleAxis(radians, axis);
 	}
 
-	Quat LookTowards(const Vec& position, const Vec& target, const Vec& up)
+	Quat LookTowards(Vec const& position, Vec const& target, Vec const& up)
 	{
 		Vec newForwards = glm::normalize(target - position);
 

@@ -17,8 +17,8 @@ namespace Fjordimm3DEngine
 		/* Constructors */
 
 	   public:
-		WorldState(const WorldState&) = delete;
-		WorldState& operator=(const WorldState&) = delete;
+		WorldState(WorldState const&) = delete;
+		WorldState& operator=(WorldState const&) = delete;
 		
 		WorldState();
 		

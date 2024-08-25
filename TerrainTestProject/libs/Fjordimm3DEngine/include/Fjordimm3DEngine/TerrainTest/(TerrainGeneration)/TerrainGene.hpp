@@ -8,8 +8,8 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Constructors */
 
 	   public:
-		TerrainGene(const TerrainGene&) = delete;
-		TerrainGene& operator=(const TerrainGene&) = delete;
+		TerrainGene(TerrainGene const&) = delete;
+		TerrainGene& operator=(TerrainGene const&) = delete;
 		
 		TerrainGene();
 		

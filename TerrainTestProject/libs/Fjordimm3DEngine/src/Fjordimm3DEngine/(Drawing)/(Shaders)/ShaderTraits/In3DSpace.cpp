@@ -68,21 +68,21 @@ namespace Fjordimm3DEngine::ShaderTraits
 
 	void In3DSpace::updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const {}
 
-	void In3DSpace::setUniView(const glm::mat4& val) const
+	void In3DSpace::setUniView(glm::mat4 const& val) const
 	{ glUniformMatrix4fv(this->uniView, 1, GL_FALSE, glm::value_ptr(val)); }
 
-	void In3DSpace::setUniProj(const glm::mat4& val) const
+	void In3DSpace::setUniProj(glm::mat4 const& val) const
 	{ glUniformMatrix4fv(this->uniProj, 1, GL_FALSE, glm::value_ptr(val)); }
 
-	void In3DSpace::setUniSunRot(const glm::mat4& val) const
+	void In3DSpace::setUniSunRot(glm::mat4 const& val) const
 	{ glUniformMatrix4fv(this->uniSunRot, 1, GL_FALSE, glm::value_ptr(val)); }
 	
-	void In3DSpace::setUniSunBrightness(const float& val) const
+	void In3DSpace::setUniSunBrightness(float const& val) const
 	{ glUniform1f(this->uniSunBrightness, val); }
 	
-	void In3DSpace::setUniSunAmbientLight(const float& val) const
+	void In3DSpace::setUniSunAmbientLight(float const& val) const
 	{ glUniform1f(this->uniSunAmbientLight, val); }
 	
-	void In3DSpace::setUniSunColor(const glm::vec3& val) const
+	void In3DSpace::setUniSunColor(glm::vec3 const& val) const
 	{ glUniform3fv(this->uniSunColor, 1, glm::value_ptr(val)); }
 }

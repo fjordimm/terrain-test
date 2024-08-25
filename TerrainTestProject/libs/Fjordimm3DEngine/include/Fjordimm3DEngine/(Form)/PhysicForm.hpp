@@ -11,8 +11,8 @@ namespace Fjordimm3DEngine
 
 	   protected:
 		PhysicForm() = delete;
-		PhysicForm(const PhysicForm&) = delete;
-		PhysicForm& operator=(const PhysicForm&) = delete;
+		PhysicForm(PhysicForm const&) = delete;
+		PhysicForm& operator=(PhysicForm const&) = delete;
 
 		PhysicForm(WorldState& worldState);
 

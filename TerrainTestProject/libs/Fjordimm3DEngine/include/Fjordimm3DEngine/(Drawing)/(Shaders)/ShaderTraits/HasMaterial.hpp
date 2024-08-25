@@ -10,8 +10,8 @@ namespace Fjordimm3DEngine::ShaderTraits
 		/* Constructors */
 
 	   public:
-		HasMaterial(const HasMaterial&) = delete;
-		HasMaterial& operator=(const HasMaterial&) = delete;
+		HasMaterial(HasMaterial const&) = delete;
+		HasMaterial& operator=(HasMaterial const&) = delete;
 		
 		HasMaterial();
 

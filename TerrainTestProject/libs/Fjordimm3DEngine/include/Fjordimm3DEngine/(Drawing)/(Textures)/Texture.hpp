@@ -19,8 +19,8 @@ namespace Fjordimm3DEngine
 		/* Constructors */
 
 	   private:
-		Texture(const Texture&) = delete;
-		Texture& operator=(const Texture&) = delete;
+		Texture(Texture const&) = delete;
+		Texture& operator=(Texture const&) = delete;
 		
 		Texture();
 
@@ -35,7 +35,7 @@ namespace Fjordimm3DEngine
 		/* Methods */
 
 	   public:
-		void initializeTextureForGl(int index, const std::string& filename);
+		void initializeTextureForGl(int index, std::string const& filename);
 		void useForGl();
 
 	//    private:

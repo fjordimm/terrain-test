@@ -22,7 +22,7 @@ namespace Fjordimm3DEngine
 		_scale(Vecs::One)
 	{}
 
-	Tran::Tran(const Tran& that) :
+	Tran::Tran(Tran const& that) :
 		_mayHaveChangedPosition(that._mayHaveChangedPosition),
 		_position(that._position),
 		_cached_positionMatrix(that._cached_positionMatrix),
@@ -37,7 +37,7 @@ namespace Fjordimm3DEngine
 		_cached_scaleMatrix(that._cached_scaleMatrix)
 	{}
 
-	Tran& Tran::operator=(const Tran& that)
+	Tran& Tran::operator=(Tran const& that)
 	{
 		_mayHaveChangedPosition = that._mayHaveChangedPosition;
 		_position = that._position;
@@ -57,7 +57,7 @@ namespace Fjordimm3DEngine
 
 	/* Getters and Setters */
 
-	const glm::mat4& Tran::getPositionMatrix()
+	glm::mat4 const& Tran::getPositionMatrix()
 	{
 		if (this->_mayHaveChangedPosition)
 		{
@@ -68,7 +68,7 @@ namespace Fjordimm3DEngine
 		return this->_cached_positionMatrix;
 	}
 
-	const glm::mat4& Tran::getRotationMatrix()
+	glm::mat4 const& Tran::getRotationMatrix()
 	{
 		if (this->_mayHaveChangedRotation)
 		{
@@ -79,7 +79,7 @@ namespace Fjordimm3DEngine
 		return this->_cached_rotationMatrix;
 	}
 
-	const Vec& Tran::getForwardVec()
+	Vec const& Tran::getForwardVec()
 	{
 		if (this->_mayHaveChangedRotation)
 		{
@@ -90,7 +90,7 @@ namespace Fjordimm3DEngine
 		return this->_cached_forwardVec;
 	}
 
-	const Vec& Tran::getUpVec()
+	Vec const& Tran::getUpVec()
 	{
 		if (this->_mayHaveChangedRotation)
 		{
@@ -101,7 +101,7 @@ namespace Fjordimm3DEngine
 		return this->_cached_upVec;
 	}
 
-	const Vec& Tran::getRightVec()
+	Vec const& Tran::getRightVec()
 	{
 		if (this->_mayHaveChangedRotation)
 		{
@@ -112,7 +112,7 @@ namespace Fjordimm3DEngine
 		return this->_cached_rightVec;
 	}
 	
-	const glm::mat4 Tran::getScaleMatrix()
+	glm::mat4 const Tran::getScaleMatrix()
 	{
 		if (this->_mayHaveChangedScale)
 		{
@@ -137,37 +137,37 @@ namespace Fjordimm3DEngine
 		return glm::eulerAngles(this->_rotation);
 	}
 
-	void Tran::move(const Vec& translation)
+	void Tran::move(Vec const& translation)
 	{
 		this->acqPosition() += translation;
 	}
 	
-	void Tran::locallyMove(const Vec& translation)
+	void Tran::locallyMove(Vec const& translation)
 	{
 		this->acqPosition() += this->getRotation() * translation;
 	}
 
-	void Tran::moveAlong(const Vec& axis, float distance)
+	void Tran::moveAlong(Vec const& axis, float distance)
 	{
 		this->acqPosition() += distance * axis;
 	}
 
-	void Tran::locallyMoveAlong(const Vec& axis, float distance)
+	void Tran::locallyMoveAlong(Vec const& axis, float distance)
 	{
 		this->acqPosition() += distance * (this->getRotation() * axis);
 	}
 
-	void Tran::rotate(const Vec& axis, float radians)
+	void Tran::rotate(Vec const& axis, float radians)
 	{
 		this->acqRotation() = Quats::Rotate(this->getRotation(), axis, radians);
 	}
 
-	void Tran::locallyRotate(const Vec& axis, float radians)
+	void Tran::locallyRotate(Vec const& axis, float radians)
 	{
 		this->acqRotation() = Quats::LocallyRotate(this->getRotation(), axis, radians);
 	}
 
-	void Tran::lookTowards(const Vec& target, const Vec& up)
+	void Tran::lookTowards(Vec const& target, Vec const& up)
 	{
 		this->acqRotation() = Quats::LookTowards(this->getPosition(), target, up);
 	}

@@ -32,9 +32,9 @@ namespace Fjordimm3DEngine
 				pressedOnce(pressedOnce)
 			{}
 
-			InputVal(const InputVal& that) : InputVal(that.isDown, that.pressedOnce) {}
+			InputVal(InputVal const& that) : InputVal(that.isDown, that.pressedOnce) {}
 
-			InputVal& operator=(const InputVal& that)
+			InputVal& operator=(InputVal const& that)
 			{
 				this->isDown = that.isDown;
 				this->pressedOnce = that.pressedOnce;
@@ -45,8 +45,8 @@ namespace Fjordimm3DEngine
 		/* Constructors */
 
 	   public:
-		InputManager(const InputManager&) = delete;
-		InputManager& operator=(const InputManager&) = delete;
+		InputManager(InputManager const&) = delete;
+		InputManager& operator=(InputManager const&) = delete;
 		
 		InputManager();
 		
@@ -72,8 +72,8 @@ namespace Fjordimm3DEngine
 		/* Getters and Setters */
 
 	   public:
-		inline const InputVal& getAnyKey() { return this->anyKey; }
-		inline const InputVal& getAnyMouseButton() { return this->anyMouseButton; }
+		inline InputVal const& getAnyKey() { return this->anyKey; }
+		inline InputVal const& getAnyMouseButton() { return this->anyMouseButton; }
 		inline float getCursorX() { return this->cursorX; }
 		inline float getCursorY() { return this->cursorY; }
 		inline float getDeltaCursorX() { return this->deltaCursorX; }
@@ -87,8 +87,8 @@ namespace Fjordimm3DEngine
 		void giveWindowForGlfw(GLFWwindow* windowForGlfw);
 		void nextLoopIteration();
 
-		const InputVal& findKey(int key) const;
-		const InputVal& findMouseButton(int mouseButton) const;
+		InputVal const& findKey(int key) const;
+		InputVal const& findMouseButton(int mouseButton) const;
 
 		/* Methods for External Use */
 

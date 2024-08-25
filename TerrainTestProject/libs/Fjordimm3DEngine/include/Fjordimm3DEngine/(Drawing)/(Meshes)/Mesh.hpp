@@ -21,14 +21,14 @@ namespace Fjordimm3DEngine
 
 	   private:
 		Mesh() = delete;
-		Mesh(const Mesh&) = delete;
-		Mesh& operator=(const Mesh&) = delete;
+		Mesh(Mesh const&) = delete;
+		Mesh& operator=(Mesh const&) = delete;
 		
 		Mesh(ShaderProgram* shaderProgram, std::unique_ptr<MeshData> meshData);
 
 	   public:
 		static std::unique_ptr<Mesh> New(ShaderProgram* shaderProgram, std::unique_ptr<MeshData> meshData);
-		static inline std::unique_ptr<Mesh> New(ShaderProgram* shaderProgram, const MeshSample& meshSample)
+		static inline std::unique_ptr<Mesh> New(ShaderProgram* shaderProgram, MeshSample const& meshSample)
 		{ return Mesh::New(shaderProgram, meshSample.make(*shaderProgram)); }
 		
 		/* Fields */

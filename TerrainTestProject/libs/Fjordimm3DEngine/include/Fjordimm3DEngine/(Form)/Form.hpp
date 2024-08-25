@@ -15,8 +15,8 @@ namespace Fjordimm3DEngine
 
 	   protected:
 		Form() = delete;
-		Form(const Form&) = delete;
-		Form& operator=(const Form&) = delete;
+		Form(Form const&) = delete;
+		Form& operator=(Form const&) = delete;
 		
 		Form(WorldState& worldState);
 

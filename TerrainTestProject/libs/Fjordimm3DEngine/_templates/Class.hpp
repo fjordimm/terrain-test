@@ -8,8 +8,8 @@ namespace Fjordimm3DEngine
 		/* Constructors */
 
 	   public:
-		___(const ___&) = delete;
-		___& operator=(const ___&) = delete;
+		___(___ const&) = delete;
+		___& operator=(___ const&) = delete;
 		
 		___();
 		

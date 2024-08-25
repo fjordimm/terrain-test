@@ -21,15 +21,15 @@ namespace Fjordimm3DEngine
 		/* Constructors */
 
 	   public:
-		MeshSample(const MeshSample&) = delete;
-		MeshSample& operator=(const MeshSample&) = delete;
+		MeshSample(MeshSample const&) = delete;
+		MeshSample& operator=(MeshSample const&) = delete;
 
 		MeshSample();
 
 		/* Methods */
 
 	   public:
-		std::unique_ptr<MeshData> make(const ShaderProgram& shaderProgram) const;
+		std::unique_ptr<MeshData> make(ShaderProgram const& shaderProgram) const;
 
 	   protected:
 		virtual void generateData(bool doVertPositions3D, std::vector<Vec>& vertPositions3D, bool doVertNormals3D, std::vector<Vec>& vertNormals3D, bool doVertTextureCoords, std::vector<Vec2>& vertTextureCoords, std::vector<std::tuple<GLuint, GLuint, GLuint>>& triangles) const = 0;

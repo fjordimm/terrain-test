@@ -12,8 +12,8 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Constructors */
 
 	   public:
-		TerrainTestHead(const TerrainTestHead&) = delete;
-		TerrainTestHead& operator=(const TerrainTestHead&) = delete;
+		TerrainTestHead(TerrainTestHead const&) = delete;
+		TerrainTestHead& operator=(TerrainTestHead const&) = delete;
 
 		TerrainTestHead();
 		

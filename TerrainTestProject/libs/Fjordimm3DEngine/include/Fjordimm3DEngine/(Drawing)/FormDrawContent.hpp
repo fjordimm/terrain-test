@@ -14,8 +14,8 @@ namespace Fjordimm3DEngine
 
 	   public:
 		FormDrawContent() = delete;
-		FormDrawContent(const FormDrawContent&) = delete;
-		FormDrawContent& operator=(const FormDrawContent&) = delete;
+		FormDrawContent(FormDrawContent const&) = delete;
+		FormDrawContent& operator=(FormDrawContent const&) = delete;
 		
 		FormDrawContent(Tran* tran, Mesh* mesh, Color materialColor, Texture* texture);
 		

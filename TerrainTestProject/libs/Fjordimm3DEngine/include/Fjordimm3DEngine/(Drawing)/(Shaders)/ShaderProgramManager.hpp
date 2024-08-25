@@ -13,8 +13,8 @@ namespace Fjordimm3DEngine
 		/* Constructors */
 
 	   public:
-		ShaderProgramManager(const ShaderProgramManager&) = delete;
-		ShaderProgramManager& operator=(const ShaderProgramManager&) = delete;
+		ShaderProgramManager(ShaderProgramManager const&) = delete;
+		ShaderProgramManager& operator=(ShaderProgramManager const&) = delete;
 		
 		ShaderProgramManager();
 		
@@ -42,21 +42,21 @@ namespace Fjordimm3DEngine
 		/* Getters and Setters */
 
 	   public:
-		inline const float& getFov() const { return this->_fov; }
-		inline const float& getAspectRatio() const { return this->_aspectRatio; }
-		inline const float& getNearClippingPlane() const { return this->_nearClippingPlane; }
-		inline const float& getFarClippingPlane() const { return this->_farClippingPlane; }
+		inline float const& getFov() const { return this->_fov; }
+		inline float const& getAspectRatio() const { return this->_aspectRatio; }
+		inline float const& getNearClippingPlane() const { return this->_nearClippingPlane; }
+		inline float const& getFarClippingPlane() const { return this->_farClippingPlane; }
 		inline float& acqFov() { this->_mayHaveChangedProjectionMatrix = true; return this->_fov; }
 		inline float& acqAspectRatio() { this->_mayHaveChangedProjectionMatrix = true; return this->_aspectRatio; }
 		inline float& acqNearClippingPlane() { this->_mayHaveChangedProjectionMatrix = true; return this->_nearClippingPlane; }
 		inline float& acqFarClippingPlane() { this->_mayHaveChangedProjectionMatrix = true; return this->_farClippingPlane; }
 
-		inline const Quat& getSunRot() const { return this->_sunRot; }
+		inline Quat const& getSunRot() const { return this->_sunRot; }
 		inline Quat& acqSunRot() { this->_mayHaveChangedSunRotMatrix = true; return this->_sunRot; }
 
-		inline const float& getSunBrightness() const { return this->_sunBrightness; }
-		inline const float& getSunAmbientLight() const { return this->_sunAmbientLight; }
-		inline const Color& getSunColor() const { return this->_sunColor; }
+		inline float const& getSunBrightness() const { return this->_sunBrightness; }
+		inline float const& getSunAmbientLight() const { return this->_sunAmbientLight; }
+		inline Color const& getSunColor() const { return this->_sunColor; }
 		inline float& acqSunBrightness() { this->_mayHaveChangedSunlight = true; return this->_sunBrightness; }
 		inline float& acqSunAmbientLight() { this->_mayHaveChangedSunlight = true; return this->_sunAmbientLight; }
 		inline Color& acqSunColor() { this->_mayHaveChangedSunlight = true; return this->_sunColor; }
@@ -66,7 +66,7 @@ namespace Fjordimm3DEngine
 	   public:
 		ShaderProgram* add(std::unique_ptr<ShaderProgram> shaderProgram);
 		void drawEverything();
-		void setViewMatrix(const glm::mat4& val);
+		void setViewMatrix(glm::mat4 const& val);
 
 	   private:
 		void _updateProjectionMatrix();

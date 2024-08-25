@@ -26,7 +26,7 @@ namespace Fjordimm3DEngine
 
 	/* Methods */
 
-	void Texture::initializeTextureForGl(int index, const std::string& filename)
+	void Texture::initializeTextureForGl(int index, std::string const& filename)
 	{
 		if (index < 0 || index >= NumTexs)
 		{

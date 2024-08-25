@@ -14,8 +14,8 @@ namespace Fjordimm3DEngine
 		/* Constructors */
 
 	   public:
-		PtrForGlfw(const PtrForGlfw&) = delete;
-		PtrForGlfw& operator=(const PtrForGlfw&) = delete;
+		PtrForGlfw(PtrForGlfw const&) = delete;
+		PtrForGlfw& operator=(PtrForGlfw const&) = delete;
 
 		PtrForGlfw();
 		

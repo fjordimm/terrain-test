@@ -6,14 +6,14 @@
 
 namespace Fjordimm3DEngine::Vecs
 {
-	std::string ToString(const Vec& subj)
+	std::string ToString(Vec const& subj)
 	{
 		std::ostringstream ret;
 		ret << "(" << subj.x << ", " << subj.y << ", " << subj.z << ")";
 		return ret.str();
 	}
 
-	bool RoughlyEqual(const Vec& a, const Vec& b, float epsilon)
+	bool RoughlyEqual(Vec const& a, Vec const& b, float epsilon)
 	{
 		return
 			(std::abs(a.x - b.x) < epsilon)

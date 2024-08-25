@@ -10,8 +10,8 @@ namespace Fjordimm3DEngine::ShaderTraits
 		/* Constructors */
 
 	   public:
-		HasNormals(const HasNormals&) = delete;
-		HasNormals& operator=(const HasNormals&) = delete;
+		HasNormals(HasNormals const&) = delete;
+		HasNormals& operator=(HasNormals const&) = delete;
 		
 		HasNormals();
 
