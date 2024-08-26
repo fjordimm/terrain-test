@@ -4,6 +4,7 @@ The contents of this file were copied from https://github.com/deerel/OpenSimplex
 Modifications made:
  - the namespace (from 'OpenSimplexNoise' to 'Fjordimm3DEngine')
  - the name of the class (from 'Noise' to 'OpenSimplexNoise')
+ - changed double to float
  - whitespace
 */
 
@@ -83,43 +84,43 @@ namespace Fjordimm3DEngine
 		}
 	}
 
-	double OpenSimplexNoise::eval(double x,  double y) const
+	float OpenSimplexNoise::eval(float x,  float y) const
 	{
 		//Place input coordinates onto grid.
-		double stretchOffset = (x + y) * m_stretch2d;
-		double xs = x + stretchOffset;
-		double ys = y + stretchOffset;
+		float stretchOffset = (x + y) * m_stretch2d;
+		float xs = x + stretchOffset;
+		float ys = y + stretchOffset;
 
 		//Floor to get grid coordinates of rhombus (stretched square) super-cell origin.
 		int xsb = static_cast<int>(floor(xs));
 		int ysb = static_cast<int>(floor(ys));
 
 		//Skew out to get actual coordinates of rhombus origin. We'll need these later.
-		double squishOffset = (xsb + ysb) * m_squish2d;
-		double xb = xsb + squishOffset;
-		double yb = ysb + squishOffset;
+		float squishOffset = (xsb + ysb) * m_squish2d;
+		float xb = xsb + squishOffset;
+		float yb = ysb + squishOffset;
 
 		//Compute grid coordinates relative to rhombus origin.
-		double xins = xs - xsb;
-		double yins = ys - ysb;
+		float xins = xs - xsb;
+		float yins = ys - ysb;
 
 		//Sum those together to get a value that determines which region we're in.
-		double inSum = xins + yins;
+		float inSum = xins + yins;
 
 		//Positions relative to origin point.
-		double dx0 = x - xb;
-		double dy0 = y - yb;
+		float dx0 = x - xb;
+		float dy0 = y - yb;
 
 		//We'll be defining these inside the next block and using them afterwards.
-		double dx_ext, dy_ext;
+		float dx_ext, dy_ext;
 		int xsv_ext, ysv_ext;
 
-		double value = 0;
+		float value = 0;
 
 		//Contribution (1,0)
-		double dx1 = dx0 - 1 - m_squish2d;
-		double dy1 = dy0 - 0 - m_squish2d;
-		double attn1 = 2 - dx1 * dx1 - dy1 * dy1;
+		float dx1 = dx0 - 1 - m_squish2d;
+		float dy1 = dy0 - 0 - m_squish2d;
+		float attn1 = 2 - dx1 * dx1 - dy1 * dy1;
 		if (attn1 > 0)
 		{
 		attn1 *= attn1;
@@ -127,9 +128,9 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,1)
-		double dx2 = dx0 - 0 - m_squish2d;
-		double dy2 = dy0 - 1 - m_squish2d;
-		double attn2 = 2 - dx2 * dx2 - dy2 * dy2;
+		float dx2 = dx0 - 0 - m_squish2d;
+		float dy2 = dy0 - 1 - m_squish2d;
+		float attn2 = 2 - dx2 * dx2 - dy2 * dy2;
 		if (attn2 > 0)
 		{
 		attn2 *= attn2;
@@ -138,7 +139,7 @@ namespace Fjordimm3DEngine
 
 		if (inSum <= 1)
 		{ //We're inside the triangle (2-Simplex) at (0,0)
-		double zins = 1 - inSum;
+		float zins = 1 - inSum;
 		if (zins > xins || zins > yins)
 		{ //(0,0) is one of the closest two triangular vertices
 		if (xins > yins)
@@ -166,7 +167,7 @@ namespace Fjordimm3DEngine
 		}
 		else
 		{ //We're inside the triangle (2-Simplex) at (1,1)
-		double zins = 2 - inSum;
+		float zins = 2 - inSum;
 		if (zins < xins || zins < yins)
 		{ //(0,0) is one of the closest two triangular vertices
 		if (xins > yins)
@@ -198,7 +199,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,0) or (1,1)
-		double attn0 = 2 - dx0 * dx0 - dy0 * dy0;
+		float attn0 = 2 - dx0 * dx0 - dy0 * dy0;
 		if (attn0 > 0)
 		{
 		attn0 *= attn0;
@@ -206,7 +207,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Extra Vertex
-		double attn_ext = 2 - dx_ext * dx_ext - dy_ext * dy_ext;
+		float attn_ext = 2 - dx_ext * dx_ext - dy_ext * dy_ext;
 		if (attn_ext > 0)
 		{
 		attn_ext *= attn_ext;
@@ -216,13 +217,13 @@ namespace Fjordimm3DEngine
 		return value / m_norm2d;
 	}
 
-	double OpenSimplexNoise::eval(double x, double y, double z) const
+	float OpenSimplexNoise::eval(float x, float y, float z) const
 	{
 		//Place input coordinates on simplectic honeycomb.
-		double stretchOffset = (x + y + z) * m_stretch3d;
-		double xs = x + stretchOffset;
-		double ys = y + stretchOffset;
-		double zs = z + stretchOffset;
+		float stretchOffset = (x + y + z) * m_stretch3d;
+		float xs = x + stretchOffset;
+		float ys = y + stretchOffset;
+		float zs = z + stretchOffset;
 
 		//static_cast<int>(floor to get simplectic honeycomb coordinates of rhombohedron (stretched cube) super-cell origin.
 		int xsb = static_cast<int>(floor(xs));
@@ -230,39 +231,39 @@ namespace Fjordimm3DEngine
 		int zsb = static_cast<int>(floor(zs));
 
 		//Skew out to get actual coordinates of rhombohedron origin. We'll need these later.
-		double squishOffset = (xsb + ysb + zsb) * m_squish3d;
-		double xb = xsb + squishOffset;
-		double yb = ysb + squishOffset;
-		double zb = zsb + squishOffset;
+		float squishOffset = (xsb + ysb + zsb) * m_squish3d;
+		float xb = xsb + squishOffset;
+		float yb = ysb + squishOffset;
+		float zb = zsb + squishOffset;
 
 		//Compute simplectic honeycomb coordinates relative to rhombohedral origin.
-		double xins = xs - xsb;
-		double yins = ys - ysb;
-		double zins = zs - zsb;
+		float xins = xs - xsb;
+		float yins = ys - ysb;
+		float zins = zs - zsb;
 
 		//Sum those together to get a value that determines which region we're in.
-		double inSum = xins + yins + zins;
+		float inSum = xins + yins + zins;
 
 		//Positions relative to origin point.
-		double dx0 = x - xb;
-		double dy0 = y - yb;
-		double dz0 = z - zb;
+		float dx0 = x - xb;
+		float dy0 = y - yb;
+		float dz0 = z - zb;
 
 		//We'll be defining these inside the next block and using them afterwards.
-		double dx_ext0, dy_ext0, dz_ext0;
-		double dx_ext1, dy_ext1, dz_ext1;
+		float dx_ext0, dy_ext0, dz_ext0;
+		float dx_ext1, dy_ext1, dz_ext1;
 		int xsv_ext0, ysv_ext0, zsv_ext0;
 		int xsv_ext1, ysv_ext1, zsv_ext1;
 
-		double value = 0;
+		float value = 0;
 		if (inSum <= 1)
 		{ //We're inside the tetrahedron (3-Simplex) at (0,0,0)
 
 		//Determine which two of (0,0,1), (0,1,0), (1,0,0) are closest.
 		char aPoint = 0x01;
-		double aScore = xins;
+		float aScore = xins;
 		char bPoint = 0x02;
-		double bScore = yins;
+		float bScore = yins;
 		if (aScore >= bScore && zins > bScore)
 		{
 		bScore = zins;
@@ -276,7 +277,7 @@ namespace Fjordimm3DEngine
 
 		//Now we determine the two lattice points not part of the tetrahedron that may contribute.
 		//This depends on the closest two tetrahedral vertices, including (0,0,0)
-		double wins = 1 - inSum;
+		float wins = 1 - inSum;
 		if (wins > aScore || wins > bScore)
 		{ //(0,0,0) is one of the closest two tetrahedral vertices.
 		char c = (bScore > aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and b.
@@ -376,7 +377,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,0,0)
-		double attn0 = 2 - dx0 * dx0 - dy0 * dy0 - dz0 * dz0;
+		float attn0 = 2 - dx0 * dx0 - dy0 * dy0 - dz0 * dz0;
 		if (attn0 > 0)
 		{
 		attn0 *= attn0;
@@ -384,10 +385,10 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,0,0)
-		double dx1 = dx0 - 1 - m_squish3d;
-		double dy1 = dy0 - 0 - m_squish3d;
-		double dz1 = dz0 - 0 - m_squish3d;
-		double attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1;
+		float dx1 = dx0 - 1 - m_squish3d;
+		float dy1 = dy0 - 0 - m_squish3d;
+		float dz1 = dz0 - 0 - m_squish3d;
+		float attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1;
 		if (attn1 > 0)
 		{
 		attn1 *= attn1;
@@ -395,10 +396,10 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,1,0)
-		double dx2 = dx0 - 0 - m_squish3d;
-		double dy2 = dy0 - 1 - m_squish3d;
-		double dz2 = dz1;
-		double attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2;
+		float dx2 = dx0 - 0 - m_squish3d;
+		float dy2 = dy0 - 1 - m_squish3d;
+		float dz2 = dz1;
+		float attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2;
 		if (attn2 > 0)
 		{
 		attn2 *= attn2;
@@ -406,10 +407,10 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,0,1)
-		double dx3 = dx2;
-		double dy3 = dy1;
-		double dz3 = dz0 - 1 - m_squish3d;
-		double attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3;
+		float dx3 = dx2;
+		float dy3 = dy1;
+		float dz3 = dz0 - 1 - m_squish3d;
+		float attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3;
 		if (attn3 > 0)
 		{
 		attn3 *= attn3;
@@ -421,9 +422,9 @@ namespace Fjordimm3DEngine
 
 		//Determine which two tetrahedral vertices are the closest, out of (1,1,0), (1,0,1), (0,1,1) but not (1,1,1).
 		char aPoint = 0x06;
-		double aScore = xins;
+		float aScore = xins;
 		char bPoint = 0x05;
-		double bScore = yins;
+		float bScore = yins;
 		if (aScore <= bScore && zins < bScore)
 		{
 		bScore = zins;
@@ -437,7 +438,7 @@ namespace Fjordimm3DEngine
 
 		//Now we determine the two lattice points not part of the tetrahedron that may contribute.
 		//This depends on the closest two tetrahedral vertices, including (1,1,1)
-		double wins = 3 - inSum;
+		float wins = 3 - inSum;
 		if (wins < aScore || wins < bScore)
 		{ //(1,1,1) is one of the closest two tetrahedral vertices.
 		char c = (bScore < aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and b.
@@ -537,10 +538,10 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,1,0)
-		double dx3 = dx0 - 1 - 2 * m_squish3d;
-		double dy3 = dy0 - 1 - 2 * m_squish3d;
-		double dz3 = dz0 - 0 - 2 * m_squish3d;
-		double attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3;
+		float dx3 = dx0 - 1 - 2 * m_squish3d;
+		float dy3 = dy0 - 1 - 2 * m_squish3d;
+		float dz3 = dz0 - 0 - 2 * m_squish3d;
+		float attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3;
 		if (attn3 > 0)
 		{
 		attn3 *= attn3;
@@ -548,10 +549,10 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,0,1)
-		double dx2 = dx3;
-		double dy2 = dy0 - 0 - 2 * m_squish3d;
-		double dz2 = dz0 - 1 - 2 * m_squish3d;
-		double attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2;
+		float dx2 = dx3;
+		float dy2 = dy0 - 0 - 2 * m_squish3d;
+		float dz2 = dz0 - 1 - 2 * m_squish3d;
+		float attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2;
 		if (attn2 > 0)
 		{
 		attn2 *= attn2;
@@ -559,10 +560,10 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,1,1)
-		double dx1 = dx0 - 0 - 2 * m_squish3d;
-		double dy1 = dy3;
-		double dz1 = dz2;
-		double attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1;
+		float dx1 = dx0 - 0 - 2 * m_squish3d;
+		float dy1 = dy3;
+		float dz1 = dz2;
+		float attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1;
 		if (attn1 > 0)
 		{
 		attn1 *= attn1;
@@ -573,7 +574,7 @@ namespace Fjordimm3DEngine
 		dx0 = dx0 - 1 - 3 * m_squish3d;
 		dy0 = dy0 - 1 - 3 * m_squish3d;
 		dz0 = dz0 - 1 - 3 * m_squish3d;
-		double attn0 = 2 - dx0 * dx0 - dy0 * dy0 - dz0 * dz0;
+		float attn0 = 2 - dx0 * dx0 - dy0 * dy0 - dz0 * dz0;
 		if (attn0 > 0)
 		{
 		attn0 *= attn0;
@@ -582,15 +583,15 @@ namespace Fjordimm3DEngine
 		}
 		else
 		{ //We're inside the octahedron (Rectified 3-Simplex) in between.
-		double aScore;
+		float aScore;
 		char aPoint;
 		bool aIsFurtherSide;
-		double bScore;
+		float bScore;
 		char bPoint;
 		bool bIsFurtherSide;
 
 		//Decide between point (0,0,1) and (1,1,0) as closest
-		double p1 = xins + yins;
+		float p1 = xins + yins;
 		if (p1 > 1)
 		{
 		aScore = p1 - 1;
@@ -605,7 +606,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Decide between point (0,1,0) and (1,0,1) as closest
-		double p2 = xins + zins;
+		float p2 = xins + zins;
 		if (p2 > 1)
 		{
 		bScore = p2 - 1;
@@ -620,10 +621,10 @@ namespace Fjordimm3DEngine
 		}
 
 		//The closest out of the two (1,0,0) and (0,1,1) will replace the furthest out of the two decided above, if closer.
-		double p3 = yins + zins;
+		float p3 = yins + zins;
 		if (p3 > 1)
 		{
-		double score = p3 - 1;
+		float score = p3 - 1;
 		if (aScore <= bScore && aScore < score)
 		{
 		aScore = score;
@@ -639,7 +640,7 @@ namespace Fjordimm3DEngine
 		}
 		else
 		{
-		double score = 1 - p3;
+		float score = 1 - p3;
 		if (aScore <= bScore && aScore < score)
 		{
 		aScore = score;
@@ -808,10 +809,10 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,0,0)
-		double dx1 = dx0 - 1 - m_squish3d;
-		double dy1 = dy0 - 0 - m_squish3d;
-		double dz1 = dz0 - 0 - m_squish3d;
-		double attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1;
+		float dx1 = dx0 - 1 - m_squish3d;
+		float dy1 = dy0 - 0 - m_squish3d;
+		float dz1 = dz0 - 0 - m_squish3d;
+		float attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1;
 		if (attn1 > 0)
 		{
 		attn1 *= attn1;
@@ -819,10 +820,10 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,1,0)
-		double dx2 = dx0 - 0 - m_squish3d;
-		double dy2 = dy0 - 1 - m_squish3d;
-		double dz2 = dz1;
-		double attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2;
+		float dx2 = dx0 - 0 - m_squish3d;
+		float dy2 = dy0 - 1 - m_squish3d;
+		float dz2 = dz1;
+		float attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2;
 		if (attn2 > 0)
 		{
 		attn2 *= attn2;
@@ -830,10 +831,10 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,0,1)
-		double dx3 = dx2;
-		double dy3 = dy1;
-		double dz3 = dz0 - 1 - m_squish3d;
-		double attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3;
+		float dx3 = dx2;
+		float dy3 = dy1;
+		float dz3 = dz0 - 1 - m_squish3d;
+		float attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3;
 		if (attn3 > 0)
 		{
 		attn3 *= attn3;
@@ -841,10 +842,10 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,1,0)
-		double dx4 = dx0 - 1 - 2 * m_squish3d;
-		double dy4 = dy0 - 1 - 2 * m_squish3d;
-		double dz4 = dz0 - 0 - 2 * m_squish3d;
-		double attn4 = 2 - dx4 * dx4 - dy4 * dy4 - dz4 * dz4;
+		float dx4 = dx0 - 1 - 2 * m_squish3d;
+		float dy4 = dy0 - 1 - 2 * m_squish3d;
+		float dz4 = dz0 - 0 - 2 * m_squish3d;
+		float attn4 = 2 - dx4 * dx4 - dy4 * dy4 - dz4 * dz4;
 		if (attn4 > 0)
 		{
 		attn4 *= attn4;
@@ -852,10 +853,10 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,0,1)
-		double dx5 = dx4;
-		double dy5 = dy0 - 0 - 2 * m_squish3d;
-		double dz5 = dz0 - 1 - 2 * m_squish3d;
-		double attn5 = 2 - dx5 * dx5 - dy5 * dy5 - dz5 * dz5;
+		float dx5 = dx4;
+		float dy5 = dy0 - 0 - 2 * m_squish3d;
+		float dz5 = dz0 - 1 - 2 * m_squish3d;
+		float attn5 = 2 - dx5 * dx5 - dy5 * dy5 - dz5 * dz5;
 		if (attn5 > 0)
 		{
 		attn5 *= attn5;
@@ -863,10 +864,10 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,1,1)
-		double dx6 = dx0 - 0 - 2 * m_squish3d;
-		double dy6 = dy4;
-		double dz6 = dz5;
-		double attn6 = 2 - dx6 * dx6 - dy6 * dy6 - dz6 * dz6;
+		float dx6 = dx0 - 0 - 2 * m_squish3d;
+		float dy6 = dy4;
+		float dz6 = dz5;
+		float attn6 = 2 - dx6 * dx6 - dy6 * dy6 - dz6 * dz6;
 		if (attn6 > 0)
 		{
 		attn6 *= attn6;
@@ -875,7 +876,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//First extra vertex
-		double attn_ext0 = 2 - dx_ext0 * dx_ext0 - dy_ext0 * dy_ext0 - dz_ext0 * dz_ext0;
+		float attn_ext0 = 2 - dx_ext0 * dx_ext0 - dy_ext0 * dy_ext0 - dz_ext0 * dz_ext0;
 		if (attn_ext0 > 0)
 		{
 		attn_ext0 *= attn_ext0;
@@ -883,7 +884,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Second extra vertex
-		double attn_ext1 = 2 - dx_ext1 * dx_ext1 - dy_ext1 * dy_ext1 - dz_ext1 * dz_ext1;
+		float attn_ext1 = 2 - dx_ext1 * dx_ext1 - dy_ext1 * dy_ext1 - dz_ext1 * dz_ext1;
 		if (attn_ext1 > 0)
 		{
 		attn_ext1 *= attn_ext1;
@@ -893,14 +894,14 @@ namespace Fjordimm3DEngine
 		return value / m_norm3d;
 	}
 
-	double OpenSimplexNoise::eval(double x, double y, double z, double w) const
+	float OpenSimplexNoise::eval(float x, float y, float z, float w) const
 	{
 		//Place input coordinates on simplectic honeycomb.
-		double stretchOffset = (x + y + z + w) * m_stretch4d;
-		double xs = x + stretchOffset;
-		double ys = y + stretchOffset;
-		double zs = z + stretchOffset;
-		double ws = w + stretchOffset;
+		float stretchOffset = (x + y + z + w) * m_stretch4d;
+		float xs = x + stretchOffset;
+		float ys = y + stretchOffset;
+		float zs = z + stretchOffset;
+		float ws = w + stretchOffset;
 
 		//static_cast<int>(floor to get simplectic honeycomb coordinates of rhombo-hypercube super-cell origin.
 		int xsb = static_cast<int>(floor(xs));
@@ -909,44 +910,44 @@ namespace Fjordimm3DEngine
 		int wsb = static_cast<int>(floor(ws));
 
 		//Skew out to get actual coordinates of stretched rhombo-hypercube origin. We'll need these later.
-		double squishOffset = (xsb + ysb + zsb + wsb) * m_squish4d;
-		double xb = xsb + squishOffset;
-		double yb = ysb + squishOffset;
-		double zb = zsb + squishOffset;
-		double wb = wsb + squishOffset;
+		float squishOffset = (xsb + ysb + zsb + wsb) * m_squish4d;
+		float xb = xsb + squishOffset;
+		float yb = ysb + squishOffset;
+		float zb = zsb + squishOffset;
+		float wb = wsb + squishOffset;
 
 		//Compute simplectic honeycomb coordinates relative to rhombo-hypercube origin.
-		double xins = xs - xsb;
-		double yins = ys - ysb;
-		double zins = zs - zsb;
-		double wins = ws - wsb;
+		float xins = xs - xsb;
+		float yins = ys - ysb;
+		float zins = zs - zsb;
+		float wins = ws - wsb;
 
 		//Sum those together to get a value that determines which region we're in.
-		double inSum = xins + yins + zins + wins;
+		float inSum = xins + yins + zins + wins;
 
 		//Positions relative to origin point.
-		double dx0 = x - xb;
-		double dy0 = y - yb;
-		double dz0 = z - zb;
-		double dw0 = w - wb;
+		float dx0 = x - xb;
+		float dy0 = y - yb;
+		float dz0 = z - zb;
+		float dw0 = w - wb;
 
 		//We'll be defining these inside the next block and using them afterwards.
-		double dx_ext0, dy_ext0, dz_ext0, dw_ext0;
-		double dx_ext1, dy_ext1, dz_ext1, dw_ext1;
-		double dx_ext2, dy_ext2, dz_ext2, dw_ext2;
+		float dx_ext0, dy_ext0, dz_ext0, dw_ext0;
+		float dx_ext1, dy_ext1, dz_ext1, dw_ext1;
+		float dx_ext2, dy_ext2, dz_ext2, dw_ext2;
 		int xsv_ext0, ysv_ext0, zsv_ext0, wsv_ext0;
 		int xsv_ext1, ysv_ext1, zsv_ext1, wsv_ext1;
 		int xsv_ext2, ysv_ext2, zsv_ext2, wsv_ext2;
 
-		double value = 0;
+		float value = 0;
 		if (inSum <= 1)
 		{ //We're inside the pentachoron (4-Simplex) at (0,0,0,0)
 
 		//Determine which two of (0,0,0,1), (0,0,1,0), (0,1,0,0), (1,0,0,0) are closest.
 		char aPoint = 0x01;
-		double aScore = xins;
+		float aScore = xins;
 		char bPoint = 0x02;
-		double bScore = yins;
+		float bScore = yins;
 		if (aScore >= bScore && zins > bScore)
 		{
 		bScore = zins;
@@ -970,7 +971,7 @@ namespace Fjordimm3DEngine
 
 		//Now we determine the three lattice points not part of the pentachoron that may contribute.
 		//This depends on the closest two pentachoron vertices, including (0,0,0,0)
-		double uins = 1 - inSum;
+		float uins = 1 - inSum;
 		if (uins > aScore || uins > bScore)
 		{ //(0,0,0,0) is one of the closest two pentachoron vertices.
 		char c = (bScore > aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and b.
@@ -1132,7 +1133,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,0,0,0)
-		double attn0 = 2 - dx0 * dx0 - dy0 * dy0 - dz0 * dz0 - dw0 * dw0;
+		float attn0 = 2 - dx0 * dx0 - dy0 * dy0 - dz0 * dz0 - dw0 * dw0;
 		if (attn0 > 0)
 		{
 		attn0 *= attn0;
@@ -1140,11 +1141,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,0,0,0)
-		double dx1 = dx0 - 1 - m_squish4d;
-		double dy1 = dy0 - 0 - m_squish4d;
-		double dz1 = dz0 - 0 - m_squish4d;
-		double dw1 = dw0 - 0 - m_squish4d;
-		double attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1 - dw1 * dw1;
+		float dx1 = dx0 - 1 - m_squish4d;
+		float dy1 = dy0 - 0 - m_squish4d;
+		float dz1 = dz0 - 0 - m_squish4d;
+		float dw1 = dw0 - 0 - m_squish4d;
+		float attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1 - dw1 * dw1;
 		if (attn1 > 0)
 		{
 		attn1 *= attn1;
@@ -1152,11 +1153,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,1,0,0)
-		double dx2 = dx0 - 0 - m_squish4d;
-		double dy2 = dy0 - 1 - m_squish4d;
-		double dz2 = dz1;
-		double dw2 = dw1;
-		double attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2 - dw2 * dw2;
+		float dx2 = dx0 - 0 - m_squish4d;
+		float dy2 = dy0 - 1 - m_squish4d;
+		float dz2 = dz1;
+		float dw2 = dw1;
+		float attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2 - dw2 * dw2;
 		if (attn2 > 0)
 		{
 		attn2 *= attn2;
@@ -1164,11 +1165,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,0,1,0)
-		double dx3 = dx2;
-		double dy3 = dy1;
-		double dz3 = dz0 - 1 - m_squish4d;
-		double dw3 = dw1;
-		double attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3 - dw3 * dw3;
+		float dx3 = dx2;
+		float dy3 = dy1;
+		float dz3 = dz0 - 1 - m_squish4d;
+		float dw3 = dw1;
+		float attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3 - dw3 * dw3;
 		if (attn3 > 0)
 		{
 		attn3 *= attn3;
@@ -1176,11 +1177,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,0,0,1)
-		double dx4 = dx2;
-		double dy4 = dy1;
-		double dz4 = dz1;
-		double dw4 = dw0 - 1 - m_squish4d;
-		double attn4 = 2 - dx4 * dx4 - dy4 * dy4 - dz4 * dz4 - dw4 * dw4;
+		float dx4 = dx2;
+		float dy4 = dy1;
+		float dz4 = dz1;
+		float dw4 = dw0 - 1 - m_squish4d;
+		float attn4 = 2 - dx4 * dx4 - dy4 * dy4 - dz4 * dz4 - dw4 * dw4;
 		if (attn4 > 0)
 		{
 		attn4 *= attn4;
@@ -1191,9 +1192,9 @@ namespace Fjordimm3DEngine
 		{ //We're inside the pentachoron (4-Simplex) at (1,1,1,1)
 		//Determine which two of (1,1,1,0), (1,1,0,1), (1,0,1,1), (0,1,1,1) are closest.
 		char aPoint = 0x0E;
-		double aScore = xins;
+		float aScore = xins;
 		char bPoint = 0x0D;
-		double bScore = yins;
+		float bScore = yins;
 		if (aScore <= bScore && zins < bScore)
 		{
 		bScore = zins;
@@ -1217,7 +1218,7 @@ namespace Fjordimm3DEngine
 
 		//Now we determine the three lattice points not part of the pentachoron that may contribute.
 		//This depends on the closest two pentachoron vertices, including (0,0,0,0)
-		double uins = 4 - inSum;
+		float uins = 4 - inSum;
 		if (uins < aScore || uins < bScore)
 		{ //(1,1,1,1) is one of the closest two pentachoron vertices.
 		char c = (bScore < aScore ? bPoint : aPoint); //Our other closest vertex is the closest out of a and b.
@@ -1380,11 +1381,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,1,1,0)
-		double dx4 = dx0 - 1 - 3 * m_squish4d;
-		double dy4 = dy0 - 1 - 3 * m_squish4d;
-		double dz4 = dz0 - 1 - 3 * m_squish4d;
-		double dw4 = dw0 - 3 * m_squish4d;
-		double attn4 = 2 - dx4 * dx4 - dy4 * dy4 - dz4 * dz4 - dw4 * dw4;
+		float dx4 = dx0 - 1 - 3 * m_squish4d;
+		float dy4 = dy0 - 1 - 3 * m_squish4d;
+		float dz4 = dz0 - 1 - 3 * m_squish4d;
+		float dw4 = dw0 - 3 * m_squish4d;
+		float attn4 = 2 - dx4 * dx4 - dy4 * dy4 - dz4 * dz4 - dw4 * dw4;
 		if (attn4 > 0)
 		{
 		attn4 *= attn4;
@@ -1392,11 +1393,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,1,0,1)
-		double dx3 = dx4;
-		double dy3 = dy4;
-		double dz3 = dz0 - 3 * m_squish4d;
-		double dw3 = dw0 - 1 - 3 * m_squish4d;
-		double attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3 - dw3 * dw3;
+		float dx3 = dx4;
+		float dy3 = dy4;
+		float dz3 = dz0 - 3 * m_squish4d;
+		float dw3 = dw0 - 1 - 3 * m_squish4d;
+		float attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3 - dw3 * dw3;
 		if (attn3 > 0)
 		{
 		attn3 *= attn3;
@@ -1404,11 +1405,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,0,1,1)
-		double dx2 = dx4;
-		double dy2 = dy0 - 3 * m_squish4d;
-		double dz2 = dz4;
-		double dw2 = dw3;
-		double attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2 - dw2 * dw2;
+		float dx2 = dx4;
+		float dy2 = dy0 - 3 * m_squish4d;
+		float dz2 = dz4;
+		float dw2 = dw3;
+		float attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2 - dw2 * dw2;
 		if (attn2 > 0)
 		{
 		attn2 *= attn2;
@@ -1416,11 +1417,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,1,1,1)
-		double dx1 = dx0 - 3 * m_squish4d;
-		double dz1 = dz4;
-		double dy1 = dy4;
-		double dw1 = dw3;
-		double attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1 - dw1 * dw1;
+		float dx1 = dx0 - 3 * m_squish4d;
+		float dz1 = dz4;
+		float dy1 = dy4;
+		float dw1 = dw3;
+		float attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1 - dw1 * dw1;
 		if (attn1 > 0)
 		{
 		attn1 *= attn1;
@@ -1432,7 +1433,7 @@ namespace Fjordimm3DEngine
 		dy0 = dy0 - 1 - 4 * m_squish4d;
 		dz0 = dz0 - 1 - 4 * m_squish4d;
 		dw0 = dw0 - 1 - 4 * m_squish4d;
-		double attn0 = 2 - dx0 * dx0 - dy0 * dy0 - dz0 * dz0 - dw0 * dw0;
+		float attn0 = 2 - dx0 * dx0 - dy0 * dy0 - dz0 * dz0 - dw0 * dw0;
 		if (attn0 > 0)
 		{
 		attn0 *= attn0;
@@ -1441,10 +1442,10 @@ namespace Fjordimm3DEngine
 		}
 		else if (inSum <= 2)
 		{ //We're inside the first dispentachoron (Rectified 4-Simplex)
-		double aScore;
+		float aScore;
 		char aPoint;
 		bool aIsBiggerSide = true;
-		double bScore;
+		float bScore;
 		char bPoint;
 		bool bIsBiggerSide = true;
 
@@ -1475,7 +1476,7 @@ namespace Fjordimm3DEngine
 		//Closer between (1,0,0,1) and (0,1,1,0) will replace the further of a and b, if closer.
 		if (xins + wins > yins + zins)
 		{
-		double score = xins + wins;
+		float score = xins + wins;
 		if (aScore >= bScore && score > bScore)
 		{
 		bScore = score;
@@ -1489,7 +1490,7 @@ namespace Fjordimm3DEngine
 		}
 		else
 		{
-		double score = yins + zins;
+		float score = yins + zins;
 		if (aScore >= bScore && score > bScore)
 		{
 		bScore = score;
@@ -1503,7 +1504,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Decide if (1,0,0,0) is closer.
-		double p1 = 2 - inSum + xins;
+		float p1 = 2 - inSum + xins;
 		if (aScore >= bScore && p1 > bScore)
 		{
 		bScore = p1;
@@ -1518,7 +1519,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Decide if (0,1,0,0) is closer.
-		double p2 = 2 - inSum + yins;
+		float p2 = 2 - inSum + yins;
 		if (aScore >= bScore && p2 > bScore)
 		{
 		bScore = p2;
@@ -1533,7 +1534,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Decide if (0,0,1,0) is closer.
-		double p3 = 2 - inSum + zins;
+		float p3 = 2 - inSum + zins;
 		if (aScore >= bScore && p3 > bScore)
 		{
 		bScore = p3;
@@ -1548,7 +1549,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Decide if (0,0,0,1) is closer.
-		double p4 = 2 - inSum + wins;
+		float p4 = 2 - inSum + wins;
 		if (aScore >= bScore && p4 > bScore)
 		{
 		bScore = p4;
@@ -1856,11 +1857,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,0,0,0)
-		double dx1 = dx0 - 1 - m_squish4d;
-		double dy1 = dy0 - 0 - m_squish4d;
-		double dz1 = dz0 - 0 - m_squish4d;
-		double dw1 = dw0 - 0 - m_squish4d;
-		double attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1 - dw1 * dw1;
+		float dx1 = dx0 - 1 - m_squish4d;
+		float dy1 = dy0 - 0 - m_squish4d;
+		float dz1 = dz0 - 0 - m_squish4d;
+		float dw1 = dw0 - 0 - m_squish4d;
+		float attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1 - dw1 * dw1;
 		if (attn1 > 0)
 		{
 		attn1 *= attn1;
@@ -1868,11 +1869,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,1,0,0)
-		double dx2 = dx0 - 0 - m_squish4d;
-		double dy2 = dy0 - 1 - m_squish4d;
-		double dz2 = dz1;
-		double dw2 = dw1;
-		double attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2 - dw2 * dw2;
+		float dx2 = dx0 - 0 - m_squish4d;
+		float dy2 = dy0 - 1 - m_squish4d;
+		float dz2 = dz1;
+		float dw2 = dw1;
+		float attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2 - dw2 * dw2;
 		if (attn2 > 0)
 		{
 		attn2 *= attn2;
@@ -1880,11 +1881,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,0,1,0)
-		double dx3 = dx2;
-		double dy3 = dy1;
-		double dz3 = dz0 - 1 - m_squish4d;
-		double dw3 = dw1;
-		double attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3 - dw3 * dw3;
+		float dx3 = dx2;
+		float dy3 = dy1;
+		float dz3 = dz0 - 1 - m_squish4d;
+		float dw3 = dw1;
+		float attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3 - dw3 * dw3;
 		if (attn3 > 0)
 		{
 		attn3 *= attn3;
@@ -1892,11 +1893,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,0,0,1)
-		double dx4 = dx2;
-		double dy4 = dy1;
-		double dz4 = dz1;
-		double dw4 = dw0 - 1 - m_squish4d;
-		double attn4 = 2 - dx4 * dx4 - dy4 * dy4 - dz4 * dz4 - dw4 * dw4;
+		float dx4 = dx2;
+		float dy4 = dy1;
+		float dz4 = dz1;
+		float dw4 = dw0 - 1 - m_squish4d;
+		float attn4 = 2 - dx4 * dx4 - dy4 * dy4 - dz4 * dz4 - dw4 * dw4;
 		if (attn4 > 0)
 		{
 		attn4 *= attn4;
@@ -1904,11 +1905,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,1,0,0)
-		double dx5 = dx0 - 1 - 2 * m_squish4d;
-		double dy5 = dy0 - 1 - 2 * m_squish4d;
-		double dz5 = dz0 - 0 - 2 * m_squish4d;
-		double dw5 = dw0 - 0 - 2 * m_squish4d;
-		double attn5 = 2 - dx5 * dx5 - dy5 * dy5 - dz5 * dz5 - dw5 * dw5;
+		float dx5 = dx0 - 1 - 2 * m_squish4d;
+		float dy5 = dy0 - 1 - 2 * m_squish4d;
+		float dz5 = dz0 - 0 - 2 * m_squish4d;
+		float dw5 = dw0 - 0 - 2 * m_squish4d;
+		float attn5 = 2 - dx5 * dx5 - dy5 * dy5 - dz5 * dz5 - dw5 * dw5;
 		if (attn5 > 0)
 		{
 		attn5 *= attn5;
@@ -1916,11 +1917,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,0,1,0)
-		double dx6 = dx0 - 1 - 2 * m_squish4d;
-		double dy6 = dy0 - 0 - 2 * m_squish4d;
-		double dz6 = dz0 - 1 - 2 * m_squish4d;
-		double dw6 = dw0 - 0 - 2 * m_squish4d;
-		double attn6 = 2 - dx6 * dx6 - dy6 * dy6 - dz6 * dz6 - dw6 * dw6;
+		float dx6 = dx0 - 1 - 2 * m_squish4d;
+		float dy6 = dy0 - 0 - 2 * m_squish4d;
+		float dz6 = dz0 - 1 - 2 * m_squish4d;
+		float dw6 = dw0 - 0 - 2 * m_squish4d;
+		float attn6 = 2 - dx6 * dx6 - dy6 * dy6 - dz6 * dz6 - dw6 * dw6;
 		if (attn6 > 0)
 		{
 		attn6 *= attn6;
@@ -1928,11 +1929,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,0,0,1)
-		double dx7 = dx0 - 1 - 2 * m_squish4d;
-		double dy7 = dy0 - 0 - 2 * m_squish4d;
-		double dz7 = dz0 - 0 - 2 * m_squish4d;
-		double dw7 = dw0 - 1 - 2 * m_squish4d;
-		double attn7 = 2 - dx7 * dx7 - dy7 * dy7 - dz7 * dz7 - dw7 * dw7;
+		float dx7 = dx0 - 1 - 2 * m_squish4d;
+		float dy7 = dy0 - 0 - 2 * m_squish4d;
+		float dz7 = dz0 - 0 - 2 * m_squish4d;
+		float dw7 = dw0 - 1 - 2 * m_squish4d;
+		float attn7 = 2 - dx7 * dx7 - dy7 * dy7 - dz7 * dz7 - dw7 * dw7;
 		if (attn7 > 0)
 		{
 		attn7 *= attn7;
@@ -1940,11 +1941,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,1,1,0)
-		double dx8 = dx0 - 0 - 2 * m_squish4d;
-		double dy8 = dy0 - 1 - 2 * m_squish4d;
-		double dz8 = dz0 - 1 - 2 * m_squish4d;
-		double dw8 = dw0 - 0 - 2 * m_squish4d;
-		double attn8 = 2 - dx8 * dx8 - dy8 * dy8 - dz8 * dz8 - dw8 * dw8;
+		float dx8 = dx0 - 0 - 2 * m_squish4d;
+		float dy8 = dy0 - 1 - 2 * m_squish4d;
+		float dz8 = dz0 - 1 - 2 * m_squish4d;
+		float dw8 = dw0 - 0 - 2 * m_squish4d;
+		float attn8 = 2 - dx8 * dx8 - dy8 * dy8 - dz8 * dz8 - dw8 * dw8;
 		if (attn8 > 0)
 		{
 		attn8 *= attn8;
@@ -1952,11 +1953,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,1,0,1)
-		double dx9 = dx0 - 0 - 2 * m_squish4d;
-		double dy9 = dy0 - 1 - 2 * m_squish4d;
-		double dz9 = dz0 - 0 - 2 * m_squish4d;
-		double dw9 = dw0 - 1 - 2 * m_squish4d;
-		double attn9 = 2 - dx9 * dx9 - dy9 * dy9 - dz9 * dz9 - dw9 * dw9;
+		float dx9 = dx0 - 0 - 2 * m_squish4d;
+		float dy9 = dy0 - 1 - 2 * m_squish4d;
+		float dz9 = dz0 - 0 - 2 * m_squish4d;
+		float dw9 = dw0 - 1 - 2 * m_squish4d;
+		float attn9 = 2 - dx9 * dx9 - dy9 * dy9 - dz9 * dz9 - dw9 * dw9;
 		if (attn9 > 0)
 		{
 		attn9 *= attn9;
@@ -1964,11 +1965,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,0,1,1)
-		double dx10 = dx0 - 0 - 2 * m_squish4d;
-		double dy10 = dy0 - 0 - 2 * m_squish4d;
-		double dz10 = dz0 - 1 - 2 * m_squish4d;
-		double dw10 = dw0 - 1 - 2 * m_squish4d;
-		double attn10 = 2 - dx10 * dx10 - dy10 * dy10 - dz10 * dz10 - dw10 * dw10;
+		float dx10 = dx0 - 0 - 2 * m_squish4d;
+		float dy10 = dy0 - 0 - 2 * m_squish4d;
+		float dz10 = dz0 - 1 - 2 * m_squish4d;
+		float dw10 = dw0 - 1 - 2 * m_squish4d;
+		float attn10 = 2 - dx10 * dx10 - dy10 * dy10 - dz10 * dz10 - dw10 * dw10;
 		if (attn10 > 0)
 		{
 		attn10 *= attn10;
@@ -1977,10 +1978,10 @@ namespace Fjordimm3DEngine
 		}
 		else
 		{ //We're inside the second dispentachoron (Rectified 4-Simplex)
-		double aScore;
+		float aScore;
 		char aPoint;
 		bool aIsBiggerSide = true;
-		double bScore;
+		float bScore;
 		char bPoint;
 		bool bIsBiggerSide = true;
 
@@ -2011,7 +2012,7 @@ namespace Fjordimm3DEngine
 		//Closer between (0,1,1,0) and (1,0,0,1) will replace the further of a and b, if closer.
 		if (xins + wins < yins + zins)
 		{
-		double score = xins + wins;
+		float score = xins + wins;
 		if (aScore <= bScore && score < bScore)
 		{
 		bScore = score;
@@ -2025,7 +2026,7 @@ namespace Fjordimm3DEngine
 		}
 		else
 		{
-		double score = yins + zins;
+		float score = yins + zins;
 		if (aScore <= bScore && score < bScore)
 		{
 		bScore = score;
@@ -2039,7 +2040,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Decide if (0,1,1,1) is closer.
-		double p1 = 3 - inSum + xins;
+		float p1 = 3 - inSum + xins;
 		if (aScore <= bScore && p1 < bScore)
 		{
 		bScore = p1;
@@ -2054,7 +2055,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Decide if (1,0,1,1) is closer.
-		double p2 = 3 - inSum + yins;
+		float p2 = 3 - inSum + yins;
 		if (aScore <= bScore && p2 < bScore)
 		{
 		bScore = p2;
@@ -2069,7 +2070,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Decide if (1,1,0,1) is closer.
-		double p3 = 3 - inSum + zins;
+		float p3 = 3 - inSum + zins;
 		if (aScore <= bScore && p3 < bScore)
 		{
 		bScore = p3;
@@ -2084,7 +2085,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Decide if (1,1,1,0) is closer.
-		double p4 = 3 - inSum + wins;
+		float p4 = 3 - inSum + wins;
 		if (aScore <= bScore && p4 < bScore)
 		{
 		bScore = p4;
@@ -2377,11 +2378,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,1,1,0)
-		double dx4 = dx0 - 1 - 3 * m_squish4d;
-		double dy4 = dy0 - 1 - 3 * m_squish4d;
-		double dz4 = dz0 - 1 - 3 * m_squish4d;
-		double dw4 = dw0 - 3 * m_squish4d;
-		double attn4 = 2 - dx4 * dx4 - dy4 * dy4 - dz4 * dz4 - dw4 * dw4;
+		float dx4 = dx0 - 1 - 3 * m_squish4d;
+		float dy4 = dy0 - 1 - 3 * m_squish4d;
+		float dz4 = dz0 - 1 - 3 * m_squish4d;
+		float dw4 = dw0 - 3 * m_squish4d;
+		float attn4 = 2 - dx4 * dx4 - dy4 * dy4 - dz4 * dz4 - dw4 * dw4;
 		if (attn4 > 0)
 		{
 		attn4 *= attn4;
@@ -2389,11 +2390,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,1,0,1)
-		double dx3 = dx4;
-		double dy3 = dy4;
-		double dz3 = dz0 - 3 * m_squish4d;
-		double dw3 = dw0 - 1 - 3 * m_squish4d;
-		double attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3 - dw3 * dw3;
+		float dx3 = dx4;
+		float dy3 = dy4;
+		float dz3 = dz0 - 3 * m_squish4d;
+		float dw3 = dw0 - 1 - 3 * m_squish4d;
+		float attn3 = 2 - dx3 * dx3 - dy3 * dy3 - dz3 * dz3 - dw3 * dw3;
 		if (attn3 > 0)
 		{
 		attn3 *= attn3;
@@ -2401,11 +2402,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,0,1,1)
-		double dx2 = dx4;
-		double dy2 = dy0 - 3 * m_squish4d;
-		double dz2 = dz4;
-		double dw2 = dw3;
-		double attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2 - dw2 * dw2;
+		float dx2 = dx4;
+		float dy2 = dy0 - 3 * m_squish4d;
+		float dz2 = dz4;
+		float dw2 = dw3;
+		float attn2 = 2 - dx2 * dx2 - dy2 * dy2 - dz2 * dz2 - dw2 * dw2;
 		if (attn2 > 0)
 		{
 		attn2 *= attn2;
@@ -2413,11 +2414,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,1,1,1)
-		double dx1 = dx0 - 3 * m_squish4d;
-		double dz1 = dz4;
-		double dy1 = dy4;
-		double dw1 = dw3;
-		double attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1 - dw1 * dw1;
+		float dx1 = dx0 - 3 * m_squish4d;
+		float dz1 = dz4;
+		float dy1 = dy4;
+		float dw1 = dw3;
+		float attn1 = 2 - dx1 * dx1 - dy1 * dy1 - dz1 * dz1 - dw1 * dw1;
 		if (attn1 > 0)
 		{
 		attn1 *= attn1;
@@ -2425,11 +2426,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,1,0,0)
-		double dx5 = dx0 - 1 - 2 * m_squish4d;
-		double dy5 = dy0 - 1 - 2 * m_squish4d;
-		double dz5 = dz0 - 0 - 2 * m_squish4d;
-		double dw5 = dw0 - 0 - 2 * m_squish4d;
-		double attn5 = 2 - dx5 * dx5 - dy5 * dy5 - dz5 * dz5 - dw5 * dw5;
+		float dx5 = dx0 - 1 - 2 * m_squish4d;
+		float dy5 = dy0 - 1 - 2 * m_squish4d;
+		float dz5 = dz0 - 0 - 2 * m_squish4d;
+		float dw5 = dw0 - 0 - 2 * m_squish4d;
+		float attn5 = 2 - dx5 * dx5 - dy5 * dy5 - dz5 * dz5 - dw5 * dw5;
 		if (attn5 > 0)
 		{
 		attn5 *= attn5;
@@ -2437,11 +2438,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,0,1,0)
-		double dx6 = dx0 - 1 - 2 * m_squish4d;
-		double dy6 = dy0 - 0 - 2 * m_squish4d;
-		double dz6 = dz0 - 1 - 2 * m_squish4d;
-		double dw6 = dw0 - 0 - 2 * m_squish4d;
-		double attn6 = 2 - dx6 * dx6 - dy6 * dy6 - dz6 * dz6 - dw6 * dw6;
+		float dx6 = dx0 - 1 - 2 * m_squish4d;
+		float dy6 = dy0 - 0 - 2 * m_squish4d;
+		float dz6 = dz0 - 1 - 2 * m_squish4d;
+		float dw6 = dw0 - 0 - 2 * m_squish4d;
+		float attn6 = 2 - dx6 * dx6 - dy6 * dy6 - dz6 * dz6 - dw6 * dw6;
 		if (attn6 > 0)
 		{
 		attn6 *= attn6;
@@ -2449,11 +2450,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (1,0,0,1)
-		double dx7 = dx0 - 1 - 2 * m_squish4d;
-		double dy7 = dy0 - 0 - 2 * m_squish4d;
-		double dz7 = dz0 - 0 - 2 * m_squish4d;
-		double dw7 = dw0 - 1 - 2 * m_squish4d;
-		double attn7 = 2 - dx7 * dx7 - dy7 * dy7 - dz7 * dz7 - dw7 * dw7;
+		float dx7 = dx0 - 1 - 2 * m_squish4d;
+		float dy7 = dy0 - 0 - 2 * m_squish4d;
+		float dz7 = dz0 - 0 - 2 * m_squish4d;
+		float dw7 = dw0 - 1 - 2 * m_squish4d;
+		float attn7 = 2 - dx7 * dx7 - dy7 * dy7 - dz7 * dz7 - dw7 * dw7;
 		if (attn7 > 0)
 		{
 		attn7 *= attn7;
@@ -2461,11 +2462,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,1,1,0)
-		double dx8 = dx0 - 0 - 2 * m_squish4d;
-		double dy8 = dy0 - 1 - 2 * m_squish4d;
-		double dz8 = dz0 - 1 - 2 * m_squish4d;
-		double dw8 = dw0 - 0 - 2 * m_squish4d;
-		double attn8 = 2 - dx8 * dx8 - dy8 * dy8 - dz8 * dz8 - dw8 * dw8;
+		float dx8 = dx0 - 0 - 2 * m_squish4d;
+		float dy8 = dy0 - 1 - 2 * m_squish4d;
+		float dz8 = dz0 - 1 - 2 * m_squish4d;
+		float dw8 = dw0 - 0 - 2 * m_squish4d;
+		float attn8 = 2 - dx8 * dx8 - dy8 * dy8 - dz8 * dz8 - dw8 * dw8;
 		if (attn8 > 0)
 		{
 		attn8 *= attn8;
@@ -2473,11 +2474,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,1,0,1)
-		double dx9 = dx0 - 0 - 2 * m_squish4d;
-		double dy9 = dy0 - 1 - 2 * m_squish4d;
-		double dz9 = dz0 - 0 - 2 * m_squish4d;
-		double dw9 = dw0 - 1 - 2 * m_squish4d;
-		double attn9 = 2 - dx9 * dx9 - dy9 * dy9 - dz9 * dz9 - dw9 * dw9;
+		float dx9 = dx0 - 0 - 2 * m_squish4d;
+		float dy9 = dy0 - 1 - 2 * m_squish4d;
+		float dz9 = dz0 - 0 - 2 * m_squish4d;
+		float dw9 = dw0 - 1 - 2 * m_squish4d;
+		float attn9 = 2 - dx9 * dx9 - dy9 * dy9 - dz9 * dz9 - dw9 * dw9;
 		if (attn9 > 0)
 		{
 		attn9 *= attn9;
@@ -2485,11 +2486,11 @@ namespace Fjordimm3DEngine
 		}
 
 		//Contribution (0,0,1,1)
-		double dx10 = dx0 - 0 - 2 * m_squish4d;
-		double dy10 = dy0 - 0 - 2 * m_squish4d;
-		double dz10 = dz0 - 1 - 2 * m_squish4d;
-		double dw10 = dw0 - 1 - 2 * m_squish4d;
-		double attn10 = 2 - dx10 * dx10 - dy10 * dy10 - dz10 * dz10 - dw10 * dw10;
+		float dx10 = dx0 - 0 - 2 * m_squish4d;
+		float dy10 = dy0 - 0 - 2 * m_squish4d;
+		float dz10 = dz0 - 1 - 2 * m_squish4d;
+		float dw10 = dw0 - 1 - 2 * m_squish4d;
+		float attn10 = 2 - dx10 * dx10 - dy10 * dy10 - dz10 * dz10 - dw10 * dw10;
 		if (attn10 > 0)
 		{
 		attn10 *= attn10;
@@ -2498,7 +2499,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//First extra vertex
-		double attn_ext0 = 2 - dx_ext0 * dx_ext0 - dy_ext0 * dy_ext0 - dz_ext0 * dz_ext0 - dw_ext0 * dw_ext0;
+		float attn_ext0 = 2 - dx_ext0 * dx_ext0 - dy_ext0 * dy_ext0 - dz_ext0 * dz_ext0 - dw_ext0 * dw_ext0;
 		if (attn_ext0 > 0)
 		{
 		attn_ext0 *= attn_ext0;
@@ -2506,7 +2507,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Second extra vertex
-		double attn_ext1 = 2 - dx_ext1 * dx_ext1 - dy_ext1 * dy_ext1 - dz_ext1 * dz_ext1 - dw_ext1 * dw_ext1;
+		float attn_ext1 = 2 - dx_ext1 * dx_ext1 - dy_ext1 * dy_ext1 - dz_ext1 * dz_ext1 - dw_ext1 * dw_ext1;
 		if (attn_ext1 > 0)
 		{
 		attn_ext1 *= attn_ext1;
@@ -2514,7 +2515,7 @@ namespace Fjordimm3DEngine
 		}
 
 		//Third extra vertex
-		double attn_ext2 = 2 - dx_ext2 * dx_ext2 - dy_ext2 * dy_ext2 - dz_ext2 * dz_ext2 - dw_ext2 * dw_ext2;
+		float attn_ext2 = 2 - dx_ext2 * dx_ext2 - dy_ext2 * dy_ext2 - dz_ext2 * dz_ext2 - dw_ext2 * dw_ext2;
 		if (attn_ext2 > 0)
 		{
 		attn_ext2 *= attn_ext2;
@@ -2524,14 +2525,14 @@ namespace Fjordimm3DEngine
 		return value / m_norm4d;
 	}
 
-	double OpenSimplexNoise::extrapolate(int xsb, int ysb, double dx, double dy) const
+	float OpenSimplexNoise::extrapolate(int xsb, int ysb, float dx, float dy) const
 	{
 		int index = m_perm[(m_perm[xsb & 0xFF] + ysb) & 0xFF] & 0x0E;
 		return m_gradients2d[index] * dx 
 		+ m_gradients2d[index + 1] * dy;
 	}
 
-	double OpenSimplexNoise::extrapolate(int xsb, int ysb, int zsb, double dx, double dy, double dz) const
+	float OpenSimplexNoise::extrapolate(int xsb, int ysb, int zsb, float dx, float dy, float dz) const
 	{
 		int index = m_permGradIndex3d[(m_perm[(m_perm[xsb & 0xFF] + ysb) & 0xFF] + zsb) & 0xFF];
 		return m_gradients3d[index] * dx
@@ -2539,7 +2540,7 @@ namespace Fjordimm3DEngine
 		+ m_gradients3d[index + 2] * dz;
 	}
 
-	double OpenSimplexNoise::extrapolate(int xsb, int ysb, int zsb, int wsb, double dx, double dy, double dz, double dw) const
+	float OpenSimplexNoise::extrapolate(int xsb, int ysb, int zsb, int wsb, float dx, float dy, float dz, float dw) const
 	{
 		int index = m_perm[(m_perm[(m_perm[(m_perm[xsb & 0xFF] + ysb) & 0xFF] + zsb) & 0xFF] + wsb) & 0xFF] & 0xFC;
 		return m_gradients4d[index] * dx

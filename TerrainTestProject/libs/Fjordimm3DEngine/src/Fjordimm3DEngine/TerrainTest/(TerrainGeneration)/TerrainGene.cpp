@@ -10,10 +10,16 @@ namespace Fjordimm3DEngine::TerrainTest
 	/* Constructors */
 
 	TerrainGene::TerrainGene(unsigned int seed) :
+		osnRidges(),
 		osnDetails()
 	{
 		std::default_random_engine randomEngine(seed);
 		std::uniform_int_distribution<std::int64_t> randomDistr(std::numeric_limits<std::int64_t>::min(), std::numeric_limits<std::int64_t>::max());
+
+		for (std::size_t i = 0; i < osnRidges.size(); i++)
+		{
+			osnRidges[i] = std::make_unique<OpenSimplexNoise>(randomDistr(randomEngine));
+		}
 
 		for (std::size_t i = 0; i < osnDetails.size(); i++)
 		{
@@ -23,25 +29,25 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	/* Methods */
 
-	float TerrainGene::heightAt(float xPre, float yPre)
+	float TerrainGene::heightAt(float x_, float y_)
 	{
-		double x = 3.0 * ((double)xPre - 0.0);
-		double y = 3.0 * ((double)yPre - 0.0);
+		float x = 3.0f * (x_ - 0.0f);
+		float y = 3.0f * (y_ - 0.0f);
 
-		double z = 0.0;
+		float z = 0.0f;
 
-		double ampl = 3.0;
-		double freq = 0.005;
+		float ampl = 3.0f;
+		float freq = 0.005f;
 		for (std::size_t i = 0; i < osnDetails.size(); i++)
 		{
 			z += ampl * osnDetails[i]->eval(x * freq, y * freq);
-			ampl *= 0.5;
-			freq *= 1.7;
+			ampl *= 0.5f;
+			freq *= 1.7f;
 		}
 
 		z = std::exp(z);
 
-		z *= 0.7;
-		return (float)z;
+		z *= 0.7f;
+		return z;
 	}
 }
