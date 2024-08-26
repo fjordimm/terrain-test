@@ -22,13 +22,14 @@ namespace Fjordimm3DEngine::TerrainTest
 		{
 			this->mesh = std::move(mesh);
 
-			this->form->changeMesh(mesh.get());
+			this->form->changeMesh(this->mesh.get());
 		}
 
 	/* Constructors */
 
 	TerrainManager::TerrainManager() :
-		terrainGene()
+		terrainGene(),
+		chunks()
 	{}
 
 	/* Methods */
@@ -39,25 +40,12 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		{
 			PhysicForm* chunkForm = worldState.forms.add(PhysicForm::New(worldState));
+			chunkForm->tran.acqPosition() = Vecs::Zero;
 			
+			std::unique_ptr<Chunk> chunk = std::make_unique<Chunk>(chunkForm);
+			chunk->setMesh(Mesh::New(shaderProgram, ChunkMesh(terrainGene, 30, 2.0f, 0, 0, LodTransitions::None)));
+
+			this->chunks.push_back(std::move(chunk));
 		}
-
-		// {
-		// 	this->mesh1 = Mesh::New(shaderProgram, ChunkMesh(terrainGene, 30, 2.0f, 0, 0, LodTransitions::None));
-
-		// 	std::unique_ptr<PhysicForm> form1 = PhysicForm::New(worldState);
-		// 	form1->changeMesh(this->mesh1.get());
-		// 	form1->tran.acqPosition() += Vecs::Zero;
-		// 	worldState.forms.add(std::move(form1));
-		// }
-
-		// {
-		// 	this->mesh2 = Mesh::New(shaderProgram, ChunkMesh(terrainGene, 30, 1.0f, 2, 0, LodTransitions::Left));
-
-		// 	std::unique_ptr<PhysicForm> form2 = PhysicForm::New(worldState);
-		// 	form2->changeMesh(this->mesh2.get());
-		// 	form2->tran.acqPosition() += Vecs::Zero;
-		// 	worldState.forms.add(std::move(form2));
-		// }
 	}
 }

@@ -61,4 +61,4 @@ target_include_directories(Fjordimm3DEngineExec PUBLIC "${CMAKE_CURRENT_SOURCE_D
 target_link_libraries(Fjordimm3DEngineExec LodePNG)
 
 target_compile_options(Fjordimm3DEngineExec PRIVATE -O2)
-# target_compile_options(Fjordimm3DEngineExec PRIVATE -O2 -Wall -pedantic)
+# target_compile_options(Fjordimm3DEngineExec PRIVATE -Wall)

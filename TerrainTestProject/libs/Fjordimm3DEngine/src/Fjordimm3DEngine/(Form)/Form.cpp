@@ -17,7 +17,7 @@ namespace Fjordimm3DEngine
 
 	void Form::changeMesh(Mesh* mesh)
 	{
-		FJORDIMM3DENGINE_DEBUG_ASSERT(mesh);
+		FJORDIMM3DENGINE_DEBUG_ASSERT(mesh != nullptr);
 
 		ShaderProgram* oldShaderProgram = nullptr;
 		if (this->formDrawContent.mesh != nullptr)
