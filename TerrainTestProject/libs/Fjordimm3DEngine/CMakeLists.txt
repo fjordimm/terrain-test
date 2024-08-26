@@ -60,5 +60,5 @@ target_link_libraries(Fjordimm3DEngineExec OpenGL::GL)
 target_include_directories(Fjordimm3DEngineExec PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../LodePNG/include")
 target_link_libraries(Fjordimm3DEngineExec LodePNG)
 
-target_compile_options(Fjordimm3DEngineExec PRIVATE -O2)
-# target_compile_options(Fjordimm3DEngineExec PRIVATE -Wall)
+# target_compile_options(Fjordimm3DEngineExec PRIVATE -O2)
+target_compile_options(Fjordimm3DEngineExec PRIVATE -Wall -Wno-unused-variable)

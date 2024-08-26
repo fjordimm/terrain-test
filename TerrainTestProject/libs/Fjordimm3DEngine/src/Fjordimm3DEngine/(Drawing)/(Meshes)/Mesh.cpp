@@ -22,7 +22,7 @@ namespace Fjordimm3DEngine
 		shaderProgram->enableAttribsForMesh();
 		ret->updateGlBufferData();
 
-		return std::move(ret);
+		return ret;
 	}
 
 	/* Methods */

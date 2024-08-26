@@ -61,7 +61,7 @@ namespace Fjordimm3DEngine
 			std::unique_ptr<float[]> _verts(new float[vertsLen]);
 			verts = std::move(_verts);
 
-			for (int i = 0; i < vertsVertLen; i++)
+			for (std::size_t i = 0; i < vertsVertLen; i++)
 			{
 				std::size_t cumlOffset = 0;
 
@@ -106,7 +106,7 @@ namespace Fjordimm3DEngine
 			std::unique_ptr<GLuint[]> _elems(new GLuint[elemsLen]);
 			elems = std::move(_elems);
 
-			for (int i = 0; i < trianglesLen; i++)
+			for (std::size_t i = 0; i < trianglesLen; i++)
 			{
 				elems[i * 3 + 0] = std::get<0>(triangles[i]);
 				elems[i * 3 + 1] = std::get<1>(triangles[i]);

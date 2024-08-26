@@ -26,7 +26,7 @@ namespace Fjordimm3DEngine
 		{
 			std::unique_ptr<T> ret = std::make_unique<T>(worldState);
 			ret->onCreate(worldState);
-			return std::move(ret);
+			return ret;
 		}
 
 	   public:

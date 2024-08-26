@@ -23,7 +23,7 @@ namespace Fjordimm3DEngine
 		ret << "MeshData:\n";
 
 		ret << "  Vertices (" << this->verticesLen << "):\n    ";
-		for (int i = 0; i < this->verticesLen; i++)
+		for (std::size_t i = 0; i < this->verticesLen; i++)
 		{
 			if (i > 0) { ret << ", "; }
 			ret << this->vertices[i];
@@ -31,7 +31,7 @@ namespace Fjordimm3DEngine
 		ret << "\n";
 
 		ret << "  Elements (" << this->elementsLen << "):\n    ";
-		for (int i = 0; i < this->elementsLen; i++)
+		for (std::size_t i = 0; i < this->elementsLen; i++)
 		{
 			if (i > 0) { ret << ", "; }
 			ret << this->elements[i];

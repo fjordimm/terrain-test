@@ -14,14 +14,14 @@ namespace Fjordimm3DEngine
 	{
 		for (int i = 0; i < NumTexs; i++)
 		{
-			this->texs[i] = -1;
+			this->texs[i] = (GLuint)(-1);
 		}
 	}
 
 	std::unique_ptr<Texture> Texture::New()
 	{
 		std::unique_ptr<Texture> ret = std::make_unique<Texture>();
-		return std::move(ret);
+		return ret;
 	}
 
 	/* Methods */
@@ -52,7 +52,7 @@ namespace Fjordimm3DEngine
 	{
 		for (int i = 0; i < NumTexs; i++)
 		{
-			if (this->texs[i] != -1)
+			if (this->texs[i] != (GLuint)(-1))
 			{
 				glBindTextureUnit(i, this->texs[i]);
 			}

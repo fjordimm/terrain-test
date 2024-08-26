@@ -14,8 +14,8 @@ namespace Fjordimm3DEngine
 		vertexShader(-1),
 		geometryShader(-1),
 		fragmentShader(-1),
-		program(-1),
-		formDrawContents()
+		formDrawContents(),
+		program(-1)
 	{}
 
 	/* Methods */

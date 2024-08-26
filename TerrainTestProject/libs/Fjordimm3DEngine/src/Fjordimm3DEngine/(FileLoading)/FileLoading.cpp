@@ -33,7 +33,7 @@ namespace Fjordimm3DEngine::FileLoading
 		std::fclose(file);
 
 		std::unique_ptr<std::string const> ret(new std::string const(buf));
-		return std::move(ret);
+		return ret;
 	}
 	
 	std::unique_ptr<std::vector<unsigned char>> LoadImage(std::string const& name, std::size_t& imageWidth, std::size_t& imageHeight)
@@ -72,7 +72,7 @@ namespace Fjordimm3DEngine::FileLoading
 				}
 			}
 
-			return std::move(ret);
+			return ret;
 		}
 	}
 }
