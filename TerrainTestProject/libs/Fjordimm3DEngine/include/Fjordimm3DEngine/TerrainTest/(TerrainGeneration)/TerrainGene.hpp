@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include <array>
+#include <memory>
 #include "Fjordimm3DEngine/(Util)/(OpenSimplexNoise)/OpenSimplexNoise.hpp"
 
 namespace Fjordimm3DEngine::TerrainTest
@@ -18,8 +20,7 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Fields */
 
 	   private:
-		OpenSimplexNoise osn;
-		// TODO: array of OpenSimplexNoise
+		std::array<std::unique_ptr<OpenSimplexNoise>, 25> osnDetails;
 
 		/* Methods */
 
