@@ -79,7 +79,7 @@ namespace Fjordimm3DEngine
 	{
 		for (FormDrawContent* formDrawContent : this->formDrawContents)
 		{
-			if (formDrawContent->mesh)
+			if (formDrawContent->mesh != nullptr)
 			{
 				formDrawContent->mesh->useForGl();
 
@@ -90,7 +90,7 @@ namespace Fjordimm3DEngine
 					trait->updateUniformsFromFormDrawContent(formDrawContent);
 				}
 
-				if (formDrawContent->texture)
+				if (formDrawContent->texture != nullptr)
 				{
 					formDrawContent->texture->useForGl();
 				}

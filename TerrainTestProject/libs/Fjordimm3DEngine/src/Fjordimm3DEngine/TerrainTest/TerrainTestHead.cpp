@@ -76,15 +76,17 @@ namespace Fjordimm3DEngine::TerrainTest
 			texture1->initializeTextureForGl(0, "res/textures/star.png");
 
 			std::unique_ptr<PhysicForm> form1 = PhysicForm::New(this->worldState);
-			form1->changeMesh(this->sphereMesh.get());
+			form1->changeMesh(this->cubeMesh.get());
 			form1->changeTexture(texture1.get());
-			form1->tran.acqPosition() += Vec(0.0f, 0.0f, 3.0f);
+			form1->tran.acqScale() = Vec(0.5f, 0.5f, 0.5f);
+			form1->tran.acqPosition() += Vec(0.0f, 0.0f, 1.5f);
 			this->worldState.forms.add(std::move(form1));
 
 			std::unique_ptr<PhysicForm> form2 = PhysicForm::New(this->worldState);
-			form2->changeMesh(this->cubeMesh.get());
+			form2->changeMesh(this->sphereMesh.get());
 			form2->changeTexture(texture1.get());
-			form2->tran.acqPosition() += Vec(0.0f, 0.0f, 6.0f);
+			form2->tran.acqScale() = Vec(1.0f, 1.0f, 1.0f);
+			form2->tran.acqPosition() += Vec(0.0f, 0.0f, 3.0f);
 			this->worldState.forms.add(std::move(form2));
 		}
 		///////////////

@@ -36,16 +36,22 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	void TerrainManager::beginGeneration(WorldState& worldState, ShaderProgram* shaderProgram)
 	{
-		Debug::Log("Beginning terrain generation...");
+		// {
+		// 	std::unique_ptr<Chunk> chunk = std::make_unique<Chunk>(worldState.forms.add(Form::New(worldState)));
+		// 	chunk->setMesh(Mesh::New(shaderProgram, ChunkMesh(terrainGene, 30, 2.0f, 0, 0, LodTransitions::None)));
+		// 	this->chunks.push_back(std::move(chunk));
+		// }
 
+		std::int64_t n = 100;
+		std::int64_t s = 2;
+		for (std::int64_t x = 0; x < n; x++)
 		{
-			PhysicForm* chunkForm = worldState.forms.add(PhysicForm::New(worldState));
-			chunkForm->tran.acqPosition() = Vecs::Zero;
-			
-			std::unique_ptr<Chunk> chunk = std::make_unique<Chunk>(chunkForm);
-			chunk->setMesh(Mesh::New(shaderProgram, ChunkMesh(terrainGene, 30, 2.0f, 0, 0, LodTransitions::None)));
-
-			this->chunks.push_back(std::move(chunk));
+			for (std::int64_t y = 0; y < n; y++)
+			{
+				std::unique_ptr<Chunk> chunk = std::make_unique<Chunk>(worldState.forms.add(Form::New(worldState)));
+				chunk->setMesh(Mesh::New(shaderProgram, ChunkMesh(terrainGene, s, 1.0f, x, y, LodTransitions::None)));
+				this->chunks.push_back(std::move(chunk));
+			}
 		}
 	}
 }
