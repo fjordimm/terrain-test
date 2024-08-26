@@ -2,6 +2,7 @@
 #pragma once
 
 #include <random>
+#include <cstdint>
 
 namespace Fjordimm3DEngine::Random
 {
@@ -9,15 +10,19 @@ namespace Fjordimm3DEngine::Random
 	{
 		extern std::default_random_engine _RandomEngine;
 
-		extern std::bernoulli_distribution _Bool;
-		extern std::uniform_real_distribution<float> _Float0to1;
+		extern std::bernoulli_distribution _DistrBool;
+		extern std::uniform_real_distribution<float> _DistrFloat0to1;
+		extern std::uniform_int_distribution<std::int64_t> _DistrInt64;
+		extern std::uniform_int_distribution<std::size_t> _DistrSizeT;
 	}
 
 	void Reseed(unsigned int seed);
 	void Reseed();
 
-	bool Bool();
-	float Float0to1();
+	bool RandBool();
+	float RandFloat0to1();
+	std::int64_t RandInt64();
+	std::size_t RandSizeT();
 
 	template <typename T>
 	T From(std::uniform_int_distribution<T>& distr)

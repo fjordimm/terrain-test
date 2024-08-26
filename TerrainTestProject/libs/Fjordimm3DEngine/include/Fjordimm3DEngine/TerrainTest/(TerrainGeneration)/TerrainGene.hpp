@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include "Fjordimm3DEngine/(Util)/(OpenSimplexNoise)/OpenSimplexNoise.hpp"
+
 namespace Fjordimm3DEngine::TerrainTest
 {
 	class TerrainGene
@@ -16,6 +18,7 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Fields */
 
 	   private:
+		OpenSimplexNoise osn;
 		// TODO: array of OpenSimplexNoise
 
 		/* Methods */
