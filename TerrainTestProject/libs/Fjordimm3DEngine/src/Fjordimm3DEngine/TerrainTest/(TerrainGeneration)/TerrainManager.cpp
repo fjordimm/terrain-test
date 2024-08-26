@@ -28,7 +28,7 @@ namespace Fjordimm3DEngine::TerrainTest
 	/* Constructors */
 
 	TerrainManager::TerrainManager() :
-		terrainGene(),
+		terrainGene(35935932),
 		chunks()
 	{}
 

@@ -12,10 +12,11 @@ namespace Fjordimm3DEngine::TerrainTest
 		/* Constructors */
 
 	   public:
+		TerrainGene() = delete;
 		TerrainGene(TerrainGene const&) = delete;
 		TerrainGene& operator=(TerrainGene const&) = delete;
 		
-		TerrainGene();
+		TerrainGene(unsigned int seed);
 		
 		/* Fields */
 

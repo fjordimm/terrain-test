@@ -2,18 +2,22 @@
 #include "Fjordimm3DEngine/TerrainTest/(TerrainGeneration)/TerrainGene.hpp"
 
 #include <cmath>
+#include <random>
 #include "Fjordimm3DEngine/(Util)/(Random)/Random.hpp"
 
 namespace Fjordimm3DEngine::TerrainTest
 {
 	/* Constructors */
 
-	TerrainGene::TerrainGene() :
+	TerrainGene::TerrainGene(unsigned int seed) :
 		osnDetails()
 	{
+		std::default_random_engine randomEngine(seed);
+		std::uniform_int_distribution<std::int64_t> randomDistr(std::numeric_limits<std::int64_t>::min(), std::numeric_limits<std::int64_t>::max());
+
 		for (std::size_t i = 0; i < osnDetails.size(); i++)
 		{
-			osnDetails[i] = std::make_unique<OpenSimplexNoise>(Random::RandInt64());
+			osnDetails[i] = std::make_unique<OpenSimplexNoise>(randomDistr(randomEngine));
 		}
 	}
 
@@ -26,7 +30,6 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		double z = 0.0;
 
-		// z = osn.eval(x, y);
 		double ampl = 3.0;
 		double freq = 0.005;
 		for (std::size_t i = 0; i < osnDetails.size(); i++)
