@@ -98,11 +98,17 @@ namespace Fjordimm3DEngine::Debug
 		std::exit(EXIT_FAILURE);
 	}
 
-	void _Assert(bool expr, int lineNum, char const* filename)
+	void __Assert(bool expr, int lineNum, char const* filename)
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
-		FJORDIMM3DENGINE_DEBUG_ASSERT(filename != nullptr);
+		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that would be infinite recursion.
+		if (filename == nullptr)
+		{
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE ASSERTION ]]] This should not happen.%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fflush(stderr);
+			std::exit(EXIT_FAILURE);
+		}
 
 		if (!expr)
 		{
