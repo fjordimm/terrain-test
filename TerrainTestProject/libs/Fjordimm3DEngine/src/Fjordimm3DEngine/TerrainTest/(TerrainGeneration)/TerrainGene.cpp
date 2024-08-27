@@ -12,7 +12,8 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	TerrainGene::TerrainGene(unsigned int seed) :
 		osnRidges(),
-		osnMountains()
+		osnMountains(),
+		osnDetails()
 	{
 		std::default_random_engine randomEngine(seed);
 		std::uniform_int_distribution<std::int64_t> randomDistr(std::numeric_limits<std::int64_t>::min(), std::numeric_limits<std::int64_t>::max());
@@ -26,14 +27,19 @@ namespace Fjordimm3DEngine::TerrainTest
 		{
 			osnMountains[i] = std::make_unique<OpenSimplexNoise>(randomDistr(randomEngine));
 		}
+
+		for (std::size_t i = 0; i < osnDetails.size(); i++)
+		{
+			osnDetails[i] = std::make_unique<OpenSimplexNoise>(randomDistr(randomEngine));
+		}
 	}
 
 	/* Methods */
 
 	float TerrainGene::heightAt(float x_, float y_)
 	{
-		float x = 1.0f * (x_ - 0.0f);
-		float y = 1.0f * (y_ - 0.0f);
+		float x = 0.4f * (x_ - 0.0f);
+		float y = 0.4f * (y_ - 0.0f);
 
 		float z = 0.0f;
 
@@ -64,9 +70,21 @@ namespace Fjordimm3DEngine::TerrainTest
 			}
 		}
 
-		z = 23.2f * std::exp(ridges) * Math::Sigmoid(mountains, 0.9f, 2.7f);
+		float details = 0.0f;
+		{
+			float ampl = 0.6f;
+			float freq = 0.04f;
+			for (std::size_t i = 0; i < osnDetails.size(); i++)
+			{
+				details += ampl * osnDetails[i]->eval(x * freq, y * freq);
+				ampl *= 0.5f;
+				freq *= 1.7f;
+			}
+		}
 
-		z *= 1.0f;
+		z = 19.7f * std::exp(ridges) * Math::Sigmoid(mountains, 0.9f, 2.7f) + 1.3f * details;
+
+		z *= 2.5f;
 		return z;
 	}
 }

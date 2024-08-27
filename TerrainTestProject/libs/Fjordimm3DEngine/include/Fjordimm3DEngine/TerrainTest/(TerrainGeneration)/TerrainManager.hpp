@@ -3,9 +3,11 @@
 
 #include <memory>
 #include <list>
+#include <mutex>
 #include "Fjordimm3DEngine/(Drawing)/(Meshes)/Mesh.hpp"
 #include "Fjordimm3DEngine/(World)/WorldState.hpp"
 #include "Fjordimm3DEngine/TerrainTest/(TerrainGeneration)/TerrainGene.hpp"
+#include "Fjordimm3DEngine/TerrainTest/(TerrainGeneration)/ChunkMesh.hpp"
 
 namespace Fjordimm3DEngine::TerrainTest
 {
@@ -13,7 +15,7 @@ namespace Fjordimm3DEngine::TerrainTest
 	{
 		/* Subclasses */
 
-	   private:
+	   public:
 		class Chunk
 		{
 			/* Constructors */
@@ -55,10 +57,16 @@ namespace Fjordimm3DEngine::TerrainTest
 	   private:
 		TerrainGene terrainGene;
 		std::list<std::unique_ptr<Chunk>> chunks;
+		std::mutex mut_chunks;
 
 		/* Methods */
 
 	   public:
 		void beginGeneration(WorldState& worldState, ShaderProgram* shaderProgram);
+
+		/* Functions */
+
+	   private:
+		static void makeChunk(std::list<std::unique_ptr<Chunk>>* chunks, std::mutex* mut_chunks, WorldState* worldState, ShaderProgram* shaderProgram, TerrainGene* terrainGene, std::int64_t size, float chunkScale, std::int64_t xOff, std::int64_t yOff);
 	};
 }
