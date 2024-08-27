@@ -33,7 +33,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 		glm::vec4 uniMaterialColor_val = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 		glUniform4fv(this->uniMaterialColor, 1, glm::value_ptr(uniMaterialColor_val));
 
-		Debug::CheckOpenGLErrors();
+		FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 	}
 
 	void HasMaterial::updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const
@@ -44,5 +44,5 @@ namespace Fjordimm3DEngine::ShaderTraits
 	}
 
 	void HasMaterial::setUniMaterialColor(glm::vec4 val) const
-	{ glUniform4fv(this->uniMaterialColor, 1, glm::value_ptr(val)); Debug::CheckOpenGLErrors(); }
+	{ glUniform4fv(this->uniMaterialColor, 1, glm::value_ptr(val)); FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR(); }
 }

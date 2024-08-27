@@ -151,28 +151,44 @@ namespace Fjordimm3DEngine::Debug
 
 		if (!expr)
 		{
-			std::fprintf(stderr, "%s[[[ ASSERTION FAILED ]]] at line %d in '%s'.%s\n", PRINTCOLOR_ERROR, lineNum, filename, PRINTCOLOR_NONE);
+			std::fprintf(stderr, "%s[[[ ASSERTION FAILED ]]] at line %i in '%s'.%s\n", PRINTCOLOR_ERROR, lineNum, filename, PRINTCOLOR_NONE);
 			std::fflush(stderr);
 			std::exit(EXIT_FAILURE);
 		}
 	}
 
-	void CheckOpenGLErrors()
+	void __AssertGlError(int lineNum, char const* filename)
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
+
+		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that would cause infinite recursion.
+		if (filename == nullptr)
+		{
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] __FILE__ was somehow null.%s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fflush(stderr);
+			std::exit(EXIT_FAILURE);
+		}
 
 		int count = 0;
 		GLenum err;
 		while ((err = glGetError()) != GL_NO_ERROR)
 		{
-			std::fprintf(stderr, "%s[[[ OPENGL ERROR ]]] '%s'.%s\n", PRINTCOLOR_ERROR, gluErrorString(err), PRINTCOLOR_NONE);
+			if (count == 0)
+			{
+				std::fprintf(stderr, "%s[[[ OPENGL HAS ERROR(S) ]]] (Assertion occurred at line %i in '%s')...%s\n", PRINTCOLOR_ERROR, lineNum, filename, PRINTCOLOR_NONE);
+				std::fflush(stderr);
+			}
+
+			std::fprintf(stderr, "%s  Error: '%s'.%s\n", PRINTCOLOR_ERROR, gluErrorString(err), PRINTCOLOR_NONE);
 			std::fflush(stderr);
 
 			count++;
 			if (count >= 15)
 			{
-				std::fprintf(stderr, "%s...and more (only showing first %i OpenGL errors).%s\n", PRINTCOLOR_ERROR, count, PRINTCOLOR_NONE);
+				std::fprintf(stderr, "%s  ...and more (only showing first %i OpenGL errors, now exiting program).%s\n", PRINTCOLOR_ERROR, count, PRINTCOLOR_NONE);
 				std::fflush(stderr);
+				std::exit(EXIT_FAILURE);
+
 				return;
 			}
 		}

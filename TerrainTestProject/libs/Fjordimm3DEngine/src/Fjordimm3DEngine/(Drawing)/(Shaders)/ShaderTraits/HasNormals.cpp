@@ -18,7 +18,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 		glEnableVertexAttribArray(this->attribNormal);
 		glVertexAttribPointer(this->attribNormal, 3, GL_FLOAT, GL_FALSE, stride, strideOffset);
 
-		Debug::CheckOpenGLErrors();
+		FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 	}
 
 	std::size_t HasNormals::attribsSize()
@@ -30,7 +30,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 	{
 		this->attribNormal = glGetAttribLocation(program, "attrib_Normal");
 		
-		Debug::CheckOpenGLErrors();
+		FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 	}
 
 	void HasNormals::setupUniforms(GLuint program)

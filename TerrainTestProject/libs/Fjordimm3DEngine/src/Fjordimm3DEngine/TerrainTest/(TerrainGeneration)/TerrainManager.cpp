@@ -58,8 +58,8 @@ namespace Fjordimm3DEngine::TerrainTest
 				// this->chunks.push_back(std::move(chunk));
 				
 				// makeChunk(&this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
-				// std::future<void> fut = std::async(std::launch::async, makeChunk, &this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
-				// fut.get();
+				std::future<void> fut = std::async(std::launch::async, makeChunk, &this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
+				fut.get();
 			}
 		}
 	}

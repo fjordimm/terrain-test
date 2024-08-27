@@ -68,7 +68,7 @@ namespace Fjordimm3DEngine
 	void ShaderProgram::useForGl() const
 	{
 		glUseProgram(this->program);
-		Debug::CheckOpenGLErrors();
+		FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 	}
 
 	void ShaderProgram::cleanupForGl()
@@ -77,7 +77,7 @@ namespace Fjordimm3DEngine
 		glDeleteShader(this->geometryShader);
 		glDeleteShader(this->fragmentShader);
 		glDeleteProgram(this->program);
-		Debug::CheckOpenGLErrors();
+		FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 	}
 
 	void ShaderProgram::addFormDrawContent(FormDrawContent* formDrawContent)
@@ -115,7 +115,7 @@ namespace Fjordimm3DEngine
 				}
 
 				glDrawElements(GL_TRIANGLES, formDrawContent->mesh->getElementsLen(), GL_UNSIGNED_INT, 0);
-				Debug::CheckOpenGLErrors();
+				FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 			}
 		}
 	}
@@ -157,6 +157,6 @@ namespace Fjordimm3DEngine
 			Debug::Exit();
 		}
 
-		Debug::CheckOpenGLErrors();
+		FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 	}
 }

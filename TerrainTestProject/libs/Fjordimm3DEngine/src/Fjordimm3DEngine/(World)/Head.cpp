@@ -72,7 +72,7 @@ namespace Fjordimm3DEngine
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 		glEnable(GL_DITHER);
-		Debug::CheckOpenGLErrors();
+		FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 
 		/* Head settings */
 
@@ -99,7 +99,7 @@ namespace Fjordimm3DEngine
 		this->worldState.shaderProgramManager.acqNearClippingPlane() = 0.01f;
 		this->worldState.shaderProgramManager.acqFarClippingPlane() = 100000.0f;
 
-		Debug::CheckOpenGLErrors();
+		FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 
 		/* Main loop */
 
@@ -115,7 +115,7 @@ namespace Fjordimm3DEngine
 
 			glfwSwapBuffers(this->windowForGlfw);
 			glfwPollEvents();
-			Debug::CheckOpenGLErrors();
+			FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 
 			/* Do movements, physics, inputs, etc. */
 
@@ -140,7 +140,7 @@ namespace Fjordimm3DEngine
 
 			glClearColor(0.1f, 0.0f, 0.25f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			Debug::CheckOpenGLErrors();
+			FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 
 			this->worldState.shaderProgramManager.drawEverything();
 
@@ -292,7 +292,7 @@ namespace Fjordimm3DEngine
 		self->_windowHeight = height;
 
 		glViewport(0, 0, width, height);
-		Debug::CheckOpenGLErrors();
+		FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 		self->worldState.shaderProgramManager.acqAspectRatio() = (float)width / (float)height;
 	}
 }

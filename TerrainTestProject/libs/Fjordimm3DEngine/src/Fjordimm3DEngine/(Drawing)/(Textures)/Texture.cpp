@@ -49,7 +49,7 @@ namespace Fjordimm3DEngine
 		std::unique_ptr<std::vector<unsigned char>> image = FileLoading::LoadImage(filename, imageWidth, imageHeight);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->data());
 		
-		Debug::CheckOpenGLErrors();
+		FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 	}
 
 	void Texture::useForGl(ShaderTraits::HasTexture const* hasTextureTrait)
@@ -66,7 +66,7 @@ namespace Fjordimm3DEngine
 				glBindTexture(GL_TEXTURE_2D, this->texs[i]);
 				glUniform1i(uniTextureSampler, i);
 				
-				Debug::CheckOpenGLErrors();
+				FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 			}
 		}
 	}
