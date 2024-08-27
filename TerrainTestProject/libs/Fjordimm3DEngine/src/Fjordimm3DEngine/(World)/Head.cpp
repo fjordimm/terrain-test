@@ -103,8 +103,6 @@ namespace Fjordimm3DEngine
 
 	void Head::mainLoop()
 	{
-		// Debug::Log("lope");
-
 		while (!glfwWindowShouldClose(this->windowForGlfw))
 		{
 			/* Stuff required by GLFW */
@@ -148,7 +146,6 @@ namespace Fjordimm3DEngine
 
 	void Head::endGlfw()
 	{
-		// this->worldState.shaderManager.cleanupForGl();
 		glfwTerminate();
 	}
 	

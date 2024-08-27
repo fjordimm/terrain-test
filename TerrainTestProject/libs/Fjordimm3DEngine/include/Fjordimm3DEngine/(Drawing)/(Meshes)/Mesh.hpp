@@ -31,6 +31,7 @@ namespace Fjordimm3DEngine
 
 	   public:
 		static std::unique_ptr<Mesh> New(ShaderProgram* shaderProgram, std::unique_ptr<MeshData> meshData);
+		
 		static inline std::unique_ptr<Mesh> New(ShaderProgram* shaderProgram, MeshSample const& meshSample)
 		{ return Mesh::New(shaderProgram, meshSample.make(*shaderProgram)); }
 		

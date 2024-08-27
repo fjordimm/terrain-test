@@ -44,6 +44,10 @@ namespace Fjordimm3DEngine::TerrainTest
 	{
 		FJORDIMM3DENGINE_DEBUG_ASSERT(shaderProgram != nullptr);
 
+		// std::future<void> fut = std::async(std::launch::async, makeChunk, &this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, 60, 1.0f, 0, 0);
+		// std::this_thread::sleep_for(std::chrono::duration<int, std::milli>(5000));
+		// fut.get();
+
 		std::int64_t n = 1;
 		std::int64_t s = 60;
 		for (std::int64_t x = 0; x < n; x++)
@@ -54,18 +58,16 @@ namespace Fjordimm3DEngine::TerrainTest
 				// chunk->setMesh(Mesh::New(shaderProgram, ChunkMesh(terrainGene, s, 1.0f, x, y, LodTransitions::None)));
 				// this->chunks.push_back(std::move(chunk));
 				
-				makeChunk(&this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
-				// std::future<void> fut = std::async(std::launch::async, makeChunk, &this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
-				// fut.get();
+				// makeChunk(&this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
+				std::future<void> fut = std::async(std::launch::async, makeChunk, &this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
+				fut.get();
 			}
 		}
 	}
 
 	void TerrainManager::makeChunk(std::list<std::unique_ptr<Chunk>>* chunks, std::mutex* mut_chunks, WorldState* worldState, ShaderProgram* shaderProgram, TerrainGene* terrainGene, std::int64_t size, float chunkScale, std::int64_t xOff, std::int64_t yOff)
 	{
-		std::this_thread::sleep_for(std::chrono::duration<int, std::micro>(800));
-		// std::fprintf(stderr, "yoooooooooohawwwwwww\n");
-		Debug::Log("Noice");
+		// std::this_thread::sleep_for(std::chrono::duration<int, std::milli>(800));
 
 		FJORDIMM3DENGINE_DEBUG_ASSERT(chunks != nullptr);
 		FJORDIMM3DENGINE_DEBUG_ASSERT(mut_chunks != nullptr);
@@ -75,7 +77,7 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		std::unique_ptr<TerrainManager::Chunk> chunk = std::make_unique<TerrainManager::Chunk>(worldState->forms.add(Form::New(*worldState)));
 		chunk->setMesh(Mesh::New(shaderProgram, ChunkMesh(*terrainGene, size, chunkScale, xOff, yOff, LodTransitions::None)));
-		chunk->getForm()->changeMaterialColor(Colors::Purple);
+		chunk->getForm()->changeMaterialColor(Colors::Yellow);
 		
 		{
 			std::lock_guard<std::mutex> _lock(*mut_chunks);
