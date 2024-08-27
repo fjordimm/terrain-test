@@ -30,11 +30,6 @@ namespace Fjordimm3DEngine
 		return ret;
 	}
 
-	Mesh::~Mesh()
-	{
-		this->cleanupForGl();
-	}
-
 	/* Methods */
 
 	std::mutex bruhhhhhhhhhhh;
@@ -48,7 +43,7 @@ namespace Fjordimm3DEngine
 		Debug::Log("...and...");
 		glGenVertexArrays(1, &this->vao);
 		Debug::CheckOpenGLErrors();
-		Debug::Logf("vao = %u", this->vao);
+		Debug::Log("vao = %u", this->vao);
 		glBindVertexArray(this->vao);
 		
 		glGenBuffers(1, &this->vbo);
@@ -57,20 +52,12 @@ namespace Fjordimm3DEngine
 		glGenBuffers(1, &this->ebo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
 
-		// Debug::Log("");
+		Debug::Log("g1");
 		Debug::CheckOpenGLErrors();
 
 		// Immediately after the call of this function,
 		//   someone must call ShaderProgram.enableAttribsForMesh(),
 		//   and they must call Mesh.updateGlBufferData()
-	}
-
-	void Mesh::cleanupForGl()
-	{
-		glDeleteBuffers(1, &this->ebo);
-		glDeleteBuffers(1, &this->vbo);
-		glDeleteVertexArrays(1, &this->vao);
-		// Debug::CheckOpenGLErrors();
 	}
 
 	void Mesh::updateGlBufferData()
@@ -83,12 +70,23 @@ namespace Fjordimm3DEngine
 		glBufferData(GL_ARRAY_BUFFER, this->meshData->verticesLen * sizeof(this->meshData->vertices[0]), this->meshData->vertices.get(), GL_DYNAMIC_DRAW);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->meshData->elementsLen * sizeof(this->meshData->elements[0]), this->meshData->elements.get(), GL_DYNAMIC_DRAW);
 
-		// Debug::CheckOpenGLErrors();
+		Debug::Log("g3");
+		Debug::CheckOpenGLErrors();
 	}
 
 	void Mesh::useForGl()
 	{
 		glBindVertexArray(this->vao);
-		// Debug::CheckOpenGLErrors();
+		Debug::Log("g4");
+		Debug::CheckOpenGLErrors();
+	}
+
+	void Mesh::cleanupForGl()
+	{
+		glDeleteBuffers(1, &this->ebo);
+		glDeleteBuffers(1, &this->vbo);
+		glDeleteVertexArrays(1, &this->vao);
+		Debug::Log("g2");
+		Debug::CheckOpenGLErrors();
 	}
 }

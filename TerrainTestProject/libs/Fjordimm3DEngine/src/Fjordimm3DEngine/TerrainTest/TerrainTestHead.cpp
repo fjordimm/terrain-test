@@ -109,4 +109,14 @@ namespace Fjordimm3DEngine::TerrainTest
 	{
 
 	}
+
+	void TerrainTestHead::onFinish()
+	{
+		this->flatShaderProgram->cleanupForGl();
+		this->smoothShaderProgram->cleanupForGl();
+		this->cubeMesh->cleanupForGl();
+		this->sphereMesh->cleanupForGl();
+		this->sphereMesh2->cleanupForGl();
+		// TODO: cleanup the chunk meshes
+	}
 }

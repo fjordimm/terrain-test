@@ -25,8 +25,6 @@ namespace Fjordimm3DEngine
 		
 		ShaderProgram();
 		
-		~ShaderProgram();
-		
 		/* Fields */
 
 	   private:
@@ -48,6 +46,7 @@ namespace Fjordimm3DEngine
 	   public:
 		void compileAndActivate();
 		void useForGl() const;
+		void cleanupForGl();
 
 		void addFormDrawContent(FormDrawContent* formDrawContent);
 		void removeFormDrawContent(FormDrawContent* formDrawContent);
@@ -73,7 +72,6 @@ namespace Fjordimm3DEngine
 		virtual char const* getFragmentShaderSourcePath() const = 0;
 
 	   private:
-		void cleanupForGl();
 		static void CheckShaderCompilation(GLuint shader);
 	};
 }

@@ -27,9 +27,6 @@ namespace Fjordimm3DEngine
 		Mesh(ShaderProgram* shaderProgram, std::unique_ptr<MeshData> meshData);
 
 	   public:
-		~Mesh();
-
-	   public:
 		static std::unique_ptr<Mesh> New(ShaderProgram* shaderProgram, std::unique_ptr<MeshData> meshData);
 		
 		static inline std::unique_ptr<Mesh> New(ShaderProgram* shaderProgram, MeshSample const& meshSample)
@@ -58,11 +55,11 @@ namespace Fjordimm3DEngine
 
 	   private:
 		void generateGlVaoAndBuffers();
-		void cleanupForGl();
 
 	   public:
 		void updateGlBufferData();
 		void useForGl();
+		void cleanupForGl();
 
 		/* Friends */
 

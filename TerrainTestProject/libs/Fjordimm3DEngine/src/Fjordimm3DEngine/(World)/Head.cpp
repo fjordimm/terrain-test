@@ -39,6 +39,8 @@ namespace Fjordimm3DEngine
 
 		{
 			glewExperimental = GL_TRUE;
+
+			glfwSetErrorCallback(ErrorCallbackForGlfw);
 			
 			if (!glfwInit())
 			{ Debug::LogFatalError("glfwInit failed."); }
@@ -122,7 +124,7 @@ namespace Fjordimm3DEngine
 
 			float deltaTime;
 			float totalTime;
-			Head::CalculateDeltaTime(deltaTime, totalTime);
+			CalculateDeltaTime(deltaTime, totalTime);
 
 			this->doCameraMovements(deltaTime);
 			this->worldState.mainCamera->onUpdate(this->worldState, deltaTime);
@@ -156,7 +158,16 @@ namespace Fjordimm3DEngine
 
 	void Head::endGlfw()
 	{
+		Debug::Log("f30a");
+		Debug::CheckOpenGLErrors();
 		glfwTerminate();
+		{
+			int code = glfwGetError(NULL);
+			if (code != GLFW_NO_ERROR)
+			{
+				Debug::Log("yow");
+			}
+		}
 		Debug::Log("f30");
 		Debug::CheckOpenGLErrors();
 	}
@@ -277,6 +288,11 @@ namespace Fjordimm3DEngine
 
 		durMillisecs timeElapsedSinceStart = std::chrono::duration_cast<durMillisecs>(timePoint - initialTimePoint);
 		totalTime = timeElapsedSinceStart.count();
+	}
+
+	void Head::ErrorCallbackForGlfw(int code, char const* description)
+	{
+		Debug::LogNonfatalError("GLFW Error with code %i: '%s'.", code, description);
 	}
 
 	/* Methods for External Use */

@@ -35,5 +35,6 @@ namespace Fjordimm3DEngine::TerrainTest
 	   protected:
 		void onStart() final;
 		void onUpdate(float deltaTime) final;
+		void onFinish() final;
 	};
 }

@@ -53,15 +53,17 @@ namespace Fjordimm3DEngine
 
 		virtual void onStart() = 0;
 		virtual void onUpdate(float deltaTime) = 0;
+		virtual void onFinish() = 0;
 
 		/* Functions */
 
 	   protected:
 		static void CalculateDeltaTime(float& deltaTime, float& totalTime); // In milliseconds
+		static void ErrorCallbackForGlfw(int code, char const* description);
 
 		/* Methods for External Use */
 
-	   protected:
+	   private:
 		static void onWindowResize(GLFWwindow* windowForGlfw, int width, int height);
 	};
 }
