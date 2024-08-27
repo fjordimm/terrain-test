@@ -24,6 +24,8 @@ namespace Fjordimm3DEngine::Debug
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
+		FJORDIMM3DENGINE_DEBUG_ASSERT(msg != nullptr);
+
 		std::fprintf(stderr, "%s[[[ DEBUG ]]]%s %s\n", PRINTCOLOR_DEBUG, PRINTCOLOR_NONE, msg);
 		std::fflush(stderr);
 	}
@@ -31,6 +33,8 @@ namespace Fjordimm3DEngine::Debug
 	void LogWarning(char const* msg)
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
+
+		FJORDIMM3DENGINE_DEBUG_ASSERT(msg != nullptr);
 
 		std::fprintf(stderr, "%s[[[ WARNING ]]]%s %s\n", PRINTCOLOR_WARNING, PRINTCOLOR_NONE, msg);
 		std::fflush(stderr);
@@ -40,6 +44,8 @@ namespace Fjordimm3DEngine::Debug
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
+		FJORDIMM3DENGINE_DEBUG_ASSERT(msg != nullptr);
+
 		std::fprintf(stderr, "%s[[[ NONFATAL ERROR ]]]%s %s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE, msg);
 		std::fflush(stderr);
 	}
@@ -47,6 +53,8 @@ namespace Fjordimm3DEngine::Debug
 	void LogFatalError(char const* msg)
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
+
+		FJORDIMM3DENGINE_DEBUG_ASSERT(msg != nullptr);
 		
 		std::fprintf(stderr, "%s[[[ FATAL ERROR ]]]%s %s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE, msg);
 		std::fflush(stderr);
@@ -56,6 +64,8 @@ namespace Fjordimm3DEngine::Debug
 	void Printf(char const* const format, ...)
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
+
+		FJORDIMM3DENGINE_DEBUG_ASSERT(format != nullptr);
 
 		std::va_list argptr;
 		va_start(argptr, format);
@@ -67,6 +77,8 @@ namespace Fjordimm3DEngine::Debug
 	void Logf(char const* const format, ...)
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
+
+		FJORDIMM3DENGINE_DEBUG_ASSERT(format != nullptr);
 
 		std::va_list argptr;
 		va_start(argptr, format);
@@ -89,6 +101,8 @@ namespace Fjordimm3DEngine::Debug
 	void _Assert(bool expr, int lineNum, char const* filename)
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
+
+		FJORDIMM3DENGINE_DEBUG_ASSERT(filename != nullptr);
 
 		if (!expr)
 		{

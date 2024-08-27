@@ -36,6 +36,8 @@ namespace Fjordimm3DEngine::ShaderTraits
 
 	void HasMaterial::updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(formDrawContent != nullptr);
+
 		this->setUniMaterialColor(formDrawContent->materialColor.toVec4());
 	}
 

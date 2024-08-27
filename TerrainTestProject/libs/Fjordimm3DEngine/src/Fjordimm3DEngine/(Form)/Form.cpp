@@ -36,6 +36,7 @@ namespace Fjordimm3DEngine
 		{ oldShaderProgram = this->formDrawContent.mesh->getShaderProgram(); }
 
 		ShaderProgram* newShaderProgram = mesh->getShaderProgram();
+		FJORDIMM3DENGINE_DEBUG_ASSERT(newShaderProgram != nullptr);
 
 		if (oldShaderProgram != newShaderProgram)
 		{
@@ -57,6 +58,7 @@ namespace Fjordimm3DEngine
 
 	void Form::changeTexture(Texture* texture)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(texture != nullptr);
 		this->formDrawContent.texture = texture;
 	}
 

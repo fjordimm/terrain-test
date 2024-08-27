@@ -16,6 +16,8 @@ namespace Fjordimm3DEngine
 
 	void FormManager::remove(Form* form)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(form != nullptr);
+
 		auto tryGet = this->formDict.find(form);
 		if (tryGet != this->formDict.end())
 		{

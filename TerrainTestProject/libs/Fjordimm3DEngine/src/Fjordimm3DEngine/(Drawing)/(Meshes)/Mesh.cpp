@@ -2,6 +2,7 @@
 #include "Fjordimm3DEngine/(Drawing)/(Meshes)/Mesh.hpp"
 
 #include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderProgram.hpp"
+#include "Fjordimm3DEngine/(Debug)/Debug.hpp"
 
 namespace Fjordimm3DEngine
 {
@@ -13,10 +14,14 @@ namespace Fjordimm3DEngine
 		vao(-1),
 		vbo(-1),
 		ebo(-1)
-	{}
+	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(shaderProgram != nullptr);
+	}
 
 	std::unique_ptr<Mesh> Mesh::New(ShaderProgram* shaderProgram, std::unique_ptr<MeshData> meshData)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(shaderProgram != nullptr);
+
 		std::unique_ptr<Mesh> ret = std::make_unique<Mesh>(shaderProgram, std::move(meshData));
 		ret->generateGlVaoAndBuffers();
 		shaderProgram->enableAttribsForMesh();

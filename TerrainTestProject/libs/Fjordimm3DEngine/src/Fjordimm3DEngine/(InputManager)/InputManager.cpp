@@ -32,6 +32,8 @@ namespace Fjordimm3DEngine
 
 	void InputManager::giveWindowForGlfw(GLFWwindow* windowForGlfw)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(windowForGlfw != nullptr);
+
 		glfwSetKeyCallback(windowForGlfw, InputManager::keyCallback);
 		glfwSetMouseButtonCallback(windowForGlfw, InputManager::mouseButtonCallback);
 		glfwSetCursorPosCallback(windowForGlfw, InputManager::cursorPosCallback);
@@ -91,7 +93,10 @@ namespace Fjordimm3DEngine
 
 	void InputManager::keyCallback(GLFWwindow* windowForGlfw, int key, int scancode, int action, int mods)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(windowForGlfw != nullptr);
+
 		InputManager* self = PtrForGlfw::Retrieve(windowForGlfw)->get<InputManager>();
+		FJORDIMM3DENGINE_DEBUG_ASSERT(self != nullptr);
 
 		// only replaces the item if it doesn't exist
 		auto iter = self->keyDict.emplace(key, FALSE_FALSE_INPUT).first;
@@ -126,7 +131,10 @@ namespace Fjordimm3DEngine
 
 	void InputManager::mouseButtonCallback(GLFWwindow* windowForGlfw, int button, int action, int mods)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(windowForGlfw != nullptr);
+
 		InputManager* self = PtrForGlfw::Retrieve(windowForGlfw)->get<InputManager>();
+		FJORDIMM3DENGINE_DEBUG_ASSERT(self != nullptr);
 
 		// only replaces the item if it doesn't exist
 		auto iter = self->mouseButtonDict.emplace(button, FALSE_FALSE_INPUT).first;
@@ -161,7 +169,10 @@ namespace Fjordimm3DEngine
 
 	void InputManager::cursorPosCallback(GLFWwindow* windowForGlfw, double xPos, double yPos)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(windowForGlfw != nullptr);
+
 		InputManager* self = PtrForGlfw::Retrieve(windowForGlfw)->get<InputManager>();
+		FJORDIMM3DENGINE_DEBUG_ASSERT(self != nullptr);
 
 		self->deltaCursorX += xPos - self->cursorX;
 		self->deltaCursorY += yPos - self->cursorY;
@@ -172,7 +183,10 @@ namespace Fjordimm3DEngine
 
 	void InputManager::scrollCallback(GLFWwindow* windowForGlfw, double xOffset, double yOffset)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(windowForGlfw != nullptr);
+
 		InputManager* self = PtrForGlfw::Retrieve(windowForGlfw)->get<InputManager>();
+		FJORDIMM3DENGINE_DEBUG_ASSERT(self != nullptr);
 
 		self->deltaScrollX += xOffset;
 		self->deltaScrollY += yOffset;

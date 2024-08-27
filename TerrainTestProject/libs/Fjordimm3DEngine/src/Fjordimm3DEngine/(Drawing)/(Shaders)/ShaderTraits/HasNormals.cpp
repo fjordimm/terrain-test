@@ -1,6 +1,8 @@
 
 #include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderTraits/HasNormals.hpp"
 
+#include "Fjordimm3DEngine/(Debug)/Debug.hpp"
+
 namespace Fjordimm3DEngine::ShaderTraits
 {
 	/* Constructors */
@@ -27,7 +29,11 @@ namespace Fjordimm3DEngine::ShaderTraits
 		this->attribNormal = glGetAttribLocation(program, "attrib_Normal");
 	}
 
-	void HasNormals::setupUniforms(GLuint program) {}
+	void HasNormals::setupUniforms(GLuint program)
+	{}
 
-	void HasNormals::updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const {}
+	void HasNormals::updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const
+	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(formDrawContent != nullptr);
+	}
 }

@@ -122,6 +122,7 @@ namespace Fjordimm3DEngine
 			for (std::pair<Form* const, std::unique_ptr<Form>> const& _form : this->worldState.forms)
 			{
 				Form* form = _form.second.get();
+				FJORDIMM3DENGINE_DEBUG_ASSERT(form != nullptr);
 				form->onUpdate(this->worldState, deltaTime);
 			}
 
@@ -270,6 +271,8 @@ namespace Fjordimm3DEngine
 
 	void Head::onWindowResize(GLFWwindow* windowForGlfw, int width, int height)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(windowForGlfw != nullptr);
+
 		Head* self = PtrForGlfw::Retrieve(windowForGlfw)->get<Head>();
 
 		self->_windowWidth = width;

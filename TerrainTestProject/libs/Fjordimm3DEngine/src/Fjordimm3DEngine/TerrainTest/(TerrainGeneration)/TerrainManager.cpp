@@ -41,6 +41,8 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	void TerrainManager::beginGeneration(WorldState& worldState, ShaderProgram* shaderProgram)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(shaderProgram != nullptr);
+
 		std::int64_t n = 1;
 		std::int64_t s = 60;
 		for (std::int64_t x = 0; x < n; x++)
@@ -58,6 +60,12 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	void TerrainManager::makeChunk(std::list<std::unique_ptr<Chunk>>* chunks, std::mutex* mut_chunks, WorldState* worldState, ShaderProgram* shaderProgram, TerrainGene* terrainGene, std::int64_t size, float chunkScale, std::int64_t xOff, std::int64_t yOff)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(chunks != nullptr);
+		FJORDIMM3DENGINE_DEBUG_ASSERT(mut_chunks != nullptr);
+		FJORDIMM3DENGINE_DEBUG_ASSERT(worldState != nullptr);
+		FJORDIMM3DENGINE_DEBUG_ASSERT(shaderProgram != nullptr);
+		FJORDIMM3DENGINE_DEBUG_ASSERT(terrainGene != nullptr);
+
 		std::unique_ptr<TerrainManager::Chunk> chunk = std::make_unique<TerrainManager::Chunk>(worldState->forms.add(Form::New(*worldState)));
 		std::unique_ptr<Mesh> wowowowo = Mesh::New(shaderProgram, ChunkMesh(*terrainGene, size, chunkScale, xOff, yOff, LodTransitions::None));
 		chunk->setMesh(std::move(wowowowo));

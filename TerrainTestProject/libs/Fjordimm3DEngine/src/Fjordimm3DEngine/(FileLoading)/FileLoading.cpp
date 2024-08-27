@@ -26,6 +26,7 @@ namespace Fjordimm3DEngine::FileLoading
 		std::fseek(file, 0, SEEK_SET);
 
 		char* buf = new char[size + 1];
+		FJORDIMM3DENGINE_DEBUG_ASSERT(buf != nullptr);
 
 		size_t charsRead = std::fread(buf, sizeof(char), size, file);
 		buf[charsRead] = '\0';

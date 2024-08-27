@@ -1,6 +1,8 @@
 
 #include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderTraits/Has3DShape.hpp"
 
+#include "Fjordimm3DEngine/(Debug)/Debug.hpp"
+
 namespace Fjordimm3DEngine::ShaderTraits
 {
 	/* Constructors */
@@ -13,11 +15,14 @@ namespace Fjordimm3DEngine::ShaderTraits
 
 	/* Methods */
 
-	void Has3DShape::enableAttribsForMesh(std::size_t stride, void* strideOffset) {}
+	void Has3DShape::enableAttribsForMesh(std::size_t stride, void* strideOffset)
+	{}
 
-	std::size_t Has3DShape::attribsSize() { return 0; }
+	std::size_t Has3DShape::attribsSize()
+	{ return 0; }
 
-	void Has3DShape::setupAttributes(GLuint program) {}
+	void Has3DShape::setupAttributes(GLuint program)
+	{}
 
 	void Has3DShape::setupUniforms(GLuint program)
 	{
@@ -36,6 +41,8 @@ namespace Fjordimm3DEngine::ShaderTraits
 	
 	void Has3DShape::updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(formDrawContent != nullptr);
+
 		this->setUniTransScale(formDrawContent->tran->getScaleMatrix());
 		this->setUniTransRot(formDrawContent->tran->getRotationMatrix());
 		this->setUniTransPos(formDrawContent->tran->getPositionMatrix());

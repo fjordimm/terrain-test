@@ -1,6 +1,8 @@
 
 #include "Fjordimm3DEngine/(PtrForGlfw)/PtrForGlfw.hpp"
 
+#include "Fjordimm3DEngine/(Debug)/Debug.hpp"
+
 namespace Fjordimm3DEngine
 {
 	/* Constructors */
@@ -13,6 +15,8 @@ namespace Fjordimm3DEngine
 
 	void PtrForGlfw::bindToGlfwWindow(GLFWwindow* windowForGlfw)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(windowForGlfw != nullptr);
+
 		glfwSetWindowUserPointer(windowForGlfw, this);
 	}
 	
@@ -20,6 +24,8 @@ namespace Fjordimm3DEngine
 	
 	PtrForGlfw* PtrForGlfw::Retrieve(GLFWwindow* windowForGlfw)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(windowForGlfw != nullptr);
+
 		return (PtrForGlfw*)glfwGetWindowUserPointer(windowForGlfw);
 	}
 }

@@ -28,6 +28,7 @@ namespace Fjordimm3DEngine
 	ShaderProgram* ShaderProgramManager::add(std::unique_ptr<ShaderProgram> shaderProgram)
 	{
 		ShaderProgram* ret = shaderProgram.get();
+		FJORDIMM3DENGINE_DEBUG_ASSERT(ret != nullptr);
 		ret->compileAndActivate();
 		this->shaderPrograms.push_back(std::move(shaderProgram));
 
@@ -64,6 +65,7 @@ namespace Fjordimm3DEngine
 		for (std::unique_ptr<ShaderProgram>& shaderProgram_ : this->shaderPrograms)
 		{
 			ShaderProgram* shaderProgram = shaderProgram_.get();
+			FJORDIMM3DENGINE_DEBUG_ASSERT(shaderProgram != nullptr);
 
 			shaderProgram->useForGl();
 			
@@ -97,6 +99,7 @@ namespace Fjordimm3DEngine
 		for (std::unique_ptr<ShaderProgram>& shaderProgram_ : this->shaderPrograms)
 		{
 			ShaderProgram* shaderProgram = shaderProgram_.get();
+			FJORDIMM3DENGINE_DEBUG_ASSERT(shaderProgram != nullptr);
 
 			ShaderTraits::In3DSpace* traitIn3DSpace = shaderProgram->tryGetTrait<ShaderTraits::In3DSpace>();
 			if (traitIn3DSpace != nullptr)
