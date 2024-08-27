@@ -27,23 +27,17 @@ namespace Fjordimm3DEngine
 
 	/* Methods */
 
-	void Texture::initializeTextureForGl(ShaderTraits::HasTexture const* hasTextureTrait, std::size_t index, std::string const& filename)
+	void Texture::initializeTextureForGl(std::size_t index, std::string const& filename)
 	{
-		FJORDIMM3DENGINE_DEBUG_ASSERT(hasTextureTrait != nullptr);
-
 		if (index < 0 || index >= NumTexs)
 		{
 			Debug::LogNonfatalError("Tried to set a texture with an index out of bounds.");
 		}
 
-		GLint uniTextureSampler = hasTextureTrait->getUniTextureSampler(index);
-
 		glGenTextures(1, &this->texs[index]);
 
-		// glBindTextureUnit(index, this->texs[index]);
-		glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE0 + index);
 		glBindTexture(GL_TEXTURE_2D, this->texs[index]);
-		glUniform1i(uniTextureSampler, index);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -68,52 +62,12 @@ namespace Fjordimm3DEngine
 			{
 				GLint uniTextureSampler = hasTextureTrait->getUniTextureSampler(i);
 
-				// glBindTextureUnit(i, this->texs[i]);
-				glActiveTexture(GL_TEXTURE0);
+				glActiveTexture(GL_TEXTURE0 + i);
 				glBindTexture(GL_TEXTURE_2D, this->texs[i]);
-				glUniform1i(uniTextureSampler, 0);
+				glUniform1i(uniTextureSampler, i);
 				
 				Debug::CheckOpenGLErrors();
 			}
 		}
 	}
-
-	// GLenum Texture::TextureEnumForGl(int index)
-	// {
-	// 	switch (index)
-	// 	{
-	// 	case 0:
-	// 		return GL_TEXTURE0;
-	// 	case 1:
-	// 		return GL_TEXTURE1;
-	// 	case 2:
-	// 		return GL_TEXTURE2;
-	// 	case 3:
-	// 		return GL_TEXTURE3;
-	// 	case 4:
-	// 		return GL_TEXTURE4;
-	// 	case 5:
-	// 		return GL_TEXTURE5;
-	// 	case 6:
-	// 		return GL_TEXTURE6;
-	// 	case 7:
-	// 		return GL_TEXTURE7;
-	// 	case 8:
-	// 		return GL_TEXTURE8;
-	// 	case 9:
-	// 		return GL_TEXTURE9;
-	// 	case 10:
-	// 		return GL_TEXTURE10;
-	// 	case 11:
-	// 		return GL_TEXTURE11;
-	// 	case 12:
-	// 		return GL_TEXTURE12;
-	// 	case 13:
-	// 		return GL_TEXTURE13;
-	// 	// Can do more cases, up to 32
-	// 	default:
-	// 		Debug::LogFatalError("Tried to get a texture id with an index out of bounds.");
-	// 		return GL_INVALID_ENUM;
-	// 	}
-	// }
 }

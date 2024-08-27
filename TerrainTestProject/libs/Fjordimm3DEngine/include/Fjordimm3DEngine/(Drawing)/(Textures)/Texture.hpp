@@ -38,16 +38,14 @@ namespace Fjordimm3DEngine
 		/* Methods */
 
 	   public:
-		void initializeTextureForGl(ShaderTraits::HasTexture const* hasTextureTrait, std::size_t index, std::string const& filename);
+		void initializeTextureForGl(std::size_t index, std::string const& filename);
 		void useForGl(ShaderTraits::HasTexture const* hasTextureTrait);
-
-	//    private:
-	// 	static GLenum TextureEnumForGl(int index);
 
 		/* Friends */
 
 		friend std::unique_ptr<Texture> std::make_unique<Fjordimm3DEngine::Texture>();
 	};
 
+	// TODO: test if using multiple textures (e.g. GL_TEXTURE0 and GL_TEXTURE1) works
 	// TODO: glGenerateMipmap()
 }

@@ -31,9 +31,9 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		/* Textures */
 
-		this->flatShaderProgram->useForGl();
+		// this->flatShaderProgram->useForGl();
 		this->texture1 = Texture::New();
-		this->texture1->initializeTextureForGl(this->flatShaderProgram->tryGetTrait<ShaderTraits::HasTexture>(), 0, "res/textures/star.png");
+		this->texture1->initializeTextureForGl(0, "res/textures/star.png");
 
 		/* Meshes */
 
@@ -94,7 +94,7 @@ namespace Fjordimm3DEngine::TerrainTest
 
 			std::unique_ptr<PhysicForm> form2 = PhysicForm::New(this->worldState);
 			form2->changeMesh(this->sphereMesh.get());
-			// form2->changeTexture(texture2.get());
+			form2->changeTexture(this->texture1.get());
 			form2->tran.acqScale() = Vec(1.0f, 1.0f, 1.0f);
 			form2->tran.acqPosition() += Vec(0.0f, 0.0f, 3.0f);
 			this->worldState.forms.add(std::move(form2));
