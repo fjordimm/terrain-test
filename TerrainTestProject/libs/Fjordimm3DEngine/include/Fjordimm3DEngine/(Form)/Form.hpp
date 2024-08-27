@@ -19,6 +19,9 @@ namespace Fjordimm3DEngine
 		Form& operator=(Form const&) = delete;
 		
 		Form(WorldState& worldState);
+		
+	   public:
+		~Form();
 
 	   protected:
 		template <class T, typename std::enable_if<std::is_base_of<Form, T>::value>::type* = nullptr>

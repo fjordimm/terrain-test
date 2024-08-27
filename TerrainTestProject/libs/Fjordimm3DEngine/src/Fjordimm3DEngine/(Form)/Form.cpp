@@ -13,6 +13,18 @@ namespace Fjordimm3DEngine
 		shaderProgramSpot{}
 	{}
 
+	Form::~Form()
+	{
+		ShaderProgram* oldShaderProgram = nullptr;
+		if (this->formDrawContent.mesh != nullptr)
+		{ oldShaderProgram = this->formDrawContent.mesh->getShaderProgram(); }
+
+		if (oldShaderProgram != nullptr)
+		{
+			oldShaderProgram->removeFormDrawContent(&this->formDrawContent);
+		}
+	}
+
 	/* Methods */
 
 	void Form::changeMesh(Mesh* mesh)
@@ -22,7 +34,7 @@ namespace Fjordimm3DEngine
 		ShaderProgram* oldShaderProgram = nullptr;
 		if (this->formDrawContent.mesh != nullptr)
 		{ oldShaderProgram = this->formDrawContent.mesh->getShaderProgram(); }
-		
+
 		ShaderProgram* newShaderProgram = mesh->getShaderProgram();
 
 		if (oldShaderProgram != newShaderProgram)
