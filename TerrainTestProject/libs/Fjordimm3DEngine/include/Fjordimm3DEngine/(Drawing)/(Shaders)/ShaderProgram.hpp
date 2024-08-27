@@ -24,6 +24,8 @@ namespace Fjordimm3DEngine
 		
 		ShaderProgram();
 		
+		~ShaderProgram();
+		
 		/* Fields */
 
 	   private:

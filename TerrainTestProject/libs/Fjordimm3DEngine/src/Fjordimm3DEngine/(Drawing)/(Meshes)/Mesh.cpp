@@ -32,7 +32,7 @@ namespace Fjordimm3DEngine
 
 	Mesh::~Mesh()
 	{
-		// this->cleanupForGl();
+		this->cleanupForGl();
 	}
 
 	/* Methods */
