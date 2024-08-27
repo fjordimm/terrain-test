@@ -103,6 +103,8 @@ namespace Fjordimm3DEngine
 
 	void Head::mainLoop()
 	{
+		// Debug::Log("lope");
+
 		while (!glfwWindowShouldClose(this->windowForGlfw))
 		{
 			/* Stuff required by GLFW */
@@ -123,6 +125,7 @@ namespace Fjordimm3DEngine
 			{
 				Form* form = _form.second.get();
 				FJORDIMM3DENGINE_DEBUG_ASSERT(form != nullptr);
+				
 				form->onUpdate(this->worldState, deltaTime);
 			}
 

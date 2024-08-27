@@ -24,7 +24,13 @@ namespace Fjordimm3DEngine::Debug
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
-		FJORDIMM3DENGINE_DEBUG_ASSERT(msg != nullptr);
+		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that could cause deadlock.
+		if (msg == nullptr)
+		{
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::Log()%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fflush(stderr);
+			std::exit(EXIT_FAILURE);
+		}
 
 		std::fprintf(stderr, "%s[[[ DEBUG ]]]%s %s\n", PRINTCOLOR_DEBUG, PRINTCOLOR_NONE, msg);
 		std::fflush(stderr);
@@ -34,7 +40,13 @@ namespace Fjordimm3DEngine::Debug
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
-		FJORDIMM3DENGINE_DEBUG_ASSERT(msg != nullptr);
+		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that could cause deadlock.
+		if (msg == nullptr)
+		{
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::LogWarning()%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fflush(stderr);
+			std::exit(EXIT_FAILURE);
+		}
 
 		std::fprintf(stderr, "%s[[[ WARNING ]]]%s %s\n", PRINTCOLOR_WARNING, PRINTCOLOR_NONE, msg);
 		std::fflush(stderr);
@@ -44,7 +56,13 @@ namespace Fjordimm3DEngine::Debug
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
-		FJORDIMM3DENGINE_DEBUG_ASSERT(msg != nullptr);
+		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that could cause deadlock.
+		if (msg == nullptr)
+		{
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::LogNonfatalError()%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fflush(stderr);
+			std::exit(EXIT_FAILURE);
+		}
 
 		std::fprintf(stderr, "%s[[[ NONFATAL ERROR ]]]%s %s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE, msg);
 		std::fflush(stderr);
@@ -54,7 +72,13 @@ namespace Fjordimm3DEngine::Debug
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
-		FJORDIMM3DENGINE_DEBUG_ASSERT(msg != nullptr);
+		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that could cause deadlock.
+		if (msg == nullptr)
+		{
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::LogFatalError()%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fflush(stderr);
+			std::exit(EXIT_FAILURE);
+		}
 		
 		std::fprintf(stderr, "%s[[[ FATAL ERROR ]]]%s %s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE, msg);
 		std::fflush(stderr);
@@ -65,7 +89,13 @@ namespace Fjordimm3DEngine::Debug
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
-		FJORDIMM3DENGINE_DEBUG_ASSERT(format != nullptr);
+		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that could cause deadlock.
+		if (format == nullptr)
+		{
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::Printf()%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fflush(stderr);
+			std::exit(EXIT_FAILURE);
+		}
 
 		std::va_list argptr;
 		va_start(argptr, format);
@@ -78,7 +108,13 @@ namespace Fjordimm3DEngine::Debug
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
-		FJORDIMM3DENGINE_DEBUG_ASSERT(format != nullptr);
+		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that could cause deadlock.
+		if (format == nullptr)
+		{
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::Logf()%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fflush(stderr);
+			std::exit(EXIT_FAILURE);
+		}
 
 		std::va_list argptr;
 		va_start(argptr, format);
@@ -102,10 +138,10 @@ namespace Fjordimm3DEngine::Debug
 	{
 		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
 
-		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that would be infinite recursion.
+		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that would cause infinite recursion.
 		if (filename == nullptr)
 		{
-			std::fprintf(stderr, "%s[[[ ERROR INSIDE ASSERTION ]]] This should not happen.%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] __FILE__ was somehow null.%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
 			std::fflush(stderr);
 			std::exit(EXIT_FAILURE);
 		}

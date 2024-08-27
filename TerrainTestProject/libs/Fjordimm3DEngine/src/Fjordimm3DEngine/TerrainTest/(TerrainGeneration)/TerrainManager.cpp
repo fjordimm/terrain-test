@@ -4,6 +4,7 @@
 #include <future>
 #include "Fjordimm3DEngine/(Debug)/Debug.hpp"
 #include "Fjordimm3DEngine/(Form)/PhysicForm.hpp"
+#include "Fjordimm3DEngine/(headerGroups)/allMeshSamples.hpp"
 
 namespace Fjordimm3DEngine::TerrainTest
 {
@@ -53,14 +54,19 @@ namespace Fjordimm3DEngine::TerrainTest
 				// chunk->setMesh(Mesh::New(shaderProgram, ChunkMesh(terrainGene, s, 1.0f, x, y, LodTransitions::None)));
 				// this->chunks.push_back(std::move(chunk));
 				
-				// makeChunk(&this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
-				std::future<void> fut = std::async(makeChunk, &this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
+				makeChunk(&this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
+				// std::future<void> fut = std::async(std::launch::async, makeChunk, &this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
+				// fut.get();
 			}
 		}
 	}
 
 	void TerrainManager::makeChunk(std::list<std::unique_ptr<Chunk>>* chunks, std::mutex* mut_chunks, WorldState* worldState, ShaderProgram* shaderProgram, TerrainGene* terrainGene, std::int64_t size, float chunkScale, std::int64_t xOff, std::int64_t yOff)
 	{
+		std::this_thread::sleep_for(std::chrono::duration<int, std::micro>(800));
+		// std::fprintf(stderr, "yoooooooooohawwwwwww\n");
+		Debug::Log("Noice");
+
 		FJORDIMM3DENGINE_DEBUG_ASSERT(chunks != nullptr);
 		FJORDIMM3DENGINE_DEBUG_ASSERT(mut_chunks != nullptr);
 		FJORDIMM3DENGINE_DEBUG_ASSERT(worldState != nullptr);
@@ -69,6 +75,7 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		std::unique_ptr<TerrainManager::Chunk> chunk = std::make_unique<TerrainManager::Chunk>(worldState->forms.add(Form::New(*worldState)));
 		chunk->setMesh(Mesh::New(shaderProgram, ChunkMesh(*terrainGene, size, chunkScale, xOff, yOff, LodTransitions::None)));
+		chunk->getForm()->changeMaterialColor(Colors::Purple);
 		
 		{
 			std::lock_guard<std::mutex> _lock(*mut_chunks);
