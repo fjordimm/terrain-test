@@ -4,6 +4,7 @@
 #include <cmath>
 #include <random>
 #include "Fjordimm3DEngine/(Util)/(Random)/Random.hpp"
+#include "Fjordimm3DEngine/(Util)/(Math)/Math.hpp"
 
 namespace Fjordimm3DEngine::TerrainTest
 {
@@ -11,7 +12,7 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	TerrainGene::TerrainGene(unsigned int seed) :
 		osnRidges(),
-		osnDetails()
+		osnMountains()
 	{
 		std::default_random_engine randomEngine(seed);
 		std::uniform_int_distribution<std::int64_t> randomDistr(std::numeric_limits<std::int64_t>::min(), std::numeric_limits<std::int64_t>::max());
@@ -21,9 +22,9 @@ namespace Fjordimm3DEngine::TerrainTest
 			osnRidges[i] = std::make_unique<OpenSimplexNoise>(randomDistr(randomEngine));
 		}
 
-		for (std::size_t i = 0; i < osnDetails.size(); i++)
+		for (std::size_t i = 0; i < osnMountains.size(); i++)
 		{
-			osnDetails[i] = std::make_unique<OpenSimplexNoise>(randomDistr(randomEngine));
+			osnMountains[i] = std::make_unique<OpenSimplexNoise>(randomDistr(randomEngine));
 		}
 	}
 
@@ -31,23 +32,41 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	float TerrainGene::heightAt(float x_, float y_)
 	{
-		float x = 3.0f * (x_ - 0.0f);
-		float y = 3.0f * (y_ - 0.0f);
+		float x = 1.0f * (x_ - 0.0f);
+		float y = 1.0f * (y_ - 0.0f);
 
 		float z = 0.0f;
 
-		float ampl = 3.0f;
-		float freq = 0.005f;
-		for (std::size_t i = 0; i < osnDetails.size(); i++)
+		float ridges = 0.0f;
 		{
-			z += ampl * osnDetails[i]->eval(x * freq, y * freq);
-			ampl *= 0.5f;
-			freq *= 1.7f;
+			float ampl = 1.9f;
+			float freq = 0.006f;
+			for (std::size_t i = 0; i < osnRidges.size(); i++)
+			{
+				float val = osnRidges[i]->eval(x * freq, y * freq);
+				val = -std::abs(val) + 0.25f;
+
+				ridges += ampl * val;
+				ampl *= 0.5f;
+				freq *= 1.7f;
+			}
 		}
 
-		z = std::exp(z);
+		float mountains = 0.0f;
+		{
+			float ampl = 2.1f;
+			float freq = 0.003f;
+			for (std::size_t i = 0; i < osnMountains.size(); i++)
+			{
+				mountains += ampl * osnMountains[i]->eval(x * freq, y * freq);
+				ampl *= 0.5f;
+				freq *= 1.7f;
+			}
+		}
 
-		z *= 0.7f;
+		z = 23.2f * std::exp(ridges) * Math::Sigmoid(mountains, 0.9f, 2.7f);
+
+		z *= 1.0f;
 		return z;
 	}
 }

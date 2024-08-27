@@ -14,4 +14,14 @@ namespace Fjordimm3DEngine::Math
 	{
 		return a + t * (b - a);
 	}
+
+	float Sigmoid(float x)
+	{
+		return 1.0f / (1.0f + std::exp(-x));
+	}
+
+	float Sigmoid(float x, float offset, float steepness)
+	{
+		return 1.0f / (1.0f + std::exp(-(steepness * (x - offset))));
+	}
 }

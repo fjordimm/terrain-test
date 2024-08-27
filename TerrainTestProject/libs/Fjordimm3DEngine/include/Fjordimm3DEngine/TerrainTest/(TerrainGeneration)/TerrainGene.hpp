@@ -22,7 +22,7 @@ namespace Fjordimm3DEngine::TerrainTest
 
 	   private:
 		std::array<std::unique_ptr<OpenSimplexNoise>, 10> osnRidges;
-		std::array<std::unique_ptr<OpenSimplexNoise>, 25> osnDetails;
+		std::array<std::unique_ptr<OpenSimplexNoise>, 6> osnMountains;
 
 		/* Methods */
 

@@ -28,7 +28,7 @@ namespace Fjordimm3DEngine::TerrainTest
 	/* Constructors */
 
 	TerrainManager::TerrainManager() :
-		terrainGene(35935932),
+		terrainGene(12455823),
 		chunks()
 	{}
 
@@ -43,7 +43,7 @@ namespace Fjordimm3DEngine::TerrainTest
 		// }
 
 		std::int64_t n = 1;
-		std::int64_t s = 500;
+		std::int64_t s = 800;
 		for (std::int64_t x = 0; x < n; x++)
 		{
 			for (std::int64_t y = 0; y < n; y++)
