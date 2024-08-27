@@ -32,12 +32,8 @@ namespace Fjordimm3DEngine
 
 	/* Methods */
 
-	std::mutex bruhhhhhhhhhhh;
-
 	void Mesh::generateGlVaoAndBuffers()
 	{
-		std::lock_guard<std::mutex> _lock(bruhhhhhhhhhhh);
-
 		Debug::Log("...Doing thing...");
 		FJORDIMM3DENGINE_DEBUG_ASSERT_GL_ERROR();
 		Debug::Log("...and...");
