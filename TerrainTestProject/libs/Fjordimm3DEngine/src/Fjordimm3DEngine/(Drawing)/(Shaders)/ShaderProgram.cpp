@@ -130,10 +130,10 @@ namespace Fjordimm3DEngine
 
 	void ShaderProgram::cleanupForGl()
 	{
-		glDeleteShader(this->vertexShader);
-		glDeleteShader(this->geometryShader);
-		glDeleteShader(this->fragmentShader);
-		glDeleteProgram(this->program);
+		// glDeleteShader(this->vertexShader);
+		// glDeleteShader(this->geometryShader);
+		// glDeleteShader(this->fragmentShader);
+		// glDeleteProgram(this->program);
 	}
 
 	void ShaderProgram::CheckShaderCompilation(GLuint shader)
