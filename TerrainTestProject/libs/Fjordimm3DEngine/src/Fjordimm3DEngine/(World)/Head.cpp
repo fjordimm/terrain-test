@@ -38,6 +38,8 @@ namespace Fjordimm3DEngine
 		/* Create the window, initializing GLFW and GLEW */
 
 		{
+			glewExperimental = GL_TRUE;
+			
 			if (!glfwInit())
 			{ Debug::LogFatalError("glfwInit failed."); }
 
@@ -53,7 +55,6 @@ namespace Fjordimm3DEngine
 
 			glfwMakeContextCurrent(this->windowForGlfw);
 
-			glewExperimental = GL_TRUE;
 			glewInit();
 		}
 

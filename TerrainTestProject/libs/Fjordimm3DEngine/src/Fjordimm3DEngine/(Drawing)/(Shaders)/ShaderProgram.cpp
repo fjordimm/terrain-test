@@ -89,7 +89,7 @@ namespace Fjordimm3DEngine
 		std::lock_guard<std::mutex> _lock(this->mut_formDrawContents);
 
 		FJORDIMM3DENGINE_DEBUG_ASSERT(formDrawContent != nullptr);
-		
+
 		this->formDrawContents.erase(formDrawContent);
 	}
 

@@ -26,7 +26,6 @@ namespace Fjordimm3DEngine::TerrainTest
 			FJORDIMM3DENGINE_DEBUG_ASSERT(mesh.get() != nullptr);
 
 			this->mesh = std::move(mesh);
-
 			this->form->changeMesh(this->mesh.get());
 		}
 
@@ -58,9 +57,9 @@ namespace Fjordimm3DEngine::TerrainTest
 				// chunk->setMesh(Mesh::New(shaderProgram, ChunkMesh(terrainGene, s, 1.0f, x, y, LodTransitions::None)));
 				// this->chunks.push_back(std::move(chunk));
 				
-				// makeChunk(&this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
-				std::future<void> fut = std::async(std::launch::async, makeChunk, &this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
-				fut.get();
+				makeChunk(&this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
+				// std::future<void> fut = std::async(std::launch::async, makeChunk, &this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
+				// fut.get();
 			}
 		}
 	}

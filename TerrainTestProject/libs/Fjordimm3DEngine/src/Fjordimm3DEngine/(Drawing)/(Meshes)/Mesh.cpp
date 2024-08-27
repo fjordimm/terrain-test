@@ -32,14 +32,21 @@ namespace Fjordimm3DEngine
 
 	Mesh::~Mesh()
 	{
-		// this->cleanupForGl();
+		this->cleanupForGl();
 	}
 
 	/* Methods */
 
+	std::mutex bruhhhhhhhhhhh;
+
 	void Mesh::generateGlVaoAndBuffers()
 	{
+		std::lock_guard<std::mutex> _lock(bruhhhhhhhhhhh);
+
+		Debug::Logf("%p", glGenVertexArrays);
 		glGenVertexArrays(1, &this->vao);
+		Debug::CheckOpenGLErrors();
+		Debug::Logf("vao = %u", this->vao);
 		glBindVertexArray(this->vao);
 		
 		glGenBuffers(1, &this->vbo);

@@ -19,4 +19,6 @@ namespace Fjordimm3DEngine::Debug
 	#else
 		#define FJORDIMM3DENGINE_DEBUG_ASSERT(EXPR) Fjordimm3DEngine::Debug::Log("howeiieieie")
 	#endif
+
+	void CheckOpenGLErrors();
 }

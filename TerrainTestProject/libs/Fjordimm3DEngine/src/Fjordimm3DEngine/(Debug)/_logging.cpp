@@ -5,6 +5,9 @@
 #include <cstdio>
 #include <cstdarg>
 #include <cstdlib>
+#define GLEW_STATIC
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 
 #ifdef CMAKECONFIG_DO_TERMINAL_COLORS
 static constexpr char PRINTCOLOR_DEBUG[] = "\033[32m"; // green
@@ -27,7 +30,7 @@ namespace Fjordimm3DEngine::Debug
 		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that could cause deadlock.
 		if (msg == nullptr)
 		{
-			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::Log()%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::Log()%s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
 			std::fflush(stderr);
 			std::exit(EXIT_FAILURE);
 		}
@@ -43,7 +46,7 @@ namespace Fjordimm3DEngine::Debug
 		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that could cause deadlock.
 		if (msg == nullptr)
 		{
-			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::LogWarning()%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::LogWarning()%s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
 			std::fflush(stderr);
 			std::exit(EXIT_FAILURE);
 		}
@@ -59,7 +62,7 @@ namespace Fjordimm3DEngine::Debug
 		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that could cause deadlock.
 		if (msg == nullptr)
 		{
-			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::LogNonfatalError()%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::LogNonfatalError()%s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
 			std::fflush(stderr);
 			std::exit(EXIT_FAILURE);
 		}
@@ -75,7 +78,7 @@ namespace Fjordimm3DEngine::Debug
 		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that could cause deadlock.
 		if (msg == nullptr)
 		{
-			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::LogFatalError()%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::LogFatalError()%s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
 			std::fflush(stderr);
 			std::exit(EXIT_FAILURE);
 		}
@@ -92,7 +95,7 @@ namespace Fjordimm3DEngine::Debug
 		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that could cause deadlock.
 		if (format == nullptr)
 		{
-			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::Printf()%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::Printf()%s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
 			std::fflush(stderr);
 			std::exit(EXIT_FAILURE);
 		}
@@ -111,7 +114,7 @@ namespace Fjordimm3DEngine::Debug
 		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that could cause deadlock.
 		if (format == nullptr)
 		{
-			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::Logf()%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] Passed a nullptr to Debug::Logf()%s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
 			std::fflush(stderr);
 			std::exit(EXIT_FAILURE);
 		}
@@ -141,7 +144,7 @@ namespace Fjordimm3DEngine::Debug
 		// Since I can't do a regular assertion (e.g. calling FJORDIMM3DENGINE_DEBUG_ASSERT) because that would cause infinite recursion.
 		if (filename == nullptr)
 		{
-			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] __FILE__ was somehow null.%s", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
+			std::fprintf(stderr, "%s[[[ ERROR INSIDE A DEBUG FUNCTION ]]] __FILE__ was somehow null.%s\n", PRINTCOLOR_ERROR, PRINTCOLOR_NONE);
 			std::fflush(stderr);
 			std::exit(EXIT_FAILURE);
 		}
@@ -151,6 +154,20 @@ namespace Fjordimm3DEngine::Debug
 			std::fprintf(stderr, "%s[[[ ASSERTION FAILED ]]] at line %d in \"%s\"%s\n", PRINTCOLOR_ERROR, lineNum, filename, PRINTCOLOR_NONE);
 			std::fflush(stderr);
 			std::exit(EXIT_FAILURE);
+		}
+	}
+
+	void CheckOpenGLErrors()
+	{
+		std::lock_guard<std::mutex> _lock(_Globals::_GlobalMutex_debug);
+
+		GLenum err;
+		while ((err = glGetError()) != GL_NO_ERROR)
+		{
+			std::fprintf(stderr, "%s[[[ OPENGL ERROR ]]] (%i)%s\n", PRINTCOLOR_ERROR, err, PRINTCOLOR_NONE);
+			std::fflush(stderr);
+
+			err = glGetError();
 		}
 	}
 }
