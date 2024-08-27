@@ -57,6 +57,7 @@ target_include_directories(Fjordimm3DEngineExec PUBLIC "${CMAKE_CURRENT_SOURCE_D
 
 find_package(OpenGL REQUIRED)
 target_link_libraries(Fjordimm3DEngineExec OpenGL::GL)
+target_link_libraries(Fjordimm3DEngineExec OpenGL::GLU)
 
 target_include_directories(Fjordimm3DEngineExec PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../LodePNG/include")
 target_link_libraries(Fjordimm3DEngineExec LodePNG)

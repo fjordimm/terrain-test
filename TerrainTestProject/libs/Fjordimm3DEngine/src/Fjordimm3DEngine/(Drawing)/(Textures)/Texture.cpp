@@ -46,6 +46,8 @@ namespace Fjordimm3DEngine
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		Debug::CheckOpenGLErrors();
 	}
 
 	void Texture::useForGl()
@@ -55,6 +57,8 @@ namespace Fjordimm3DEngine
 			if (this->texs[i] != (GLuint)(-1))
 			{
 				glBindTextureUnit(i, this->texs[i]);
+				
+				Debug::CheckOpenGLErrors();
 			}
 		}
 	}

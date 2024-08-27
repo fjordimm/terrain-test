@@ -24,6 +24,7 @@ namespace Fjordimm3DEngine::TerrainTest
 		ShaderProgram* smoothShaderProgram;
 		std::unique_ptr<Mesh> cubeMesh;
 		std::unique_ptr<Mesh> sphereMesh;
+		std::unique_ptr<Mesh> sphereMesh2;
 		TerrainManager terrainManager;
 
 		/* Methods */

@@ -15,6 +15,7 @@ namespace Fjordimm3DEngine::TerrainTest
 		smoothShaderProgram(nullptr),
 		cubeMesh(nullptr),
 		sphereMesh(nullptr),
+		sphereMesh2(nullptr),
 		terrainManager()
 	{}
 
@@ -31,6 +32,7 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		cubeMesh = Mesh::New(this->flatShaderProgram, MeshSamples::Cube());
 		sphereMesh = Mesh::New(this->smoothShaderProgram, MeshSamples::Sphere<10>());
+		sphereMesh2 = Mesh::New(this->smoothShaderProgram, MeshSamples::Sphere<4>());
 	}
 
 	void TerrainTestHead::onStart()
@@ -88,6 +90,13 @@ namespace Fjordimm3DEngine::TerrainTest
 			form2->tran.acqScale() = Vec(1.0f, 1.0f, 1.0f);
 			form2->tran.acqPosition() += Vec(0.0f, 0.0f, 3.0f);
 			this->worldState.forms.add(std::move(form2));
+
+			std::unique_ptr<PhysicForm> form3 = PhysicForm::New(this->worldState);
+			form3->changeMesh(this->sphereMesh2.get());
+			form3->changeMaterialColor(Colors::Blue);
+			form3->tran.acqScale() = Vec(1.0f, 1.0f, 1.0f);
+			form3->tran.acqPosition() += Vec(0.0f, 0.0f, -3.0f);
+			this->worldState.forms.add(std::move(form3));
 		}
 		///////////////
 		

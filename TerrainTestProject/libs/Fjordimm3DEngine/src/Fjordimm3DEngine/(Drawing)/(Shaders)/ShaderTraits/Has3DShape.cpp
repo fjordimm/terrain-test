@@ -37,6 +37,9 @@ namespace Fjordimm3DEngine::ShaderTraits
 		this->uniTransPos = glGetUniformLocation(program, "uni_TransPos");
 		glm::mat4 uniTransPos_val = glm::mat4(1.0f);
 		glUniformMatrix4fv(this->uniTransPos, 1, GL_FALSE, glm::value_ptr(uniTransPos_val));
+
+		// Debug::Log("f1");
+		Debug::CheckOpenGLErrors();
 	}
 	
 	void Has3DShape::updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const
@@ -49,11 +52,11 @@ namespace Fjordimm3DEngine::ShaderTraits
 	}
 
 	void Has3DShape::setUniTransScale(glm::mat4 const& val) const
-	{ glUniformMatrix4fv(this->uniTransScale, 1, GL_FALSE, glm::value_ptr(val)); }
+	{ glUniformMatrix4fv(this->uniTransScale, 1, GL_FALSE, glm::value_ptr(val)); Debug::CheckOpenGLErrors(); }
 
 	void Has3DShape::setUniTransRot(glm::mat4 const& val) const
-	{ glUniformMatrix4fv(this->uniTransRot, 1, GL_FALSE, glm::value_ptr(val)); }
+	{ glUniformMatrix4fv(this->uniTransRot, 1, GL_FALSE, glm::value_ptr(val)); Debug::CheckOpenGLErrors(); }
 
 	void Has3DShape::setUniTransPos(glm::mat4 const& val) const
-	{ glUniformMatrix4fv(this->uniTransPos, 1, GL_FALSE, glm::value_ptr(val)); }
+	{ glUniformMatrix4fv(this->uniTransPos, 1, GL_FALSE, glm::value_ptr(val)); Debug::CheckOpenGLErrors(); }
 }

@@ -23,6 +23,8 @@ namespace Fjordimm3DEngine::ShaderTraits
 	{
 		glEnableVertexAttribArray(this->attribPosition);
 		glVertexAttribPointer(this->attribPosition, 3, GL_FLOAT, GL_FALSE, stride, strideOffset);
+
+		Debug::CheckOpenGLErrors();
 	}
 
 	std::size_t In3DSpace::attribsSize()
@@ -33,6 +35,8 @@ namespace Fjordimm3DEngine::ShaderTraits
 	void In3DSpace::setupAttributes(GLuint program)
 	{
 		this->attribPosition = glGetAttribLocation(program, "attrib_Position");
+
+		Debug::CheckOpenGLErrors();
 	}
 
 	void In3DSpace::setupUniforms(GLuint program)
@@ -64,6 +68,8 @@ namespace Fjordimm3DEngine::ShaderTraits
 		this->uniSunColor = glGetUniformLocation(program, "uni_SunColor");
 		glm::vec3 uniSunColor_val = glm::vec3(1.0f, 1.0f, 1.0f);
 		glUniform3fv(this->uniSunColor, 1, glm::value_ptr(uniSunColor_val));
+		
+		Debug::CheckOpenGLErrors();
 	}
 
 	void In3DSpace::updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const
@@ -72,20 +78,20 @@ namespace Fjordimm3DEngine::ShaderTraits
 	}
 
 	void In3DSpace::setUniView(glm::mat4 const& val) const
-	{ glUniformMatrix4fv(this->uniView, 1, GL_FALSE, glm::value_ptr(val)); }
+	{ glUniformMatrix4fv(this->uniView, 1, GL_FALSE, glm::value_ptr(val)); Debug::CheckOpenGLErrors(); }
 
 	void In3DSpace::setUniProj(glm::mat4 const& val) const
-	{ glUniformMatrix4fv(this->uniProj, 1, GL_FALSE, glm::value_ptr(val)); }
+	{ glUniformMatrix4fv(this->uniProj, 1, GL_FALSE, glm::value_ptr(val)); Debug::CheckOpenGLErrors(); }
 
 	void In3DSpace::setUniSunRot(glm::mat4 const& val) const
-	{ glUniformMatrix4fv(this->uniSunRot, 1, GL_FALSE, glm::value_ptr(val)); }
+	{ glUniformMatrix4fv(this->uniSunRot, 1, GL_FALSE, glm::value_ptr(val)); Debug::CheckOpenGLErrors(); }
 	
 	void In3DSpace::setUniSunBrightness(float const& val) const
-	{ glUniform1f(this->uniSunBrightness, val); }
+	{ glUniform1f(this->uniSunBrightness, val); Debug::CheckOpenGLErrors(); }
 	
 	void In3DSpace::setUniSunAmbientLight(float const& val) const
-	{ glUniform1f(this->uniSunAmbientLight, val); }
+	{ glUniform1f(this->uniSunAmbientLight, val); Debug::CheckOpenGLErrors(); }
 	
 	void In3DSpace::setUniSunColor(glm::vec3 const& val) const
-	{ glUniform3fv(this->uniSunColor, 1, glm::value_ptr(val)); }
+	{ glUniform3fv(this->uniSunColor, 1, glm::value_ptr(val)); Debug::CheckOpenGLErrors(); }
 }

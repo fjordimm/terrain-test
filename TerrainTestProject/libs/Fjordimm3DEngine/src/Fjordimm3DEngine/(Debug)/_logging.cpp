@@ -8,6 +8,7 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <GL/GLU.h>
 
 #ifdef CMAKECONFIG_DO_TERMINAL_COLORS
 static constexpr char PRINTCOLOR_DEBUG[] = "\033[32m"; // green
@@ -164,10 +165,8 @@ namespace Fjordimm3DEngine::Debug
 		GLenum err;
 		while ((err = glGetError()) != GL_NO_ERROR)
 		{
-			std::fprintf(stderr, "%s[[[ OPENGL ERROR ]]] (%i)%s\n", PRINTCOLOR_ERROR, err, PRINTCOLOR_NONE);
+			std::fprintf(stderr, "%s[[[ OPENGL ERROR ]]] \"%s\"%s\n", PRINTCOLOR_ERROR, gluErrorString(err), PRINTCOLOR_NONE);
 			std::fflush(stderr);
-
-			err = glGetError();
 		}
 	}
 }
