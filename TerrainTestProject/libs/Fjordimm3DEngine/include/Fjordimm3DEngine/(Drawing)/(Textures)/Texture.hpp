@@ -17,7 +17,7 @@ namespace Fjordimm3DEngine
 		/* Constants */
 
 	   public:
-		static constexpr int NumTexs = 1; // must match the number of uni texture samplers in ShaderTraits::HasTexture
+		static constexpr std::size_t NumTexs = 1; // must match the number of uni texture samplers in ShaderTraits::HasTexture
 
 		/* Constructors */
 
@@ -38,7 +38,7 @@ namespace Fjordimm3DEngine
 		/* Methods */
 
 	   public:
-		void initializeTextureForGl(ShaderTraits::HasTexture const* hasTextureTrait, int index, std::string const& filename);
+		void initializeTextureForGl(ShaderTraits::HasTexture const* hasTextureTrait, std::size_t index, std::string const& filename);
 		void useForGl(ShaderTraits::HasTexture const* hasTextureTrait);
 
 	//    private:

@@ -5,7 +5,6 @@
 #include "Fjordimm3DEngine/(headerGroups)/allMeshSamples.hpp"
 #include "Fjordimm3DEngine/(FileLoading)/FileLoading.hpp"
 #include "Fjordimm3DEngine/(Debug)/Debug.hpp"
-#include "Fjordimm3DEngine/(Drawing)/(Textures)/Texture.hpp"
 
 namespace Fjordimm3DEngine::TerrainTest
 {
@@ -14,6 +13,7 @@ namespace Fjordimm3DEngine::TerrainTest
 	TerrainTestHead::TerrainTestHead() : Head(),
 		flatShaderProgram(nullptr),
 		smoothShaderProgram(nullptr),
+		texture1(nullptr),
 		cubeMesh(nullptr),
 		sphereMesh(nullptr),
 		sphereMesh2(nullptr),
@@ -28,6 +28,12 @@ namespace Fjordimm3DEngine::TerrainTest
 
 		flatShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Flat>());
 		smoothShaderProgram = this->worldState.shaderProgramManager.add(std::make_unique<ShaderPrograms::Smooth>());
+
+		/* Textures */
+
+		this->flatShaderProgram->useForGl();
+		this->texture1 = Texture::New();
+		this->texture1->initializeTextureForGl(this->flatShaderProgram->tryGetTrait<ShaderTraits::HasTexture>(), 0, "res/textures/star.png");
 
 		/* Meshes */
 
@@ -75,24 +81,20 @@ namespace Fjordimm3DEngine::TerrainTest
 		// TEMP
 		///////////////
 		{
-			this->flatShaderProgram->useForGl();
-			std::unique_ptr<Texture> texture1 = Texture::New();
-			texture1->initializeTextureForGl(this->flatShaderProgram->tryGetTrait<ShaderTraits::HasTexture>(), 0, "res/textures/star.png");
-
 			std::unique_ptr<PhysicForm> form1 = PhysicForm::New(this->worldState);
 			form1->changeMesh(this->cubeMesh.get());
-			form1->changeTexture(texture1.get());
+			form1->changeTexture(this->texture1.get());
 			form1->tran.acqScale() = Vec(0.5f, 0.5f, 0.5f);
 			form1->tran.acqPosition() += Vec(0.0f, 0.0f, 1.5f);
 			this->worldState.forms.add(std::move(form1));
 
-			this->smoothShaderProgram->useForGl();
-			std::unique_ptr<Texture> texture2 = Texture::New();
-			texture2->initializeTextureForGl(this->smoothShaderProgram->tryGetTrait<ShaderTraits::HasTexture>(), 0, "res/textures/star.png");
+			// this->smoothShaderProgram->useForGl();
+			// std::unique_ptr<Texture> texture2 = Texture::New();
+			// texture2->initializeTextureForGl(this->smoothShaderProgram->tryGetTrait<ShaderTraits::HasTexture>(), 0, "res/textures/star.png");
 
 			std::unique_ptr<PhysicForm> form2 = PhysicForm::New(this->worldState);
 			form2->changeMesh(this->sphereMesh.get());
-			form2->changeTexture(texture2.get());
+			// form2->changeTexture(texture2.get());
 			form2->tran.acqScale() = Vec(1.0f, 1.0f, 1.0f);
 			form2->tran.acqPosition() += Vec(0.0f, 0.0f, 3.0f);
 			this->worldState.forms.add(std::move(form2));

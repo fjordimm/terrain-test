@@ -13,7 +13,7 @@ namespace Fjordimm3DEngine
 
 	Texture::Texture()
 	{
-		for (int i = 0; i < NumTexs; i++)
+		for (std::size_t i = 0; i < NumTexs; i++)
 		{
 			this->texs[i] = (GLuint)(-1);
 		}
@@ -27,7 +27,7 @@ namespace Fjordimm3DEngine
 
 	/* Methods */
 
-	void Texture::initializeTextureForGl(ShaderTraits::HasTexture const* hasTextureTrait, int index, std::string const& filename)
+	void Texture::initializeTextureForGl(ShaderTraits::HasTexture const* hasTextureTrait, std::size_t index, std::string const& filename)
 	{
 		FJORDIMM3DENGINE_DEBUG_ASSERT(hasTextureTrait != nullptr);
 
@@ -41,7 +41,7 @@ namespace Fjordimm3DEngine
 		glGenTextures(1, &this->texs[index]);
 
 		// glBindTextureUnit(index, this->texs[index]);
-		glActiveTexture(GL_TEXTURE0 + index);
+		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, this->texs[index]);
 		glUniform1i(uniTextureSampler, index);
 
@@ -62,16 +62,16 @@ namespace Fjordimm3DEngine
 	{
 		FJORDIMM3DENGINE_DEBUG_ASSERT(hasTextureTrait != nullptr);
 		
-		for (int i = 0; i < NumTexs; i++)
+		for (std::size_t i = 0; i < NumTexs; i++)
 		{
 			if (this->texs[i] != (GLuint)(-1))
 			{
 				GLint uniTextureSampler = hasTextureTrait->getUniTextureSampler(i);
 
 				// glBindTextureUnit(i, this->texs[i]);
-				glActiveTexture(GL_TEXTURE0 + i);
+				glActiveTexture(GL_TEXTURE0);
 				glBindTexture(GL_TEXTURE_2D, this->texs[i]);
-				glUniform1i(uniTextureSampler, i);
+				glUniform1i(uniTextureSampler, 0);
 				
 				Debug::CheckOpenGLErrors();
 			}
