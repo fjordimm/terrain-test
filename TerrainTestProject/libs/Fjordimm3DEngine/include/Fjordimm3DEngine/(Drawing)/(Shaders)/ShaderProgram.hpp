@@ -6,6 +6,7 @@
 #include <unordered_set>
 #include <tuple>
 #include <cstdlib>
+#include <mutex>
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -37,6 +38,7 @@ namespace Fjordimm3DEngine
 		GLuint fragmentShader;
 
 		std::unordered_set<FormDrawContent*> formDrawContents;
+		std::mutex mut_formDrawContents;
 
 	   protected:
 		GLuint program;

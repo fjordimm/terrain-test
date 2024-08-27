@@ -15,6 +15,7 @@ namespace Fjordimm3DEngine
 		geometryShader(-1),
 		fragmentShader(-1),
 		formDrawContents(),
+		mut_formDrawContents(),
 		program(-1)
 	{}
 
@@ -76,13 +77,19 @@ namespace Fjordimm3DEngine
 
 	void ShaderProgram::addFormDrawContent(FormDrawContent* formDrawContent)
 	{
+		std::lock_guard<std::mutex> _lock(this->mut_formDrawContents);
+
 		FJORDIMM3DENGINE_DEBUG_ASSERT(formDrawContent != nullptr);
+
 		this->formDrawContents.emplace(formDrawContent);
 	}
 
 	void ShaderProgram::removeFormDrawContent(FormDrawContent* formDrawContent)
 	{
+		std::lock_guard<std::mutex> _lock(this->mut_formDrawContents);
+
 		FJORDIMM3DENGINE_DEBUG_ASSERT(formDrawContent != nullptr);
+		
 		this->formDrawContents.erase(formDrawContent);
 	}
 
