@@ -44,10 +44,10 @@ namespace Fjordimm3DEngine
 		std::lock_guard<std::mutex> _lock(bruhhhhhhhhhhh);
 
 		Debug::Log("...Doing thing...");
-		// Debug::CheckOpenGLErrors();
+		Debug::CheckOpenGLErrors();
 		Debug::Log("...and...");
 		glGenVertexArrays(1, &this->vao);
-		// Debug::CheckOpenGLErrors();
+		Debug::CheckOpenGLErrors();
 		Debug::Logf("vao = %u", this->vao);
 		glBindVertexArray(this->vao);
 		
@@ -57,7 +57,8 @@ namespace Fjordimm3DEngine
 		glGenBuffers(1, &this->ebo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ebo);
 
-		// Debug::CheckOpenGLErrors();
+		// Debug::Log("");
+		Debug::CheckOpenGLErrors();
 
 		// Immediately after the call of this function,
 		//   someone must call ShaderProgram.enableAttribsForMesh(),

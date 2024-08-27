@@ -34,19 +34,30 @@ namespace Fjordimm3DEngine
 		}
 
 		glGenTextures(1, &this->texs[index]);
+		Debug::Log("f21a");
+		Debug::CheckOpenGLErrors();
 
-		glBindTextureUnit(index, this->texs[index]);
-
-		std::size_t imageWidth;
-		std::size_t imageHeight;
-		std::unique_ptr<std::vector<unsigned char>> image = FileLoading::LoadImage(filename, imageWidth, imageHeight);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->data());
+		// glBindTextureUnit(index, this->texs[index]);
+		glActiveTexture(GL_TEXTURE0 + index);
+		glBindTexture(GL_TEXTURE_2D, this->texs[index]);
+		Debug::Log("f21b");
+		Debug::CheckOpenGLErrors();
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		Debug::Log("f21c");
+		Debug::CheckOpenGLErrors();
 
+		std::size_t imageWidth;
+		std::size_t imageHeight;
+		std::unique_ptr<std::vector<unsigned char>> image = FileLoading::LoadImage(filename, imageWidth, imageHeight);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->data());
+		Debug::Log("f21d");
+		Debug::CheckOpenGLErrors();
+
+		Debug::Log("f21");
 		Debug::CheckOpenGLErrors();
 	}
 
@@ -56,8 +67,11 @@ namespace Fjordimm3DEngine
 		{
 			if (this->texs[i] != (GLuint)(-1))
 			{
-				glBindTextureUnit(i, this->texs[i]);
+				// glBindTextureUnit(i, this->texs[i]);
+				glActiveTexture(GL_TEXTURE0 + i);
+				glBindTexture(GL_TEXTURE_2D, this->texs[i]);
 				
+				Debug::Log("f22");
 				Debug::CheckOpenGLErrors();
 			}
 		}

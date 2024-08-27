@@ -23,6 +23,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 		glEnableVertexAttribArray(this->attribTextureCoord);
 		glVertexAttribPointer(this->attribTextureCoord, 2, GL_FLOAT, GL_FALSE, stride, strideOffset);
 
+		Debug::Log("f9");
 		Debug::CheckOpenGLErrors();
 	}
 
@@ -47,6 +48,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 		// this->uniTextureSampler1 = glGetUniformLocation(program, "uni_TextureSampler1");
 		// glUniform1i(this->uniTextureSampler1, 1);
 
+		Debug::Log("f10");
 		Debug::CheckOpenGLErrors();
 	}
 
@@ -56,5 +58,5 @@ namespace Fjordimm3DEngine::ShaderTraits
 	}
 
 	void HasTexture::setUniHasTexture(bool val) const
-	{ glUniform1i(this->uniHasTexture, val); Debug::CheckOpenGLErrors(); }
+	{ glUniform1i(this->uniHasTexture, val); Debug::Log("f11"); Debug::CheckOpenGLErrors(); }
 }

@@ -39,6 +39,7 @@ namespace Fjordimm3DEngine
 		glfwSetCursorPosCallback(windowForGlfw, InputManager::cursorPosCallback);
 		glfwSetScrollCallback(windowForGlfw, InputManager::scrollCallback);
 
+		Debug::Log("f23");
 		Debug::CheckOpenGLErrors();
 	}
 

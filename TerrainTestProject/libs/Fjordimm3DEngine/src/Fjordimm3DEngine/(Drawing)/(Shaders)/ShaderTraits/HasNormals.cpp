@@ -18,6 +18,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 		glEnableVertexAttribArray(this->attribNormal);
 		glVertexAttribPointer(this->attribNormal, 3, GL_FLOAT, GL_FALSE, stride, strideOffset);
 
+		Debug::Log("f7");
 		Debug::CheckOpenGLErrors();
 	}
 
@@ -30,6 +31,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 	{
 		this->attribNormal = glGetAttribLocation(program, "attrib_Normal");
 		
+		Debug::Log("f8");
 		Debug::CheckOpenGLErrors();
 	}
 

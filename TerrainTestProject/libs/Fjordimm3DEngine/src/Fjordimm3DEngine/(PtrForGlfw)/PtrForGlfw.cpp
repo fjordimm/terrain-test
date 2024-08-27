@@ -19,6 +19,7 @@ namespace Fjordimm3DEngine
 
 		glfwSetWindowUserPointer(windowForGlfw, this);
 
+		Debug::Log("f24");
 		Debug::CheckOpenGLErrors();
 	}
 	
@@ -29,6 +30,7 @@ namespace Fjordimm3DEngine
 		FJORDIMM3DENGINE_DEBUG_ASSERT(windowForGlfw != nullptr);
 
 		PtrForGlfw* ret = (PtrForGlfw*)glfwGetWindowUserPointer(windowForGlfw);
+		Debug::Log("f25");
 		Debug::CheckOpenGLErrors();
 		return ret;
 	}
