@@ -8,6 +8,8 @@ int main(void)
 {
 	using namespace Fjordimm3DEngine;
 
+	// TODO: mutexs for all the stuff that needs it (start with the managers in WorldState)
+
 	TerrainTest::TerrainTestHead head;
 	head.start(1300, 750);
 

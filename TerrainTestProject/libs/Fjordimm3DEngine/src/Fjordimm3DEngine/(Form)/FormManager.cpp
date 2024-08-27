@@ -9,13 +9,16 @@ namespace Fjordimm3DEngine
 	/* Constructors */
 
 	FormManager::FormManager() :
-		formDict()
+		formDict(),
+		mut_formDict()
 	{}
 
 	/* Methods */
 
 	void FormManager::remove(Form* form)
 	{
+		std::lock_guard<std::mutex> _lock(this->mut_formDict);
+		
 		FJORDIMM3DENGINE_DEBUG_ASSERT(form != nullptr);
 
 		auto tryGet = this->formDict.find(form);

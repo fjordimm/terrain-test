@@ -53,7 +53,8 @@ namespace Fjordimm3DEngine::TerrainTest
 				// chunk->setMesh(Mesh::New(shaderProgram, ChunkMesh(terrainGene, s, 1.0f, x, y, LodTransitions::None)));
 				// this->chunks.push_back(std::move(chunk));
 				
-				makeChunk(&this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
+				// makeChunk(&this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
+				std::future<void> fut = std::async(makeChunk, &this->chunks, &this->mut_chunks, &worldState, shaderProgram, &this->terrainGene, s, 1.0f, x, y);
 			}
 		}
 	}
@@ -67,8 +68,7 @@ namespace Fjordimm3DEngine::TerrainTest
 		FJORDIMM3DENGINE_DEBUG_ASSERT(terrainGene != nullptr);
 
 		std::unique_ptr<TerrainManager::Chunk> chunk = std::make_unique<TerrainManager::Chunk>(worldState->forms.add(Form::New(*worldState)));
-		std::unique_ptr<Mesh> wowowowo = Mesh::New(shaderProgram, ChunkMesh(*terrainGene, size, chunkScale, xOff, yOff, LodTransitions::None));
-		chunk->setMesh(std::move(wowowowo));
+		chunk->setMesh(Mesh::New(shaderProgram, ChunkMesh(*terrainGene, size, chunkScale, xOff, yOff, LodTransitions::None)));
 		
 		{
 			std::lock_guard<std::mutex> _lock(*mut_chunks);

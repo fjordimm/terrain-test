@@ -43,7 +43,6 @@ namespace Fjordimm3DEngine
 
 	   private:
 		FormDrawContent formDrawContent;
-		std::list<std::tuple<Mesh*, Tran*>>::const_iterator shaderProgramSpot;
 
 		/* Methods */
 

@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <memory>
+#include <mutex>
 
 namespace Fjordimm3DEngine
 {
@@ -23,6 +24,7 @@ namespace Fjordimm3DEngine
 
 	   private:
 		std::unordered_map<Form*, std::unique_ptr<Form>> formDict;
+		std::mutex mut_formDict;
 
 		/* Methods */
 
@@ -30,6 +32,8 @@ namespace Fjordimm3DEngine
 		template <typename T, typename std::enable_if<std::is_base_of<Form, T>::value>::type* = nullptr>
 		T* add(std::unique_ptr<T> form)
 		{
+			std::lock_guard<std::mutex> _lock(this->mut_formDict);
+
 			Form* ret = form.get();
 			this->formDict[ret] = std::move(form);
 			return dynamic_cast<T*>(ret);

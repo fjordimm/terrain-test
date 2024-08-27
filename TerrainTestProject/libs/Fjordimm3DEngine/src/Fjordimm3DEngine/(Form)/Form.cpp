@@ -9,8 +9,7 @@ namespace Fjordimm3DEngine
 
 	Form::Form(WorldState& worldState) :
 		tran(),
-		formDrawContent(&this->tran, nullptr, Colors::White, nullptr),
-		shaderProgramSpot{}
+		formDrawContent(&this->tran, nullptr, Colors::White, nullptr)
 	{}
 
 	Form::~Form()
