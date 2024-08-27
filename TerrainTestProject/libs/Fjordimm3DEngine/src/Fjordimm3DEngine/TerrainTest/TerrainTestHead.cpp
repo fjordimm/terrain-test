@@ -94,8 +94,6 @@ namespace Fjordimm3DEngine::TerrainTest
 		{
 			this->terrainManager.beginGeneration(this->worldState, this->smoothShaderProgram);
 		}
-
-		Debug::Log("C");
 	}
 
 	void TerrainTestHead::onUpdate(float deltaTime)

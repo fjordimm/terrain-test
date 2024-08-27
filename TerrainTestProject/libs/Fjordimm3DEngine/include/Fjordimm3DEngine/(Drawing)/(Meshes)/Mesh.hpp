@@ -27,6 +27,9 @@ namespace Fjordimm3DEngine
 		Mesh(ShaderProgram* shaderProgram, std::unique_ptr<MeshData> meshData);
 
 	   public:
+		~Mesh();
+
+	   public:
 		static std::unique_ptr<Mesh> New(ShaderProgram* shaderProgram, std::unique_ptr<MeshData> meshData);
 		static inline std::unique_ptr<Mesh> New(ShaderProgram* shaderProgram, MeshSample const& meshSample)
 		{ return Mesh::New(shaderProgram, meshSample.make(*shaderProgram)); }
@@ -63,7 +66,5 @@ namespace Fjordimm3DEngine
 		/* Friends */
 
 		friend std::unique_ptr<Mesh> std::make_unique<Mesh>(Fjordimm3DEngine::ShaderProgram*&, std::unique_ptr<Fjordimm3DEngine::MeshData>&&);
-
-		// TODO: cleanupForGl
 	};
 }

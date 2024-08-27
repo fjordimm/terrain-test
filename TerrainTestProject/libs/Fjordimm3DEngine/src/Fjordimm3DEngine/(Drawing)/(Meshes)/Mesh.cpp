@@ -25,6 +25,11 @@ namespace Fjordimm3DEngine
 		return ret;
 	}
 
+	Mesh::~Mesh()
+	{
+		// this->cleanupForGl();
+	}
+
 	/* Methods */
 
 	void Mesh::generateGlVaoAndBuffers()
@@ -65,6 +70,4 @@ namespace Fjordimm3DEngine
 	{
 		glBindVertexArray(this->vao);
 	}
-
-	// TODO: optimize draw() by only binding the vao if the previously drawn vao wasn't the same one
 }

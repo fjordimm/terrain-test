@@ -69,8 +69,7 @@ namespace Fjordimm3DEngine
 		virtual char const* getFragmentShaderSourcePath() const = 0;
 
 	   private:
+		void cleanupForGl();
 		static void CheckShaderCompilation(GLuint shader);
 	};
-
-	// TODO: cleanup gl shaders and shader programs
 }

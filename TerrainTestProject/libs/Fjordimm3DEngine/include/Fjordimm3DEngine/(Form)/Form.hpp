@@ -64,9 +64,5 @@ namespace Fjordimm3DEngine
 		/* Friends */
 
 		friend std::unique_ptr<Form> std::make_unique<Form>(Fjordimm3DEngine::WorldState&);
-
-		// TODO: do ShaderProgram.removeForm() when Form is removed
-
-		// TODO: call cleanupForGl() for each DrawObj
 	};
 }

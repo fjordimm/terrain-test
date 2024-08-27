@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include <map>
+#include <unordered_map>
 #include <cstdlib>
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -11,8 +11,6 @@ namespace Fjordimm3DEngine
 {
 	class InputManager
 	{
-		// TODO: make it unordered_map instead of map
-
 		/* Structs */
 
 	   public:
@@ -53,11 +51,11 @@ namespace Fjordimm3DEngine
 		/* Fields */
 
 	   private:
-		std::map<int, InputVal> keyDict;
+		std::unordered_map<int, InputVal> keyDict;
 		InputVal anyKey;
 		int _anyKeyCount;
 
-		std::map<int, InputVal> mouseButtonDict;
+		std::unordered_map<int, InputVal> mouseButtonDict;
 		InputVal anyMouseButton;
 		int _anyMouseButtonCount;
 
