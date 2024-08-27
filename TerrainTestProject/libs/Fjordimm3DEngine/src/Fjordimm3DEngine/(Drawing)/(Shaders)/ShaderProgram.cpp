@@ -68,7 +68,6 @@ namespace Fjordimm3DEngine
 	void ShaderProgram::useForGl() const
 	{
 		glUseProgram(this->program);
-		Debug::Log("g5");
 		Debug::CheckOpenGLErrors();
 	}
 
@@ -78,7 +77,6 @@ namespace Fjordimm3DEngine
 		glDeleteShader(this->geometryShader);
 		glDeleteShader(this->fragmentShader);
 		glDeleteProgram(this->program);
-		Debug::Log("g7");
 		Debug::CheckOpenGLErrors();
 	}
 
@@ -116,13 +114,7 @@ namespace Fjordimm3DEngine
 					trait->updateUniformsFromFormDrawContent(formDrawContent);
 				}
 
-				if (formDrawContent->texture != nullptr)
-				{
-					formDrawContent->texture->useForGl();
-				}
-
 				glDrawElements(GL_TRIANGLES, formDrawContent->mesh->getElementsLen(), GL_UNSIGNED_INT, 0);
-				Debug::Log("g6");
 				Debug::CheckOpenGLErrors();
 			}
 		}
@@ -165,7 +157,6 @@ namespace Fjordimm3DEngine
 			Debug::Exit();
 		}
 
-		Debug::Log("g8");
 		Debug::CheckOpenGLErrors();
 	}
 }

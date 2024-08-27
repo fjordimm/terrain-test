@@ -33,5 +33,7 @@ namespace Fjordimm3DEngine::ShaderTraits
 		void updateUniformsFromFormDrawContent(FormDrawContent* formDrawContent) const final;
 
 		void setUniHasTexture(bool val) const;
+
+		GLint getUniTextureSampler(int index) const;
 	};
 }

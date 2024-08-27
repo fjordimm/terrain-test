@@ -11,7 +11,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Fjordimm3DEngine/(Drawing)/FormDrawContent.hpp"
-#include "Fjordimm3DEngine/(Drawing)/(Shaders)/ShaderTrait.hpp"
+#include "Fjordimm3DEngine/(headerGroups)/allShaderTraits.hpp"
 
 namespace Fjordimm3DEngine
 {

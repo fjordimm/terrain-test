@@ -9,12 +9,15 @@
 
 namespace Fjordimm3DEngine
 {
+	// Forward Declarations
+	namespace ShaderTraits { class HasTexture; }
+
 	class Texture
 	{
 		/* Constants */
 
 	   public:
-		static constexpr int NumTexs = 6;
+		static constexpr int NumTexs = 1; // must match the number of uni texture samplers in ShaderTraits::HasTexture
 
 		/* Constructors */
 
@@ -35,8 +38,8 @@ namespace Fjordimm3DEngine
 		/* Methods */
 
 	   public:
-		void initializeTextureForGl(int index, std::string const& filename);
-		void useForGl();
+		void initializeTextureForGl(ShaderTraits::HasTexture const* hasTextureTrait, int index, std::string const& filename);
+		void useForGl(ShaderTraits::HasTexture const* hasTextureTrait);
 
 	//    private:
 	// 	static GLenum TextureEnumForGl(int index);

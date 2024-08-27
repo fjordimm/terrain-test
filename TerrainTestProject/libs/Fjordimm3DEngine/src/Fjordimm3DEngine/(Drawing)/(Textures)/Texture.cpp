@@ -5,6 +5,7 @@
 #include <vector>
 #include "Fjordimm3DEngine/(Debug)/Debug.hpp"
 #include "Fjordimm3DEngine/(FileLoading)/FileLoading.hpp"
+#include "Fjordimm3DEngine/(headerGroups)/allShaderTraits.hpp"
 
 namespace Fjordimm3DEngine
 {
@@ -26,52 +27,52 @@ namespace Fjordimm3DEngine
 
 	/* Methods */
 
-	void Texture::initializeTextureForGl(int index, std::string const& filename)
+	void Texture::initializeTextureForGl(ShaderTraits::HasTexture const* hasTextureTrait, int index, std::string const& filename)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(hasTextureTrait != nullptr);
+
 		if (index < 0 || index >= NumTexs)
 		{
 			Debug::LogNonfatalError("Tried to set a texture with an index out of bounds.");
 		}
 
+		GLint uniTextureSampler = hasTextureTrait->getUniTextureSampler(index);
+
 		glGenTextures(1, &this->texs[index]);
-		Debug::Log("f21a");
-		Debug::CheckOpenGLErrors();
 
 		// glBindTextureUnit(index, this->texs[index]);
 		glActiveTexture(GL_TEXTURE0 + index);
 		glBindTexture(GL_TEXTURE_2D, this->texs[index]);
-		Debug::Log("f21b");
-		Debug::CheckOpenGLErrors();
+		glUniform1i(uniTextureSampler, index);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		Debug::Log("f21c");
-		Debug::CheckOpenGLErrors();
 
 		std::size_t imageWidth;
 		std::size_t imageHeight;
 		std::unique_ptr<std::vector<unsigned char>> image = FileLoading::LoadImage(filename, imageWidth, imageHeight);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, image->data());
-		Debug::Log("f21d");
-		Debug::CheckOpenGLErrors();
-
-		Debug::Log("f21");
+		
 		Debug::CheckOpenGLErrors();
 	}
 
-	void Texture::useForGl()
+	void Texture::useForGl(ShaderTraits::HasTexture const* hasTextureTrait)
 	{
+		FJORDIMM3DENGINE_DEBUG_ASSERT(hasTextureTrait != nullptr);
+		
 		for (int i = 0; i < NumTexs; i++)
 		{
 			if (this->texs[i] != (GLuint)(-1))
 			{
+				GLint uniTextureSampler = hasTextureTrait->getUniTextureSampler(i);
+
 				// glBindTextureUnit(i, this->texs[i]);
 				glActiveTexture(GL_TEXTURE0 + i);
 				glBindTexture(GL_TEXTURE_2D, this->texs[i]);
+				glUniform1i(uniTextureSampler, i);
 				
-				Debug::Log("f22");
 				Debug::CheckOpenGLErrors();
 			}
 		}

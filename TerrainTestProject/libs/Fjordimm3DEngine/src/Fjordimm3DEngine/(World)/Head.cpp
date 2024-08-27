@@ -72,7 +72,6 @@ namespace Fjordimm3DEngine
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 		glEnable(GL_DITHER);
-		Debug::Log("f26");
 		Debug::CheckOpenGLErrors();
 
 		/* Head settings */
@@ -100,7 +99,6 @@ namespace Fjordimm3DEngine
 		this->worldState.shaderProgramManager.acqNearClippingPlane() = 0.01f;
 		this->worldState.shaderProgramManager.acqFarClippingPlane() = 100000.0f;
 
-		Debug::Log("f27");
 		Debug::CheckOpenGLErrors();
 
 		/* Main loop */
@@ -117,7 +115,6 @@ namespace Fjordimm3DEngine
 
 			glfwSwapBuffers(this->windowForGlfw);
 			glfwPollEvents();
-			Debug::Log("f28");
 			Debug::CheckOpenGLErrors();
 
 			/* Do movements, physics, inputs, etc. */
@@ -143,7 +140,6 @@ namespace Fjordimm3DEngine
 
 			glClearColor(0.1f, 0.0f, 0.25f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			Debug::Log("f29");
 			Debug::CheckOpenGLErrors();
 
 			this->worldState.shaderProgramManager.drawEverything();
@@ -158,18 +154,7 @@ namespace Fjordimm3DEngine
 
 	void Head::endGlfw()
 	{
-		Debug::Log("f30a");
-		Debug::CheckOpenGLErrors();
 		glfwTerminate();
-		{
-			int code = glfwGetError(NULL);
-			if (code != GLFW_NO_ERROR)
-			{
-				Debug::Log("yow");
-			}
-		}
-		Debug::Log("f30");
-		Debug::CheckOpenGLErrors();
 	}
 	
 	// TODO: store a forward vector that doesn't account for verticallness so you don't lose precision when looking straight up or down
@@ -307,7 +292,6 @@ namespace Fjordimm3DEngine
 		self->_windowHeight = height;
 
 		glViewport(0, 0, width, height);
-		Debug::Log("f31");
 		Debug::CheckOpenGLErrors();
 		self->worldState.shaderProgramManager.acqAspectRatio() = (float)width / (float)height;
 	}
